@@ -290,6 +290,7 @@ border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;margin:12px 0}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
 padding:15px 16px;margin-bottom:11px;scroll-margin-top:60px}
 .card:target{border-color:var(--acc);box-shadow:0 0 0 2px rgba(31,58,95,.15)}
+.card.flash{border-color:var(--acc);box-shadow:0 0 0 3px rgba(31,58,95,.28)}
 .card h3{margin:6px 0 4px;font-size:17px;line-height:1.45}
 h3 .num{color:var(--acc);font-weight:500}
 .tnum{display:inline-block;min-width:22px;color:var(--acc);font-size:12px}
@@ -443,11 +444,36 @@ document.getElementById("showall").addEventListener("click", function(e){
   tocPanel.classList.remove("open"); ttog.classList.remove("on");
   VIEW_HIDDEN=false; render();
 });
-// 点目录项：收起目录 → 恢复列表 → 浏览器跳到锚点
+// 点目录项：先清空筛选与搜索（否则目标被筛掉、页面无落点），再滚动过去
 tocPanel.querySelectorAll('a[href^="#p-"]').forEach(function(a){
-  a.addEventListener("click", function(){
+  a.addEventListener("click", function(ev){
+    ev.preventDefault();
+    var id = a.getAttribute("href").slice(1);
+
+    // 重置筛选：每个筛选组都回到「全部」
+    F = {level:"",status:"",amt:"",aud:""};
+    document.querySelectorAll(".fg").forEach(function(g){
+      g.querySelectorAll(".btn").forEach(function(b){
+        b.classList.toggle("on", b.dataset.v === "");
+      });
+    });
+    // 清空搜索
+    Q = ""; box.value = "";
+
     tocPanel.classList.remove("open"); ttog.classList.remove("on");
-    VIEW_HIDDEN=false; render();
+    VIEW_HIDDEN = false;
+    render();
+
+    var el = document.getElementById(id);
+    if (el) {
+      // 不用 requestAnimationFrame：PWA 独立窗口/后台标签页里可能不触发。
+      // 读一次 offsetHeight 强制完成布局，再同步滚动，最稳。
+      void el.offsetHeight;
+      var y = el.getBoundingClientRect().top + window.scrollY - 64;
+      window.scrollTo(0, y);
+      el.classList.add("flash");
+      setTimeout(function(){ el.classList.remove("flash"); }, 1600);
+    }
   });
 });
 render();
