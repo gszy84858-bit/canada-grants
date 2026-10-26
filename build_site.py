@@ -56,6 +56,17 @@ def esc(s):
             .replace(">", "&gt;").replace('"', "&quot;"))
 
 
+def clip(text, n=200):
+    """按句末标点截断，避免出现「buying machiner」这种半句。"""
+    t = (text or "").strip()
+    if len(t) <= n:
+        return t
+    head = t[:n]
+    cut = max(head.rfind("。"), head.rfind("！"), head.rfind("？"),
+              head.rfind(". "), head.rfind("; "))
+    return (head[:cut + 1] if cut > n * 0.5 else head).strip() + "…"
+
+
 def anchor(p):
     return "p-" + re.sub(r"[^a-z0-9]+", "-", p["id"].lower()).strip("-")[-48:]
 
@@ -126,10 +137,23 @@ def card(p, idx=0):
         rows.append(("资格", p["eligibility"][:220]))
     if how:
         rows.append(("怎么申请", how[:220]))
+    if not p.get("url"):
+        rows.append(("链接说明", "该项目在安省资金页上没有独立详情页；"
+                               "点下方「搜索官方页面」可在 ontario.ca 内找到相关页面。"))
     rows.append(("核对日期", p.get("last_verified", "")))
 
     rows_html = "".join("<tr><th>%s</th><td>%s</td></tr>" % (esc(k), esc(v))
                         for k, v in rows)
+
+    if p.get("url"):
+        links = ('<a href="%s" target="_blank" rel="noopener">官方详情 ↗</a>'
+                 % esc(p["url"]))
+    else:
+        links = ('<a href="%s" target="_blank" rel="noopener">搜索官方页面 ↗</a>'
+                 % esc(p.get("search_url") or p.get("source_url") or "#"))
+        if p.get("source_url"):
+            links += (' <a class="sec" href="%s" target="_blank" rel="noopener">'
+                      '资金列表页 ↗</a>' % esc(p["source_url"]))
 
     return """
 <article class="card" id="{aid}" data-level="{level}" data-status="{status}"
@@ -145,7 +169,7 @@ def card(p, idx=0):
     <table class="meta">{rows}</table>
   </details>
   <div class="foot">
-    <a href="{url}" target="_blank" rel="noopener">官方详情 ↗</a>
+    {links}
     <a class="top" href="#toc">回到目录 ↑</a>
   </div>
 </article>""".format(
@@ -164,10 +188,10 @@ def card(p, idx=0):
         zhname=esc(p.get("zh_name") or p["name"]),
         enname=('<div class="en">%s</div>' % esc(p["name"])) if p.get("zh_name") else "",
         org=esc(p.get("org", "")),
-        summary=esc(p.get("zh_summary") or (p.get("summary") or "")[:200]),
+        summary=esc(p.get("zh_summary") or clip(p.get("summary") or "", 220)),
         kwhtml=('<div class="kws">%s</div>' % kw) if kw else "",
         detail=detail_html, rows=rows_html,
-        url=esc(p.get("url") or p.get("source_url") or "#"),
+        links=links,
     )
 
 
@@ -347,6 +371,7 @@ table.meta td{padding:5px 0;border-top:1px solid var(--line)}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;
 border-top:1px solid var(--line);padding-top:10px;font-size:12.5px}
 .foot a{color:var(--acc);text-decoration:none}
+.foot a.sec{color:var(--mut);font-size:12px}
 .b{font-size:11.5px;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--mut)}
 .b.open{color:var(--ok);border-color:var(--ok)}
 .b.rest,.b.share{color:var(--warn);border-color:var(--warn)}

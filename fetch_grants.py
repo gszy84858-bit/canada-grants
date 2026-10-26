@@ -18,6 +18,7 @@ import json
 import os
 import re
 import sys
+import urllib.parse
 import urllib.request
 from datetime import datetime, date
 from html import unescape
@@ -228,11 +229,30 @@ def parse_ontario(html, src):
         how = strip_tags(how_m.group(1), 500) if how_m else ""
         elig_m = re.search(r"<h3>Eligibility</h3>([\s\S]*?)(?=<h3>|$)", body)
         elig = strip_tags(elig_m.group(1), 600) if elig_m else ""
-        apply_m = re.search(r'<a class="button" href="([^"]+)"', body)
-        # 优先给「项目指南/详情页」，通用申请页被所有项目共用、信息量为零
-        guide_m = re.search(r'Program guidelines[\s\S]{0,80}?href="([^"]+)"', body)
-        detail = norm_url(src["url"], guide_m.group(1)) if guide_m else ""
-        url = detail or norm_url(src["url"], apply_m.group(1) if apply_m else "")
+        # 找「这个项目自己的页面」。
+        # 注意：Apply 按钮所有项目都指向同一个 TPON 登录页，信息量为零，必须排除。
+        url = ""
+        cands = re.findall(r'href="(https?://[^"]+)"[^>]*>([^<]{0,80})', body)
+        best, best_score = "", -1
+        for u, txt in cands:
+            if "ontario.ca" not in u:
+                continue
+            if "get-funding-ontario-government" in u or "/search/" in u:
+                continue
+            score = 0
+            if re.search(r"(guideline|program|document|fund|initiative)", txt, re.I):
+                score += 2
+            if "/document/" in u:
+                score += 2
+            elif "/page/" in u:
+                score += 1
+            if score > best_score:
+                best, best_score = u, score
+        if best_score >= 1:
+            url = best
+        # 找不到专属页时，给一个「站内搜官方页」的入口，而不是假装有详情页
+        search_url = ("https://www.google.com/search?q=" +
+                      urllib.parse.quote("site:ontario.ca " + title))
         d_iso, d_kind = parse_deadline(dl_text)
         mn, mx, share, _ = parse_amount(desc + " " + elig)
         out.append({
@@ -252,7 +272,8 @@ def parse_ontario(html, src):
             "detail": desc,
             "how_to_apply": how,
             "eligibility": elig,
-            "url": url or src["url"],
+            "url": url,
+            "search_url": search_url,
             "source": src["id"],
             "source_url": src["url"],
             "audience": "",
