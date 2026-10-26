@@ -300,9 +300,15 @@ background:transparent;color:var(--mut);cursor:pointer;font-family:inherit}
 .toch{font-size:12.5px;color:var(--mut);margin:10px 0 6px;letter-spacing:.03em}
 .panel ul{margin:0;padding-left:0;list-style:none;columns:2;column-gap:20px}
 @media(max-width:560px){.panel ul{columns:1}}
-.tochint{font-size:12.5px;color:var(--mut);line-height:1.7;margin:8px 0 4px;
-background:var(--soft);border-radius:8px;padding:8px 10px}
-.tochint .btn{padding:3px 9px;font-size:12px}
+.tocbar{position:sticky;top:46px;z-index:18;display:flex;align-items:center;gap:8px;
+flex-wrap:wrap;background:#1f3a5f;color:#fff;padding:9px 12px;border-radius:10px;
+margin:10px 0 0;box-shadow:0 3px 10px rgba(0,0,0,.18)}
+.tocbar[hidden]{display:none}
+.tocbar .txt{font-size:14px;font-weight:600;letter-spacing:.02em;flex:1 1 auto;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tocbar .btn{padding:5px 10px;font-size:12.5px;color:#fff;background:rgba(255,255,255,.16);
+border:1px solid rgba(255,255,255,.7);border-radius:7px;font-weight:500}
+.tocbar .btn:active{background:rgba(255,255,255,.3)}
 .panel li{font-size:13.5px;padding:3px 0;break-inside:avoid}
 .panel a{color:var(--fg);text-decoration:none;border-bottom:1px dotted var(--line)}
 .panel a:hover{color:var(--acc)}
@@ -362,10 +368,13 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 
 <div class="panel" id="hotPanel"><div class="hot" id="hot">__HOT__</div></div>
 
+<div class="tocbar" id="tocbar" hidden>
+  <span class="txt">点任一项目跳到该条</span>
+  <button class="btn" id="showall" type="button">显示全部项目</button>
+  <button class="btn" id="hideall" type="button">收起目录</button>
+</div>
+
 <div class="panel" id="tocPanel"><a id="toc"></a>
-  <div class="tochint">点任一项目跳到该条
-    <button class="btn" id="showall" type="button">显示全部项目</button>
-    <button class="btn" id="hideall" type="button">收起目录</button></div>
   __TOC__
 </div>
 
@@ -402,6 +411,9 @@ var hotPanel=document.getElementById("hotPanel"),
     ktog=document.getElementById("ktog"), ttog=document.getElementById("ttog"),
     ftog=document.getElementById("ftog"), box=document.getElementById("q");
 var PANELS=[[ktog,hotPanel],[ttog,tocPanel],[ftog,filterPanel]];
+var tocBar=document.getElementById("tocbar");
+function showBar(v){ tocBar.hidden = !v; }
+showBar(false);
 
 function render(){
   var q=Q.trim().toLowerCase(), n=0;
@@ -425,6 +437,7 @@ function togglePanel(btn, panel){
   PANELS.forEach(function(p){ p[1].classList.remove("open"); p[0].classList.remove("on"); });
   if(open){ panel.classList.add("open"); btn.classList.add("on"); }
   VIEW_HIDDEN = tocPanel.classList.contains("open");
+  showBar(VIEW_HIDDEN);
   render();
 }
 ktog.onclick=function(){ togglePanel(ktog, hotPanel); };
@@ -469,13 +482,13 @@ document.body.addEventListener("click",function(e){
 document.getElementById("hideall").addEventListener("click", function(e){
   e.preventDefault(); e.stopPropagation();
   tocPanel.classList.remove("open"); ttog.classList.remove("on");
-  VIEW_HIDDEN = false; render();
+  VIEW_HIDDEN = false; showBar(false); render();
   window.scrollTo(0, 0);
 });
 document.getElementById("showall").addEventListener("click", function(e){
   e.preventDefault(); e.stopPropagation();
   tocPanel.classList.remove("open"); ttog.classList.remove("on");
-  VIEW_HIDDEN=false; render();
+  VIEW_HIDDEN=false; showBar(false); render();
 });
 // 点目录项：先清空筛选与搜索（否则目标被筛掉、页面无落点），再滚动过去
 tocPanel.querySelectorAll('a[href^="#p-"]').forEach(function(a){
@@ -493,8 +506,10 @@ tocPanel.querySelectorAll('a[href^="#p-"]').forEach(function(a){
     // 清空搜索
     Q = ""; box.value = "";
 
+    // 只收起目录列表，吸顶提示条保留（用户还能一键回到目录）
     tocPanel.classList.remove("open"); ttog.classList.remove("on");
     VIEW_HIDDEN = false;
+    showBar(true);
     render();
 
     var el = document.getElementById(id);
