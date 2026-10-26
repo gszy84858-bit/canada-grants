@@ -290,8 +290,11 @@ border:1px solid transparent}
 .hk.on{background:var(--acc);color:#fff}
 #tocPanel,#filterPanel,#hotPanel{background:var(--card);border:1px solid var(--line);
 border-radius:12px;padding:12px 14px}
-.fg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.fg .lb{font-size:12px;color:var(--mut);width:100%;margin-top:4px}
+.fg{display:flex;flex-wrap:nowrap;gap:6px;align-items:center;
+margin-top:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.fg::-webkit-scrollbar{display:none}
+.fg .lb{font-size:11.5px;color:var(--mut);flex:0 0 auto;width:40px;margin:0}
+.fg .btn{flex:0 0 auto;white-space:nowrap;padding:3px 7px;font-size:11.5px}
 .btn{font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);
 background:transparent;color:var(--mut);cursor:pointer;font-family:inherit}
 .btn.on{background:var(--acc);border-color:var(--acc);color:#fff}
@@ -386,14 +389,14 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
   <div class="fg" data-g="status"><span class="lb">状态</span>
     <button class="btn on" data-v="">全部</button>
     <button class="btn" data-v="open">仅看开放</button></div>
-  <div class="fg" data-g="aud"><span class="lb">适合谁</span>
+  <div class="fg" data-g="aud"><span class="lb">对象</span>
     <button class="btn on" data-v="biz">小企业可申请</button>
     <button class="btn" data-v="">全部项目</button></div>
   <div class="fg" data-g="amt"><span class="lb">金额</span>
     <button class="btn on" data-v="">不限</button>
-    <button class="btn" data-v="lo">5 万以下</button>
-    <button class="btn" data-v="mid">5–25 万</button>
-    <button class="btn" data-v="hi">25 万以上</button></div>
+    <button class="btn" data-v="lo">≤5万</button>
+    <button class="btn" data-v="mid">5-25万</button>
+    <button class="btn" data-v="hi">&gt;25万</button></div>
 </div>
 
 <div class="count" id="count"></div>
