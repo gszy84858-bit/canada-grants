@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+
+# 原始 HTML 只是抓取快照，每天 200KB+，不必入库
+raw/
+
+# docs/ 是构建产物（每次 CI 重建后直接打包发布，不进仓库）
+docs/
