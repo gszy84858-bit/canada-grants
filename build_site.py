@@ -254,7 +254,10 @@ h1{font-size:21px;margin:4px 0 6px}
 input[type=search]{width:100%;padding:11px 14px;font-size:16px;border-radius:11px;
 border:1px solid var(--line);background:var(--card);color:var(--fg);outline:none;font-family:inherit}
 input[type=search]:focus{border-color:var(--acc)}
-.hot{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0}
+.toolrow{display:flex;align-items:center;gap:8px;margin:10px 0 0}
+.tiny{font-size:12px;color:var(--mut)}
+.hot{display:none;flex-wrap:wrap;gap:6px;margin:9px 0 0}
+.hot.open{display:flex}
 .hk{font-size:12.5px;padding:4px 10px;border-radius:999px;background:var(--soft);
 color:var(--acc);cursor:pointer;user-select:none}
 details.f{background:var(--card);border:1px solid var(--line);border-radius:12px;
@@ -328,9 +331,11 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 
 <input id="q" type="search" placeholder="搜项目名、机构、关键词…（如 培训 / 数字化 / 出口 / 零售）"
  autocomplete="off" autocorrect="off" spellcheck="false">
+<div class="toolrow"><button class="btn" id="ktog" type="button">关键词 ▾</button>
+<span class="tiny">按行业/用途快速筛选</span></div>
 <div class="hot" id="hot">__HOT__</div>
 
-<details class="toc" id="toc" open><summary>目录 · 点击任一项目查看详情</summary>
+<details class="toc" id="toc"><summary>目录 · 点击任一项目查看详情</summary>
 <div class="tochint">目录展开时，下面的项目列表会自动收起；点任意项目，或再点一次「目录」标题，就会显示正文。　<button class="btn" id="showall" type="button">显示项目列表</button></div>
 __TOC__
 </details>
@@ -362,6 +367,7 @@ __CARDS__
 <script>
 var F={level:"",status:"",amt:"",aud:"biz"}, Q="", TOTAL=__TOTAL__;
 var toc=document.getElementById("toc"), VIEW_HIDDEN=toc.open;
+var hotBox=document.getElementById("hot"), ktog=document.getElementById("ktog");
 function render(){
   var q=Q.trim().toLowerCase(), n=0;
   document.querySelectorAll(".card").forEach(function(c){
@@ -396,14 +402,18 @@ box.addEventListener("input",function(e){
   clearTimeout(t); var v=e.target.value;
   t=setTimeout(function(){Q=v; render();},120);
 });
-document.getElementById("hot").addEventListener("click",function(e){
+ktog.addEventListener("click", function(){
+  var open = hotBox.classList.toggle("open");
+  ktog.textContent = open ? "关键词 ▴" : "关键词 ▾";
+});
+hotBox.addEventListener("click",function(e){
   if(e.target.classList.contains("hk")) setQ(e.target.dataset.k);
 });
 document.body.addEventListener("click",function(e){
   if(e.target.classList.contains("k")) setQ(e.target.dataset.k);
 });
-// 手机上目录默认收起（这样一进来先看到正文），桌面上展开（先看目录）
-if(window.innerWidth < 560){ document.getElementById("toc").removeAttribute("open"); VIEW_HIDDEN=false; }
+// 一律默认收起：打开就是正文，想浏览目录再点
+toc.removeAttribute("open"); VIEW_HIDDEN=false;
 toc.addEventListener("toggle", function(){ VIEW_HIDDEN = toc.open; render(); });
 document.getElementById("showall").addEventListener("click", function(e){
   e.preventDefault(); e.stopPropagation();
