@@ -237,15 +237,34 @@ def main():
 <title>加拿大补助库 · 大多伦多小企业</title>
 <style>
 :root{--bg:#f7f6f3;--card:#fff;--fg:#1c1c1a;--mut:#6b6a66;--line:#e4e2dc;
---acc:#1f3a5f;--ok:#1f6f4a;--warn:#a8551a;--bad:#a32d2d;--soft:#eef2f7}
+--barfg:#1f3a5f;--acc:#1f3a5f;--ok:#1f6f4a;--warn:#a8551a;--bad:#a32d2d;--soft:#eef2f7}
 @media(prefers-color-scheme:dark){:root{--bg:#141413;--card:#1f1f1e;--fg:#eceae4;
 --mut:#a5a29b;--line:#33322f;--acc:#8ab4e0;--ok:#5dcaa5;--warn:#e0a458;--bad:#e2645c;--soft:#242628}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);
 font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif}
-.bar{position:sticky;top:0;z-index:20;background:__NAV_BG__;color:#fff;padding:10px 14px;
-font:14px/1.4 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
-display:flex;justify-content:space-between;align-items:center}
+.bar{position:sticky;top:0;z-index:20;background:__NAV_BG__;color:#fff;
+padding:7px 10px;font:14px/1.4 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
+display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
+.brand{font-size:13.5px;font-weight:500;white-space:nowrap;flex:0 0 auto}
+.bshort{display:none}
+@media(max-width:470px){
+  .bar{padding:6px 8px;gap:5px}
+  .bfull{display:none}
+  .bshort{display:inline}
+  .bar .btn{padding:5px 6px;font-size:11.5px}
+  .bar input[type=search]{font-size:14px;padding:6px 8px}
+  .upd,.subsrc{display:none}
+  .sub{font-size:12.5px;margin-bottom:10px}
+}
+.bar input[type=search]{flex:1 1 90px;min-width:0;padding:6px 9px;font-size:15px;
+border-radius:8px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.92);
+color:#1c1c1a;outline:none;font-family:inherit}
+.bar input[type=search]::placeholder{color:#7a7a76;font-size:13px}
+.bar .btn{flex:0 0 auto;color:#fff;background:transparent;
+border:1px solid rgba(255,255,255,.5);border-radius:7px;padding:5px 8px;
+font-size:12px;line-height:1.2;white-space:nowrap}
+.bar .btn.on{background:#fff;color:var(--barfg);border-color:#fff}
 .bar .btn{color:#fff;background:transparent;border:1px solid rgba(255,255,255,.55);
 border-radius:6px;padding:3px 10px;font-size:13px}
 .wrap{max-width:760px;margin:0 auto;padding:16px 16px 70px}
@@ -326,19 +345,16 @@ border-top:1px solid var(--line);padding-top:10px;font-size:12.5px}
 footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 .hide{display:none}
 </style></head><body>
-<div class="bar"><span>__BRAND__</span><button class="btn bartog" id="bttog" type="button">目录</button></div>
-<div class="wrap">
-<h1>加拿大补助库</h1>
-<div class="sub">共 <b>__N__</b> 个项目 · 开放 <b>__NOPEN__</b> · 有金额 <b>__NAMT__</b> · 有截止日 <b>__NDDL__</b><br>
-数据源：安省政府资金门户、多伦多市政府商务激励 · 更新于 __BUILT__</div>
-
-<div class="tools">
-  <input id="q" type="search" placeholder="搜项目名 / 机构 / 关键词…"
+<div class="bar">
+  <span class="brand"><span class="bfull">🍁 __BRAND__</span><span class="bshort">🍁 补助库</span></span>
+  <input id="q" type="search" placeholder="搜索项目 / 关键词"
    autocomplete="off" autocorrect="off" spellcheck="false">
   <button class="btn" id="ktog" type="button">关键词</button>
   <button class="btn" id="ttog" type="button">目录</button>
   <button class="btn" id="ftog" type="button">筛选</button>
 </div>
+<div class="wrap">
+<div class="sub">共 <b>__N__</b> 个项目 · 开放 <b>__NOPEN__</b> · 有金额 <b>__NAMT__</b> · 有截止日 <b>__NDDL__</b><span class="upd">　更新于 __BUILT__</span><span class="subsrc"><br>数据源：安省资金门户 · 多伦多商务激励</span></div>
 
 <div class="panel" id="hotPanel"><div class="hot" id="hot">__HOT__</div></div>
 
@@ -408,7 +424,6 @@ function togglePanel(btn, panel){
 ktog.onclick=function(){ togglePanel(ktog, hotPanel); };
 ttog.onclick=function(){ togglePanel(ttog, tocPanel); };
 ftog.onclick=function(){ togglePanel(ftog, filterPanel); };
-document.getElementById("bttog").onclick=function(){ togglePanel(ttog, tocPanel); };
 document.querySelectorAll('a[href="#toc"]').forEach(function(a){
   a.addEventListener("click", function(){ togglePanel(ttog, tocPanel); });
 });
