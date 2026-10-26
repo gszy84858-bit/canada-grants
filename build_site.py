@@ -213,8 +213,9 @@ def main():
 
     # 热门关键词：出现频次最高的 8 个
     freq = Counter(k for p in progs for k in (p.get("keywords") or []))
-    hot = "".join('<span class="hk" data-k="%s">%s</span>' % (esc(k), esc(k))
-                  for k, _ in freq.most_common(8))
+    hot = "".join(
+        '<span class="hk" data-k="%s">%s<span class="cnt">%d</span></span>'
+        % (esc(k), esc(k), n) for k, n in freq.most_common(12))
 
     cards = "\n".join(card(p, i + 1) for i, p in enumerate(progs))
     progs_index = {p["id"]: i for i, p in enumerate(progs)}
@@ -280,10 +281,13 @@ color:var(--fg);outline:none;font-family:inherit}
 input[type=search]:focus{border-color:var(--acc)}
 .toolrow{display:flex;align-items:center;gap:8px;margin:10px 0 0}
 .tiny{font-size:12px;color:var(--mut)}
-.hot{display:none;flex-wrap:wrap;gap:6px;margin:9px 0 0}
-.hot.open{display:flex}
-.hk{font-size:12.5px;padding:4px 10px;border-radius:999px;background:var(--soft);
-color:var(--acc);cursor:pointer;user-select:none}
+.hot{display:flex;flex-wrap:wrap;gap:7px;margin:0}
+.hk{font-size:13px;padding:5px 11px;border-radius:999px;background:var(--soft);
+color:var(--acc);cursor:pointer;user-select:none;display:inline-flex;gap:5px;align-items:center;
+border:1px solid transparent}
+.hk:hover{border-color:var(--acc)}
+.hk .cnt{font-size:11px;opacity:.65}
+.hk.on{background:var(--acc);color:#fff}
 #tocPanel,#filterPanel,#hotPanel{background:var(--card);border:1px solid var(--line);
 border-radius:12px;padding:12px 14px}
 .fg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
@@ -451,7 +455,13 @@ function setQ(v){
   window.scrollTo({top: box.getBoundingClientRect().top+window.scrollY-70, behavior:"smooth"});
 }
 document.getElementById("hot").addEventListener("click",function(e){
-  if(e.target.classList.contains("hk")) { setQ(e.target.dataset.k); }
+  var chip = e.target.closest ? e.target.closest(".hk") : null;
+  if(!chip) return;
+  var same = chip.classList.contains("on");
+  document.querySelectorAll("#hot .hk").forEach(function(c){ c.classList.remove("on"); });
+  if(same){ setQ(""); return; }              // 再点一次取消
+  chip.classList.add("on");
+  setQ(chip.dataset.k);
 });
 document.body.addEventListener("click",function(e){
   if(e.target.classList.contains("k")) { setQ(e.target.dataset.k); }

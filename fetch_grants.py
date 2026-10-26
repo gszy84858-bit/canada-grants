@@ -355,7 +355,9 @@ def main():
 
     for p in uniq:
         if not p.get("keywords"):
-            p["keywords"] = extract_keywords(p)
+            p["keywords"] = norm_tags(extract_keywords(p))
+        else:
+            p["keywords"] = norm_tags(p["keywords"])
 
     key = (os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or "").strip()
     if key and uniq:
@@ -474,6 +476,13 @@ def _gemini_models(key):
         return []
 
 
+TAG_VOCAB = [
+    "零售", "餐饮", "制造", "科技", "农业", "旅游", "建筑地产", "交通物流",
+    "培训", "设备采购", "数字化", "出口", "研发创新", "节能环保", "租金房产税",
+    "初创企业", "青年", "女性", "原住民", "非营利", "雇工补贴", "基础设施",
+    "社区发展", "文化艺术", "医疗健康", "能源",
+]
+
 KW_VOCAB = {
     "零售": ["retail", "storefront", "shop"],
     "制造": ["manufactur", "factory", "production"],
@@ -495,6 +504,28 @@ KW_VOCAB = {
     "非营利": ["not-for-profit", "charit"],
     "雇佣": ["hire", "hiring", "wage", "job"],
 }
+
+
+TAG_ALIAS = {
+    "基建": "基础设施", "基础设施": "基础设施", "社区": "社区发展",
+    "非营利组织": "非营利", "房产税": "租金房产税", "退税": "租金房产税",
+    "培训教育": "培训", "数字": "数字化", "创新": "研发创新", "研发": "研发创新",
+    "创业": "初创企业", "雇佣": "雇工补贴", "招聘": "雇工补贴",
+    "节能": "节能环保", "环保": "节能环保", "减排": "节能环保",
+    "文化": "文化艺术", "艺术": "文化艺术", "地产": "建筑地产", "建筑": "建筑地产",
+    "设备": "设备采购", "交通": "交通物流", "农业食品": "农业",
+}
+
+
+def norm_tags(tags):
+    """把模型给的标签压进受控词表：同义归并 → 丢弃词表外 → 去重保序。"""
+    out = []
+    for raw in tags:
+        t = str(raw).strip().strip("、，, ")
+        t = TAG_ALIAS.get(t, t)
+        if t in TAG_VOCAB and t not in out:
+            out.append(t)
+    return out[:4]
 
 
 def extract_keywords(p):
@@ -523,7 +554,8 @@ def translate(items, key, batch=5):
         "   · 申请准备：需要哪些材料、有哪些常见门槛或注意事项\n"
         "只依据给定信息；不准编造金额、日期、机构名。某段信息不足时写"
         "「以官方指南为准」，不要省略该段。\n"
-        "t = 3-5 个中文检索关键词（如：零售、数字化、培训、出口、女性创业）\n"
+        "t = 2-4 个中文标签，**必须从下面词表中选，不要自创新词，不要写地区名**：" 
+        + "、".join(TAG_VOCAB) + "\n"
         "只输出 JSON 数组：{\"i\":序号,\"n\":..,\"s\":..,\"d\":..,\"t\":[..]}\n\n")
     order = _gemini_models(key) or GEMINI_MODELS
     ok = 0
@@ -560,7 +592,7 @@ def translate(items, key, batch=5):
                         chunk[i]["zh_detail"] = (row.get("d") or "").strip()
                         tags = row.get("t") or []
                         if isinstance(tags, list):
-                            chunk[i]["keywords"] = [str(x).strip() for x in tags if str(x).strip()][:6]
+                            chunk[i]["keywords"] = norm_tags(tags)
                         if chunk[i]["zh_name"]:
                             ok += 1
                 break
