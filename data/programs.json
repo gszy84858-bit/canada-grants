@@ -1,5 +1,5 @@
 {
- "built_at": "2026-10-26 13:36:05",
+ "built_at": "2026-10-26 13:49:15",
  "count": 50,
  "errors": [],
  "programs": [
@@ -25,10 +25,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Developer, land owner or property owner",
    "keywords": [
-    "零售",
-    "租金"
+    "多伦多",
+    "棕地整治",
+    "物业税",
+    "环境清理"
    ],
    "audience_type": "unknown",
+   "zh_name": "棕地整治税收援助（多伦多市）",
+   "zh_summary": "多伦多市的棕地物业业主可申请税收援助，以抵消因污染导致物业闲置或低效所产生的整治成本。",
+   "zh_detail": "适用对象为多伦多市内的棕地物业业主，其物业因污染变得空置、利用率低下、不安全、无生产力或被遗弃。资金用途是抵消在受污染场址产生的整治成本。具体的申请门槛、援助金额和材料清单，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -54,13 +59,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Not-for-profit organization",
    "keywords": [
-    "研发",
-    "租金",
-    "新创",
-    "非营利",
-    "雇佣"
+    "多伦多",
+    "企业孵化",
+    "初创企业",
+    "商业化"
    ],
    "audience_type": "nonprofit",
+   "zh_name": "企业孵化与商业化赠款计划（多伦多市）",
+   "zh_summary": "多伦多市的非营利孵化器和加速器机构可获得赠款，为早期创业者和初创企业提供支持与项目服务。",
+   "zh_detail": "适用对象为旨在促进企业形成、创新和就业创造的非营利组织，包括孵化器、加速器和创业组织。资金用途是帮助这些机构向初创企业家、企业和初创公司提供规划和支持服务。具体金额、自付比例及申请要求，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -86,10 +93,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
    "keywords": [
-    "零售",
-    "租金"
+    "多伦多",
+    "咖啡馆",
+    "空间改善",
+    "匹配资金"
    ],
    "audience_type": "business",
+   "zh_name": "CaféTO 补助金 (CaféTO Grants)",
+   "zh_summary": "企业经营者可获得 50% 的匹配资金，用于改善市政或私人物业上持有有效许可证的咖啡馆空间。",
+   "zh_detail": "适用对象为多伦多市持有有效许可证的市政物业或私人物业上的咖啡馆空间业务经营者。资金用于改善咖啡馆空间成本。提供 50% 的匹配资金。申请门槛或需要准备的材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -115,10 +127,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
    "keywords": [
-    "餐饮",
-    "设备"
+    "多伦多",
+    "节水",
+    "能源审计",
+    "现金返利"
    ],
    "audience_type": "business",
+   "zh_name": "容量回购计划 (Capacity Buyback Program)",
+   "zh_summary": "各类组织可获得免费用水审计，并有机会获得根据平均每天节水量计算的一次性现金返利。",
+   "zh_detail": "适用对象为多伦多的各类组织。资金用途是通过免费水资源审计了解如何节水，并成为每平均日节约一升水最高可达 0.30 加元的一次性现金返利的候选对象。申请门槛和所需材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -144,13 +161,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner, not-for-profit organization, charity or BIA",
    "keywords": [
-    "培训",
-    "研发",
-    "租金",
-    "非营利",
-    "雇佣"
+    "多伦多",
+    "食品创新",
+    "循环经济",
+    "环保餐具"
    ],
    "audience_type": "business",
+   "zh_name": "循环食品创新者基金 (Circular Food Innovators Fund)",
+   "zh_summary": "企业和非营利组织可获得 5,000 至 35,000 加元资助，用于实施替代一次性餐具的循环使用系统。",
+   "zh_detail": "适用对象为多伦多的企业和非营利组织。资金用于实施可重复使用的餐饮器具来替代一次性及外卖用品的循环系统，这些器具将被收集和重新分发以供进一步使用。资助金额在 5,000 至 35,000 加元之间。申请门槛和材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -176,12 +195,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
    "keywords": [
-    "零售",
-    "设备",
-    "能效",
-    "租金"
+    "多伦多",
+    "商业房产",
+    "外立面改造",
+    "翻新补助"
    ],
    "audience_type": "business",
+   "zh_name": "商业建筑外立面改造补助计划 (Commercial Façade Improvement Grant Program)",
+   "zh_summary": "商业房产业主可获得改造费用最高 50% 的补助，最高不超过 12,500 加元。",
+   "zh_detail": "适用对象为多伦多的商业房产业主。资金用于商业建筑外立面的重新设计、翻新或修复改善工程。补助最高可达改善总价值的一半，在 25,000 加元的改善花费中最高可获 12,500 加元补助。申请门槛及准备材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -207,9 +229,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
    "keywords": [
-    "零售"
+    "多伦多",
+    "商业空间",
+    "内部装修",
+    "店面空置"
    ],
    "audience_type": "business",
+   "zh_name": "商业空间翻新补助计划 (Commercial Space Renovation Grant Program)",
+   "zh_summary": "商业经营者及空置或面临空置风险的店面业主可获得 50% 的匹配资金来进行内部装修。",
+   "zh_detail": "适用对象为多伦多的商业经营者以及空置或面临空置风险的店面业主。资金用于进行内部装修改善。可获得 50% 的匹配资金支持。具体的申请门槛或材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -235,11 +263,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant, entrepreneur, not-for-profit organization or property owner",
    "keywords": [
-    "制造",
-    "租金",
-    "非营利"
+    "多伦多",
+    "创意产业",
+    "音乐场所",
+    "房产税"
    ],
    "audience_type": "business",
+   "zh_name": "创意共置设施房产税子类指定 (Creative Co-Location Facilities Property Tax Subclass Designation)",
+   "zh_summary": "创意企业和现场音乐场所可申请被纳入创意共置设施房产税子类。",
+   "zh_detail": "适用对象为多伦多的创意企业和现场音乐场所。资金用途或税收优惠政策细节、申请门槛及需要准备的材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -265,11 +297,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Not-for-profit organization, charity, urban off-reserve Indigenous-led organization or community centre part of the Association of Community Centres",
    "keywords": [
-    "科技",
-    "旅游",
-    "新创"
+    "多伦多",
+    "创意产业",
+    "影视音乐",
+    "科技创业"
    ],
    "audience_type": "nonprofit",
+   "zh_name": "创意产业资金 (Creative Industries Funding)",
+   "zh_summary": "相关组织可申请补助金和赞助，用于在影视、音乐和创意科技领域推动创业和就业的项目或活动。",
+   "zh_detail": "适用对象为影视、音乐和创意科技行业的组织。资金用于资助和赞助能够培养创业精神、创造就业途径，并将多伦多定位为全球行业领导者的项目或活动。具体金额、自付比例、申请门槛与材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -295,12 +331,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA, not-for-profit organization or business association",
    "keywords": [
+    "多伦多",
     "餐饮",
-    "旅游",
-    "租金",
-    "非营利"
+    "户外用餐",
+    "非营利组织"
    ],
    "audience_type": "business",
+   "zh_name": "餐饮区计划 (Dining District Program)",
+   "zh_summary": "多伦多的商业改进区及非营利组织可申请资金，用于支持餐馆和酒吧拓展户外用餐机会的相关项目。",
+   "zh_detail": "适用对象为多伦多的商业改进区（BIA）、商业协会及其他非营利组织。资金用于支持旨在为餐馆和酒吧增加户外用餐机会的项目。关于具体资助金额、自付比例、申请门槛及所需材料，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -326,10 +365,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Developer or property owner",
    "keywords": [
-    "科技",
-    "租金"
+    "绿色建筑",
+    "屋顶改造",
+    "节能环保",
+    "多伦多"
    ],
    "audience_type": "unknown",
+   "zh_name": "生态屋顶激励计划 (Eco-Roof Incentive Program)",
+   "zh_summary": "住宅、工业、商业及机构建筑的业主可申请补助，用于安装绿色屋顶和凉爽屋顶以改善建筑环境。",
+   "zh_detail": "适用对象涵盖多伦多地区的住宅、工业、商业和机构建筑的业主。资金专门用于支持安装绿色屋顶和凉爽屋顶项目。资助金额与自付比例以官方指南为准。申请门槛或需要准备的材料也需参考官方最新指南。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -355,9 +399,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
    "keywords": [
-    "租金"
+    "多伦多",
+    "税收减免",
+    "基建",
+    "企业发展"
    ],
    "audience_type": "business",
+   "zh_name": "多伦多经济发展与就业增长激励计划 (Economic Development & Growth in Employment Incentive Program)",
+   "zh_summary": "目标行业的企业可在新建建筑或重大翻新时申请补助，获得符合条件的发展项目在五年内市政税收增加额的 60%。",
+   "zh_detail": "适用对象为多伦多目标行业的企业，针对新建建筑或重大翻新项目。资金用于抵扣项目产生的市政税收增长部分。补助金额为符合条件的发展项目在五年内市政税收增加额的 60%。申请门槛、自付比例及需要准备的材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -383,13 +433,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Developer or property owner",
    "keywords": [
-    "零售",
-    "科技",
-    "餐饮",
-    "旅游",
-    "设备"
+    "节能改造",
+    "低息贷款",
+    "减排",
+    "建筑升级"
    ],
    "audience_type": "unknown",
+   "zh_name": "节能改造贷款计划 (Energy Retrofit Loans)",
+   "zh_summary": "建筑业主可获得低息融资支持，用于开展能够减少能源消耗和温室气体排放的建筑改造项目。",
+   "zh_detail": "适用对象为多伦多地区的建筑业主。资金用途是用于实施可减少能源使用和温室气体排放的建筑节能改造工程。具体的贷款金额、低息利率、自付比例以及申请门槛和准备材料，均以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -415,9 +467,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Developer or property owner",
    "keywords": [
-    "租金"
+    "历史建筑",
+    "税收返还",
+    "遗产保护",
+    "多伦多"
    ],
    "audience_type": "unknown",
+   "zh_name": "历史建筑税收返还计划 (Heritage Tax Rebate Program)",
+   "zh_summary": "被指定为历史遗产的房产业主可获得税收返还，用于补贴在符合条件的遗产房产上开展的维护和保护工作。",
+   "zh_detail": "适用对象为多伦多被指定为历史遗产的房产的业主。资金用于补贴对符合条件的遗产房产所进行的维护和保护工作。返还金额、自付比例、申请门槛以及需要准备的证明材料，均以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -443,11 +501,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Developer or property owner",
    "keywords": [
-    "能效",
-    "租金",
-    "雇佣"
+    "公寓改造",
+    "节能",
+    "低成本融资",
+    "多伦多"
    ],
    "audience_type": "unknown",
+   "zh_name": "高层建筑改造提升支持计划 (High-Rise Retrofit Improvement Support Program)",
+   "zh_summary": "公寓楼业主可获得低成本融资，用于对建筑进行节能改造和各项升级工程。",
+   "zh_detail": "适用对象为多伦多地区的公寓楼业主。资金用于支持对建筑进行节能改造及相关升级。具体的融资成本、贷款额度、自付比例以及申请门槛或需要准备的材料，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -473,9 +535,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Indigenous individual, group, collective or organization",
    "keywords": [
-    "原住民"
+    "原住民",
+    "艺术文化",
+    "社区项目",
+    "多伦多"
    ],
    "audience_type": "unknown",
+   "zh_name": "原住民艺术与文化伙伴基金 (Indigenous Arts & Culture Partnership Fund)",
+   "zh_summary": "原住民个人、群体或组织可申请资金，试点项目最高可获 1 万加元，长期项目最高可获 3 万加元，用于开展原住民为主导的艺术与文化倡议。",
+   "zh_detail": "适用对象为多伦多的原住民个人、群体、集体或组织。资金用于开展以原住民为主导的艺术与文化倡议。资助金额为试点项目最高 1 万加元，长期项目最高 3 万加元。自付比例、申请门槛及所需准备的材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -501,10 +569,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
    "keywords": [
-    "制造",
-    "租金"
+    "制造业",
+    "水费优惠",
+    "节水",
+    "多伦多"
    ],
    "audience_type": "business",
+   "zh_name": "工业水费优惠计划 (Industrial Water Rate Program)",
+   "zh_summary": "制造商可享受打折的水费费率（又称 Block 2 水费），以支持经济增长并鼓励节约用水。",
+   "zh_detail": "适用对象为多伦多地区的制造商（工业企业）。资金/政策用途是通过提供水费折扣来支持企业经济增长并鼓励节水。具体的优惠幅度和计算方式、申请门槛以及需要准备的材料，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -530,10 +603,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA, business association, charity or not-for-profit organization",
    "keywords": [
-    "研发",
-    "非营利"
+    "商业街",
+    "企业复苏",
+    "创新项目",
+    "多伦多"
    ],
    "audience_type": "business",
+   "zh_name": "商业街创新基金 (Main Street Innovation Fund)",
+   "zh_summary": "各类组织可申请 25,000 加元或 50,000 加元的项目资金，用于应对商业街挑战、进行创新空间营造和激活商业街，以支持企业复苏和成功。",
+   "zh_detail": "适用对象为多伦多符合条件的各类组织。资金用于开展应对商业街挑战、创新空间营造以及激活商业街的项目。资助项目固定成本额度为 25,000 加元或 50,000 加元，具体补助比例、自付额、申请门槛及准备材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -559,11 +637,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA, business association or community group",
    "keywords": [
-    "设备",
-    "租金",
-    "青年"
+    "多伦多",
+    "商业协会",
+    "社区团体",
+    "壁画艺术"
    ],
    "audience_type": "business",
+   "zh_name": "多伦多户外壁画与街头艺术项目 (Outdoor Mural & Street Art Program)",
+   "zh_summary": "多伦多商业协会与社区团体可申请最高 7500 加元一次性资金，用于创作户外壁画，推广地方特色并塑造商业街区形象。",
+   "zh_detail": "适用对象为多伦多的商业协会和有广泛企业参与的社区团体。资金用于开展户外壁画项目，以推广地方主题并促进商业或工业街区的身份认同。资助金额为最高 7500 加元的一次性资金，自付比例与其他具体财务要求以官方指南为准。申请门槛及所需准备材料在给定信息中未提供，请以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -589,10 +671,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Charity",
    "keywords": [
-    "租金",
-    "非营利"
+    "多伦多",
+    "慈善机构",
+    "房产税",
+    "退税"
    ],
    "audience_type": "nonprofit",
+   "zh_name": "注册慈善机构房产税退税 (Property Tax Rebate for Registered Charities)",
+   "zh_summary": "符合条件的注册慈善机构可申请获得高达百分之四十的房产税退税，以减轻机构的运营及持有成本负担。",
+   "zh_detail": "适用对象为多伦多的注册慈善机构。资金用途为房产税的减免与退还。补助金额为房产税的 40%，自付比例与具体的减免上限以官方指南为准。申请门槛及需要准备的审核材料在给定信息中未作说明，详细合规条件请以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -618,9 +705,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
    "keywords": [
-    "雇佣"
+    "多伦多",
+    "商业用水",
+    "下水道附加费",
+    "退税"
    ],
    "audience_type": "business",
+   "zh_name": "下水道附加费退税计划 (Sewer Surcharge Rebate Program)",
+   "zh_summary": "在生产经营过程中消耗特定用水的企业，可申请工业或商业现场用水的下水道附加费退税以降低成本。",
+   "zh_detail": "适用对象为在多伦多市内开展工业或商业生产活动、并在现场使用水资源的企业。资金用途为退还企业在生产或商业流程中使用的现场用水附加费。具体退税金额比例及自付要求在给定信息中未标明。申请门槛、计量标准以及需要准备的申报材料，均以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -646,10 +739,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA",
    "keywords": [
-    "设备",
-    "租金"
+    "多伦多",
+    "商业改善区",
+    "房产税",
+    "资本项目"
    ],
    "audience_type": "nonprofit",
+   "zh_name": "小企业房产税子类项目 (Small Business Property Tax Subclass)",
+   "zh_summary": "商业改善区 (BIAs) 可获得百分之五十的配套资金，用于支持成本在一万加元至一百万加元之间的资本项目。",
+   "zh_detail": "适用对象为多伦多的商业改善区 (BIAs)。资金用途为资本项目的建设与开发。项目总成本范围在 10,000 加元至 100 万加元之间，可获得 50% 的匹配资金支持，其余自付比例以官方指南为准。申请门槛、资质审核与需要准备的具体材料信息不足，请以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -675,11 +773,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner",
    "keywords": [
-    "培训",
-    "租金",
-    "新创"
+    "多伦多",
+    "小型企业",
+    "创业资助",
+    "商业咨询"
    ],
    "audience_type": "business",
+   "zh_name": "初创企业加号资助项目 (Starter Company Plus Grant)",
+   "zh_summary": "小型企业创业者有机会申请 5000 加元微型补助金，并获得专业指导与建议，以协助企业实现增长和业务扩张。",
+   "zh_detail": "适用对象为多伦多的小型企业创业者。资金用途为协助业务增长和扩张，并包含配套的指导与商业咨询服务。资助金额为 5000 加元的微型补助金，自付比例及其他资金限制以官方指南为准。申请门槛、商业计划书等准备材料在给定信息中未提供，请以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -705,10 +807,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA",
    "keywords": [
-    "零售",
-    "设备"
+    "多伦多",
+    "商业改善区",
+    "街景改善",
+    "资本项目"
    ],
    "audience_type": "nonprofit",
+   "zh_name": "街景改善计划 (Streetscape Improvement Program)",
+   "zh_summary": "商业改善区 (BIAs) 可申请百分之五十的配套资金，用于开展总成本在一万至一百万加元之间的资本项目。",
+   "zh_detail": "适用对象为多伦多地区的商业改善区 (BIAs)。资金用途为街道景观建设等资本项目。资助标准为 50% 的匹配资金，项目总成本在 10,000 加元至 100 万加元之间，申请人的自付比例依据匹配额度确定。具体的申请门槛、审批流程及准备材料以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -734,10 +841,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA",
    "keywords": [
-    "设备",
-    "租金"
+    "多伦多",
+    "商业改善区",
+    "街景规划",
+    "咨询服务"
    ],
    "audience_type": "nonprofit",
+   "zh_name": "街景总体规划项目 (Streetscape Master Plan Program)",
+   "zh_summary": "商业改善区可获得最高 25000 加元的一次性匹配资金，用于聘请咨询服务以制定指导未来改善的综合街景规划。",
+   "zh_detail": "适用对象为多伦多的商业改善区 (BIAs)。资金用途为采购专业咨询服务，用以创建指导未来街景改善的综合总体规划。资助金额为最高 25,000 加元的一次性成本匹配资金，具体的自付比例以官方指南为准。申请门槛、服务商资质要求及需准备的申报材料，请以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -763,13 +875,15 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner",
    "keywords": [
-    "培训",
-    "出口",
-    "租金",
-    "新创",
-    "青年"
+    "多伦多",
+    "学生创业",
+    "夏季公司",
+    "创业培训"
    ],
    "audience_type": "business",
+   "zh_name": "夏季公司资助项目 (Summer Company Grant)",
+   "zh_summary": "十五至二十九岁的学生创业者可在夏季获得创业指导、培训以及最高 3000 加元资金，用于启动和运营小型企业。",
+   "zh_detail": "适用对象为多伦多年龄在 15 至 29 岁之间的学生创业者。资金用途为在暑假期间启动并运营一家小型企业，同时项目提供创业指导与专业培训。资金支持最高可达 3000 加元，自付比例以官方具体规定为准。申请门槛、学生身份证明及商业计划等准备材料，请以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -795,13 +909,16 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner",
    "keywords": [
-    "零售",
-    "培训",
-    "数字化",
     "出口",
-    "租金"
+    "中小企业",
+    "贸易多元化",
+    "多伦多",
+    "创业支持"
    ],
    "audience_type": "business",
+   "zh_name": "贸易加速计划 (TAP)",
+   "zh_summary": "多伦多地区的中小型企业主和创业者可申请 5,000 加元微型补助金，并获得专业导师指导和建议，旨在帮助企业实现贸易多元化并开拓国际市场。",
+   "zh_detail": "该项目由多伦多市政府支持，主要面向希望扩大出口业务的中小型企业（SME）及创业者。资金主要用于支持企业的贸易多元化战略，帮助其进入新市场。符合条件的申请人可获得 5,000 加元的微型补助金，此外还能享受专业导师的咨询与建议服务。申请门槛方面，企业需展现出出口潜力或多元化需求。具体申请材料及详细资格要求，如企业规模限制或特定行业偏好，请以官方指南为准。该计划通过培训和资金双重支持，降低企业走向国际市场的风险。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -827,10 +944,16 @@
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA or not-for-profit organization",
    "keywords": [
-    "租金",
-    "非营利"
+    "非营利组织",
+    "BIA",
+    "交通施工",
+    "多伦多",
+    "社区发展"
    ],
    "audience_type": "nonprofit",
+   "zh_name": "交通建设影响缓解基金 (TCMF)",
+   "zh_summary": "多伦多商业促进区（BIA）及与主街相关的非营利组织可申请最高 10 万加元资助，用于开展社区驱动的项目，以减轻多年期交通施工对当地商户的负面影响。",
+   "zh_detail": "本基金由多伦多市政府设立，适用对象为多伦多的商业促进区（BIA）以及与主要街道有紧密联系的非营利组织。资金用途限于实施社区驱动的倡议，旨在缓解长期轨道交通或道路施工给周边小企业带来的经营压力。符合条件的组织最高可获得 100,000 加元的资助。申请时需提交具体的缓解方案，证明项目能有效吸引客流或改善施工期间的商业环境。关于自付比例及具体的申请截止日期等细节，目前信息有限，建议申请者以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -856,10 +979,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "科技",
-    "原住民"
+    "警察",
+    "保释合规",
+    "执法",
+    "安大略省"
    ],
    "audience_type": "police",
+   "zh_name": "保释合规与逮捕令执行 (BCWA) 拨款",
+   "zh_summary": "面向安大略省警察服务机构，资助加强保释合规和逮捕令执行，重点关注高风险及累犯暴力罪犯。",
+   "zh_detail": "适用对象为安大略省的市镇警察服务机构、第一民族警察服务机构以及由安省省警（OPP）管辖的市镇。资金用于支持建立或扩大相关执法倡议。具体资助金额与自付比例以官方指南为准。申请门槛为每个符合条件的申请人最多可提交两份申请（作为牵头申请人或联合申请的合作伙伴），材料准备需参考官方指南。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -885,11 +1013,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "原住民",
-    "非营利",
-    "雇佣"
+    "体育",
+    "休闲",
+    "基础设施",
+    "社区建设"
    ],
    "audience_type": "municipal",
+   "zh_name": "社区体育与休闲基础设施基金 (CSRIF)",
+   "zh_summary": "这是一个5亿美元的专项资金项目，支持各类社区与营利/非营利组织修复、升级或新建体育与休闲设施。",
+   "zh_detail": "适用对象包括安省的市镇、地方服务委员会、非营利组织、原住民社区及组织，其中营利组织仅限参与新建项目（第二类）。资金用于修复、升级现有体育休闲设施或建设全新设施。具体资助金额与自付比例以官方指南为准。申请门槛与准备材料细节，请参阅官方发布的具体指南。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -915,9 +1047,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "设备"
+    "道路",
+    "桥梁",
+    "交通",
+    "市镇"
    ],
    "audience_type": "municipal",
+   "zh_name": "连接路段计划 (Connecting Links Program)",
+   "zh_summary": "为安大略省指定连接路段公路上的道路和桥梁项目提供省级专项资金支持。",
+   "zh_detail": "适用对象为安大略省内拥有指定连接路段公路的77个市镇。资金用于市政道路与桥梁建设，这些道路连接省道两端或通往国际/省际边界。每个拥有一个指定连接路段的市镇每年可提交一个项目。具体资助金额与自付比例以官方指南为准，材料准备要求请参考官方规定。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -943,11 +1081,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "制造",
-    "设备",
-    "能效"
+    "减排",
+    "温室气体",
+    "工业",
+    "环保"
    ],
    "audience_type": "unknown",
+   "zh_name": "排放绩效计划 (EPP)",
+   "zh_summary": "通过排放绩效标准合规收入资助符合条件的工业设施，以开展减少温室气体排放的项目。",
+   "zh_detail": "适用对象为已注册排放绩效标准计划、购买过超额排放单位且主要业务不是发电的工业设施。资金用途包括资本项目和基于研究的项目，用以减少温室气体排放。具体资助金额与自付比例以官方指南为准。该项目为非竞争性程序，具体申请门槛和材料要求以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -972,8 +1114,16 @@
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
-   "keywords": [],
+   "keywords": [
+    "消防",
+    "紧急服务",
+    "费用报销",
+    "未建制区"
+   ],
    "audience_type": "municipal",
+   "zh_name": "消防服务报销：未建制安大略省 (Fire Protection Services Reimbursement)",
+   "zh_summary": "向安大略省未建制地区的市镇提供紧急消防服务的费用报销机会。",
+   "zh_detail": "适用对象为在安大略省未建制地区提供紧急服务的市镇。资金用于报销特定类型的出警费用，如非省道道路上的机动车事故、危险品事故、车辆火灾及公共危害协助等。报销标准参考省交通厅的消防车出警服务费率。具体的申请门槛与材料要求以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -999,11 +1149,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "制造",
-    "研发",
-    "非营利"
+    "森林",
+    "木材加工",
+    "创新",
+    "竞争力"
    ],
    "audience_type": "business",
+   "zh_name": "森林部门投资与创新计划",
+   "zh_summary": "为安大略省森林部门的战略投资提供资助，以增强竞争力、开拓新市场并带来行业效益。",
+   "zh_detail": "适用对象为安大略省内符合条件的营利性木材和森林生物质制造商及加工商（包括锯木厂、纸浆厂等），项目总成本需至少达到300万加元。资金用于商业项目和合作项目。具体资助金额与自付比例以官方指南为准。申请门槛和选择流程细节请参考官方说明。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1029,12 +1183,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "研发",
-    "原住民",
-    "非营利",
-    "雇佣"
+    "五大湖",
+    "水质保护",
+    "生态",
+    "气候适应"
    ],
    "audience_type": "institution",
+   "zh_name": "五大湖地方行动基金",
+   "zh_summary": "提供项目制资金，支持社区开展增强气候变化适应能力并保护或改善五大湖生态水质的行动。",
+   "zh_detail": "适用对象为法律注册实体，例如社区注册组织、环保组织以及非营利/慈善法人机构。资金用于在指定周期内实施基于自然的成果项目，如恢复和保护湿地、海岸线及栖息地。具体资助金额与自付比例以官方指南为准。申请门槛及准备材料细节请参考官方指南。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1060,9 +1217,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "原住民"
+    "原住民",
+    "交通",
+    "社区发展",
+    "安大略省"
    ],
    "audience_type": "indigenous",
+   "zh_name": "原住民交通倡议基金",
+   "zh_summary": "面向安大略省的原住民社区和组织，资助其开展与交通行业相关且符合部委优先主题的项目。",
+   "zh_detail": "适用对象为安大略省内的第一民族社区、梅蒂斯社区以及原住民组织。资金用于实施与交通领域相关、且契合官方优先主题的项目。具体资助金额与自付比例以官方指南为准。申请门槛及所需准备的材料请查阅当年度的官方项目指南。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1087,8 +1250,16 @@
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
-   "keywords": [],
+   "keywords": [
+    "房地产",
+    "投资",
+    "土地开发",
+    "安大略省"
+   ],
    "audience_type": "unknown",
+   "zh_name": "投资就绪：认证场地项目 (Investment Ready: Certified Site)",
+   "zh_summary": "安大略省内符合特定开发条件的土地物业所有者可申请，旨在证明其物业已具备投资与开发条件。",
+   "zh_detail": "适用对象为安大略省内的待开发物业所有者；资金用途是通过完成项目要求，使物业具备开发和吸引投资的条件；资金金额与自付比例以官方指南为准；申请门槛与准备材料需参考认证说明与要求指南，或通过官方邮箱咨询。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1114,10 +1285,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "制造",
-    "能效"
+    "市政",
+    "能源效率",
+    "减排",
+    "可再生能源"
    ],
    "audience_type": "municipal",
+   "zh_name": "市政能源计划项目 (Municipal Energy Plan Program)",
+   "zh_summary": "安大略省全体市政部门可申请，用于制定能源计划，以提升能效、减少温室气体排放及促进可再生能源发展。",
+   "zh_detail": "适用对象为安大略省内所有市政部门（含区域市政）；资金用途是支持制定社区能源计划，改善能效、降低能耗及温室气体排放、研究未来增长对能源的需求影响，并促进可再生能源生产与经济发展；资金金额与自付比例以官方指南为准；申请门槛为安大略省所有市政部门均可申请，具体材料以官方要求为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1142,8 +1318,16 @@
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
-   "keywords": [],
+   "keywords": [
+    "资源开发",
+    "基础设施",
+    "安大略省北部",
+    "市政"
+   ],
    "audience_type": "municipal",
+   "zh_name": "安大略省北部资源开发支持基金 (Northern Ontario Resource Development Support Fund, NORDS)",
+   "zh_summary": "安大略省北部的 144 个市政部门可申请，用于分享资源开发的收益并弥补资源开发对市政基础设施的影响。",
+   "zh_detail": "适用对象为安大略省北部 144 个指定领土区内的所有市政部门；资金用途是分享资源开发收益，并帮助抵消资源开发对市政基础设施产生的影响；资金金额为自 2026-2027 年起，五年内每年分配 1500 万加元，具体比例以官方指南为准；申请门槛为属于安大略省北部的 144 个指定市政部门。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1169,13 +1353,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "制造",
-    "科技",
-    "培训",
-    "设备",
-    "研发"
+    "造船",
+    "制造业",
+    "员工培训",
+    "设备采购"
    ],
    "audience_type": "business",
+   "zh_name": "安大略省造船厂资助计划 (Ontario Shipbuilding Grant Program, OSGP)",
+   "zh_summary": "安大略省内符合条件的营利性造船企业或原住民企业可申请，用于建设基础设施、采购机械设备及培训员工。",
+   "zh_detail": "适用对象为安大略省或加拿大法律合法设立的营利性公司或原住民企业，且至少三分之一的年营业收入来自造船相关业务；资金用途包括建设基础设施、购买机械设备以及培训员工；资金金额最高可报销成功项目总符合条件支出的 50%，为期最长 3 个财年；申请门槛及材料需满足企业资质与营收占比要求，具体以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1201,10 +1387,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "新创",
-    "原住民"
+    "公共交通",
+    "社区建设",
+    "非营利组织",
+    "市政"
    ],
    "audience_type": "municipal",
+   "zh_name": "安大略省公共交通投资基金 (Ontario Transit Investment Fund, OTIF)",
+   "zh_summary": "安大略省内的市政部门、非营利组织和原住民社区可申请，用于支持全省公共交通服务的启动与增长。",
+   "zh_detail": "适用对象为安大略省内的市政部门、非营利组织和原住民社区；资金用途是支持全省交通服务的启动与业务增长，建立安全可靠的交通服务；资金金额与自付比例以官方指南为准；申请门槛为符合条件的目标社区群体按需申请，期限最长可达 5 年，具体材料以官方为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1229,8 +1420,16 @@
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
-   "keywords": [],
+   "keywords": [
+    "道路维护",
+    "市政",
+    "交通安全",
+    "基础设施"
+   ],
    "audience_type": "municipal",
+   "zh_name": "路面坑洼预防与修复计划 (Pothole Prevention and Repair Program)",
+   "zh_summary": "人口 1 万及以下的小型安大略省市政部门可申请，用于开展道路维护、预防及修复坑洼以提升道路安全。",
+   "zh_detail": "适用对象为根据 2021 年加拿大统计局调查显示人口在 10,000 人或以下的小型市政部门；资金用途是支持道路维护、设定标准以改善道路状况并推广高质量路面工程，减少坑洼造成的事故；资金金额与自付比例以官方指南为准；申请门槛为有意愿开展符合条件的道路坑洼预防与修复项目的小型市政部门，需满足指南要求。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1256,9 +1455,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "非营利"
+    "文化遗产",
+    "历史档案",
+    "非营利运营",
+    "安大略省"
    ],
    "audience_type": "nonprofit",
+   "zh_name": "省级遗产组织运营赠款 (Provincial Heritage Organization Operating Grant)",
+   "zh_summary": "安大略省内指定的 11 家省级遗产保护伞组织可申请，用于提供年度运营支持及遗产相关项目与服务。",
+   "zh_detail": "适用对象为安大略省内特定的 11 家受限制的省级遗产组织（代表考古、家谱、建筑、历史和档案等领域）；资金用途是提供年度运营支持，向会员及公众提供遗产项目与服务；资金金额与自付比例以官方指南为准；申请门槛为仅限清单内指定的 11 家特定遗产组织申请，具体准备材料以官方规定为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1284,11 +1489,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "科技",
+    "公共图书馆",
     "数字化",
-    "原住民"
+    "运营补助",
+    "薪酬公平"
    ],
    "audience_type": "municipal",
+   "zh_name": "公共图书馆运营赠款及数字化专项资金 (PLOG/PE/FNSS/FDE)",
+   "zh_summary": "安大略省内运营公共图书馆或提供图书馆服务的合资格机构可申请，用于支持日常运营、薪酬公平及数字化费用。",
+   "zh_detail": "适用对象为运营公共图书馆或签约提供图书馆服务的合资格机构（属于受限制的专项资助项目）；资金用途涵盖公共图书馆运营、薪酬公平、原住民薪酬补助以及数字化费用支出；资金金额与自付比例以官方指南为准；申请门槛为必须满足运营公共图书馆或提供相关服务的要求，可通过单一申请表格提交所有四类资金流申请。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1314,10 +1523,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "制造",
-    "研发"
+    "先进制造",
+    "创新",
+    "生产力",
+    "区域发展"
    ],
    "audience_type": "unknown",
+   "zh_name": "区域发展计划：先进制造与创新竞争力（AMIC）分支",
+   "zh_summary": "安大略省的先进制造企业可申请资金，用于投资创新项目、提高生产力并增强全球竞争力。",
+   "zh_detail": "适用对象为安大略省的制造业企业及相关机构。资金用途主要用于支持技术升级、创新竞争力提升以及业务拓展。关于具体金额、自付比例、申请门槛及所需准备材料，由于给定信息不足，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1342,8 +1556,16 @@
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
-   "keywords": [],
+   "keywords": [
+    "道路安全",
+    "市镇",
+    "交通",
+    "基础设施"
+   ],
    "audience_type": "municipal",
+   "zh_name": "道路安全倡议基金（RSIF）",
+   "zh_summary": "符合条件的安大略省市镇可申请资金，用于在自动超速执法（ASE）取消后继续支持道路安全项目。",
+   "zh_detail": "适用对象为安大略省内满足特定条件的市镇（即在2025年11月14日之前与交通部签署了ASE协议，且在特定时间段内安装、部署或持有ASE系统合同）。资金用途是支持持续的道路安全。具体资助金额、自付比例及材料要求，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1368,8 +1590,16 @@
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
-   "keywords": [],
+   "keywords": [
+    "工业地产",
+    "投资吸引",
+    "业务扩张",
+    "场址准备"
+   ],
    "audience_type": "business",
+   "zh_name": "场址准备计划（Site Readiness Program）",
+   "zh_summary": "符合条件的安大略省工业地产所有者或申请人可获得资金援助，为其工业地产的潜在投资和业务扩张做好准备。",
+   "zh_detail": "适用对象为安大略省内拥有合格工业地产、寻求投资吸引和业务扩展的申请人。资金用途是帮助准备符合条件的工业地产以迎接潜在投资机会。具体的 eligibility 要求、资助金额、自付比例及材料清单，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1395,13 +1625,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "培训",
-    "设备",
-    "出口",
-    "租金",
-    "原住民"
+    "技能培训",
+    "资本建设",
+    "学徒制",
+    "劳动力发展"
    ],
    "audience_type": "institution",
+   "zh_name": "技能发展基金：资本分支（SDF Capital Stream）",
+   "zh_summary": "安大略省的雇主、非营利组织及培训交付机构可申请资金，用于新建、升级或改造培训中心。",
+   "zh_detail": "适用对象包括安大略省的雇主、部长批准的非学院学徒培训交付机构以及非营利组织等主要申请人。资金用途涵盖建造新培训中心、升级现有培训中心以及将现有建筑改建为培训中心。关于具体资助金额、自付比例以及详细材料准备，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1427,11 +1659,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "研发",
-    "原住民",
-    "非营利"
+    "环境保护",
+    "濒危物种",
+    "栖息地恢复",
+    "自然生态"
    ],
    "audience_type": "mixed",
+   "zh_name": "物种保护计划（Species Conservation Program）",
+   "zh_summary": "安大略省的个人、企业、原住民及各类组织可通过 stewardship 活动获得资助，用于保护濒危物种及其栖息地。",
+   "zh_detail": "适用对象广泛，包括安大略省的学术机构、保护局、企业、原住民社区与组织、个人、市镇及地方政府、非政府组织等。资金用途为通过管理活动保护和恢复濒危物种及其栖息地，包括土地保护项目等。具体金额、自付比例及申请材料要求，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   },
@@ -1457,9 +1693,15 @@
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
    "keywords": [
-    "原住民"
+    "北部社区",
+    "冬季道路",
+    "基础设施",
+    "原住民社区"
    ],
    "audience_type": "mixed",
+   "zh_name": "冬季道路计划：桥梁和涵洞分支",
+   "zh_summary": "安大略省北部的偏远社区可申请资金，用于建设和修复冬季道路网络中的水路跨越基础设施。",
+   "zh_detail": "适用对象为安大略省北部未与全天候公路网相连的偏远社区，包括原住民社区、部族委员会等符合条件的实体或其组建的法人/合伙企业。资金用途是建设新的水路跨越基础设施（预制桥梁和涵洞）及修复现有结构。具体金额与自付比例及申请材料，以官方指南为准。",
    "first_seen": "2026-10-25",
    "last_verified": "2026-10-26"
   }
