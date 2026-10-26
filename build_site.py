@@ -359,7 +359,9 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 <div class="panel" id="hotPanel"><div class="hot" id="hot">__HOT__</div></div>
 
 <div class="panel" id="tocPanel"><a id="toc"></a>
-  <div class="tochint">点任一项目跳到该条 <button class="btn" id="showall" type="button">显示全部项目</button></div>
+  <div class="tochint">点任一项目跳到该条
+    <button class="btn" id="showall" type="button">显示全部项目</button>
+    <button class="btn" id="hideall" type="button">收起目录</button></div>
   __TOC__
 </div>
 
@@ -453,6 +455,12 @@ document.getElementById("hot").addEventListener("click",function(e){
 });
 document.body.addEventListener("click",function(e){
   if(e.target.classList.contains("k")) { setQ(e.target.dataset.k); }
+});
+document.getElementById("hideall").addEventListener("click", function(e){
+  e.preventDefault(); e.stopPropagation();
+  tocPanel.classList.remove("open"); ttog.classList.remove("on");
+  VIEW_HIDDEN = false; render();
+  window.scrollTo(0, 0);
 });
 document.getElementById("showall").addEventListener("click", function(e){
   e.preventDefault(); e.stopPropagation();
