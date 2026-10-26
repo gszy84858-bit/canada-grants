@@ -246,13 +246,18 @@ font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",s
 .bar{position:sticky;top:0;z-index:20;background:__NAV_BG__;color:#fff;padding:10px 14px;
 font:14px/1.4 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
 display:flex;justify-content:space-between;align-items:center}
-.bar a{color:#fff;text-decoration:none;font-size:13px;border:1px solid rgba(255,255,255,.5);
-border-radius:6px;padding:2px 9px}
+.bar .btn{color:#fff;background:transparent;border:1px solid rgba(255,255,255,.55);
+border-radius:6px;padding:3px 10px;font-size:13px}
 .wrap{max-width:760px;margin:0 auto;padding:16px 16px 70px}
 h1{font-size:21px;margin:4px 0 6px}
 .sub{color:var(--mut);font-size:13px;margin-bottom:14px;line-height:1.7}
-input[type=search]{width:100%;padding:11px 14px;font-size:16px;border-radius:11px;
-border:1px solid var(--line);background:var(--card);color:var(--fg);outline:none;font-family:inherit}
+.tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin:12px 0 0}
+input[type=search]{flex:1 1 160px;min-width:0;padding:9px 13px;font-size:16px;
+border-radius:10px;border:1px solid var(--line);background:var(--card);
+color:var(--fg);outline:none;font-family:inherit}
+.tools .btn{white-space:nowrap;padding:6px 11px}
+.panel{display:none;margin-top:10px}
+.panel.open{display:block}
 input[type=search]:focus{border-color:var(--acc)}
 .toolrow{display:flex;align-items:center;gap:8px;margin:10px 0 0}
 .tiny{font-size:12px;color:var(--mut)}
@@ -260,27 +265,24 @@ input[type=search]:focus{border-color:var(--acc)}
 .hot.open{display:flex}
 .hk{font-size:12.5px;padding:4px 10px;border-radius:999px;background:var(--soft);
 color:var(--acc);cursor:pointer;user-select:none}
-details.f{background:var(--card);border:1px solid var(--line);border-radius:12px;
-padding:10px 14px;margin:12px 0 0}
-details.f summary,details.toc summary{cursor:pointer;font-size:14px;color:var(--acc);list-style:none}
-details.f summary::-webkit-details-marker,details.toc summary::-webkit-details-marker{display:none}
+#tocPanel,#filterPanel,#hotPanel{background:var(--card);border:1px solid var(--line);
+border-radius:12px;padding:12px 14px}
 .fg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .fg .lb{font-size:12px;color:var(--mut);width:100%;margin-top:4px}
 .btn{font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);
 background:transparent;color:var(--mut);cursor:pointer;font-family:inherit}
 .btn.on{background:var(--acc);border-color:var(--acc);color:#fff}
-details.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;
-padding:12px 16px;margin:14px 0}
+
 .tocg{margin-top:10px}
 .toch{font-size:12.5px;color:var(--mut);margin:10px 0 6px;letter-spacing:.03em}
-details.toc ul{margin:0;padding-left:0;list-style:none;columns:2;column-gap:20px}
-@media(max-width:560px){details.toc ul{columns:1}}
+.panel ul{margin:0;padding-left:0;list-style:none;columns:2;column-gap:20px}
+@media(max-width:560px){.panel ul{columns:1}}
 .tochint{font-size:12.5px;color:var(--mut);line-height:1.7;margin:8px 0 4px;
 background:var(--soft);border-radius:8px;padding:8px 10px}
 .tochint .btn{padding:3px 9px;font-size:12px}
-details.toc li{font-size:13.5px;padding:3px 0;break-inside:avoid}
-details.toc a{color:var(--fg);text-decoration:none;border-bottom:1px dotted var(--line)}
-details.toc a:hover{color:var(--acc)}
+.panel li{font-size:13.5px;padding:3px 0;break-inside:avoid}
+.panel a{color:var(--fg);text-decoration:none;border-bottom:1px dotted var(--line)}
+.panel a:hover{color:var(--acc)}
 .mini{color:var(--acc);font-size:11.5px;margin-left:6px}
 .count{color:var(--mut);font-size:13px;margin:14px 0 10px}
 .newbox{background:rgba(31,111,74,.08);border-left:3px solid var(--ok);
@@ -323,24 +325,28 @@ border-top:1px solid var(--line);padding-top:10px;font-size:12.5px}
 footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 .hide{display:none}
 </style></head><body>
-<div class="bar"><span>__BRAND__</span><a href="#toc">目录</a></div>
+<div class="bar"><span>__BRAND__</span><button class="btn bartog" id="bttog" type="button">目录</button></div>
 <div class="wrap">
 <h1>加拿大补助库</h1>
 <div class="sub">共 <b>__N__</b> 个项目 · 开放 <b>__NOPEN__</b> · 有金额 <b>__NAMT__</b> · 有截止日 <b>__NDDL__</b><br>
 数据源：安省政府资金门户、多伦多市政府商务激励 · 更新于 __BUILT__</div>
 
-<input id="q" type="search" placeholder="搜项目名、机构、关键词…（如 培训 / 数字化 / 出口 / 零售）"
- autocomplete="off" autocorrect="off" spellcheck="false">
-<div class="toolrow"><button class="btn" id="ktog" type="button">关键词 ▾</button>
-<span class="tiny">按行业/用途快速筛选</span></div>
-<div class="hot" id="hot">__HOT__</div>
+<div class="tools">
+  <input id="q" type="search" placeholder="搜项目名 / 机构 / 关键词…"
+   autocomplete="off" autocorrect="off" spellcheck="false">
+  <button class="btn" id="ktog" type="button">关键词</button>
+  <button class="btn" id="ttog" type="button">目录</button>
+  <button class="btn" id="ftog" type="button">筛选</button>
+</div>
 
-<details class="toc" id="toc"><summary>目录 · 点击任一项目查看详情</summary>
-<div class="tochint">目录展开时，下面的项目列表会自动收起；点任意项目，或再点一次「目录」标题，就会显示正文。　<button class="btn" id="showall" type="button">显示项目列表</button></div>
-__TOC__
-</details>
+<div class="panel" id="hotPanel"><div class="hot" id="hot">__HOT__</div></div>
 
-<details class="f"><summary>筛选 ▾</summary>
+<div class="panel" id="tocPanel"><a id="toc"></a>
+  <div class="tochint">点任一项目跳到该条 <button class="btn" id="showall" type="button">显示全部项目</button></div>
+  __TOC__
+</div>
+
+<div class="panel" id="filterPanel">
   <div class="fg" data-g="level"><span class="lb">层级</span>
     <button class="btn on" data-v="">全部</button>
     <button class="btn" data-v="provincial">省级</button>
@@ -356,7 +362,7 @@ __TOC__
     <button class="btn" data-v="lo">5 万以下</button>
     <button class="btn" data-v="mid">5–25 万</button>
     <button class="btn" data-v="hi">25 万以上</button></div>
-</details>
+</div>
 
 <div class="count" id="count"></div>
 __NEWBOX__
@@ -366,8 +372,14 @@ __CARDS__
 </div>
 <script>
 var F={level:"",status:"",amt:"",aud:"biz"}, Q="", TOTAL=__TOTAL__;
-var toc=document.getElementById("toc"), VIEW_HIDDEN=toc.open;
-var hotBox=document.getElementById("hot"), ktog=document.getElementById("ktog");
+var VIEW_HIDDEN=false;
+var hotPanel=document.getElementById("hotPanel"),
+    tocPanel=document.getElementById("tocPanel"),
+    filterPanel=document.getElementById("filterPanel"),
+    ktog=document.getElementById("ktog"), ttog=document.getElementById("ttog"),
+    ftog=document.getElementById("ftog"), box=document.getElementById("q");
+var PANELS=[[ktog,hotPanel],[ttog,tocPanel],[ftog,filterPanel]];
+
 function render(){
   var q=Q.trim().toLowerCase(), n=0;
   document.querySelectorAll(".card").forEach(function(c){
@@ -384,6 +396,22 @@ function render(){
     ? "目录模式 · 共 "+TOTAL+" 个项目，点目录项查看"
     : (n<TOTAL ? "显示 "+n+" / "+TOTAL+" 个项目" : TOTAL+" 个项目");
 }
+
+function togglePanel(btn, panel){
+  var open = !panel.classList.contains("open");
+  PANELS.forEach(function(p){ p[1].classList.remove("open"); p[0].classList.remove("on"); });
+  if(open){ panel.classList.add("open"); btn.classList.add("on"); }
+  VIEW_HIDDEN = tocPanel.classList.contains("open");
+  render();
+}
+ktog.onclick=function(){ togglePanel(ktog, hotPanel); };
+ttog.onclick=function(){ togglePanel(ttog, tocPanel); };
+ftog.onclick=function(){ togglePanel(ftog, filterPanel); };
+document.getElementById("bttog").onclick=function(){ togglePanel(ttog, tocPanel); };
+document.querySelectorAll('a[href="#toc"]').forEach(function(a){
+  a.addEventListener("click", function(){ togglePanel(ttog, tocPanel); });
+});
+
 document.querySelectorAll(".fg").forEach(function(g){
   g.querySelectorAll(".btn").forEach(function(b){
     b.onclick=function(){
@@ -393,36 +421,34 @@ document.querySelectorAll(".fg").forEach(function(g){
     };
   });
 });
-var box=document.getElementById("q"), t=null;
-function setQ(v){
-  box.value=v; Q=v; render();
-  window.scrollTo({top: box.getBoundingClientRect().top+window.scrollY-70, behavior:"smooth"});
-}
+
+var t=null;
 box.addEventListener("input",function(e){
   clearTimeout(t); var v=e.target.value;
   t=setTimeout(function(){Q=v; render();},120);
 });
-ktog.addEventListener("click", function(){
-  var open = hotBox.classList.toggle("open");
-  ktog.textContent = open ? "关键词 ▴" : "关键词 ▾";
-});
-hotBox.addEventListener("click",function(e){
-  if(e.target.classList.contains("hk")) setQ(e.target.dataset.k);
+
+function setQ(v){
+  box.value=v; Q=v; render();
+  window.scrollTo({top: box.getBoundingClientRect().top+window.scrollY-70, behavior:"smooth"});
+}
+document.getElementById("hot").addEventListener("click",function(e){
+  if(e.target.classList.contains("hk")) { setQ(e.target.dataset.k); }
 });
 document.body.addEventListener("click",function(e){
-  if(e.target.classList.contains("k")) setQ(e.target.dataset.k);
+  if(e.target.classList.contains("k")) { setQ(e.target.dataset.k); }
 });
-// 一律默认收起：打开就是正文，想浏览目录再点
-toc.removeAttribute("open"); VIEW_HIDDEN=false;
-toc.addEventListener("toggle", function(){ VIEW_HIDDEN = toc.open; render(); });
 document.getElementById("showall").addEventListener("click", function(e){
   e.preventDefault(); e.stopPropagation();
-  toc.open = false; VIEW_HIDDEN = false; render();
-  window.scrollTo({top: document.getElementById("count").offsetTop - 80, behavior:"smooth"});
+  tocPanel.classList.remove("open"); ttog.classList.remove("on");
+  VIEW_HIDDEN=false; render();
 });
-// 点目录项：关掉目录 → 恢复列表 → 浏览器跳到锚点
-toc.querySelectorAll('a[href^="#p-"]').forEach(function(a){
-  a.addEventListener("click", function(){ toc.open = false; VIEW_HIDDEN = false; render(); });
+// 点目录项：收起目录 → 恢复列表 → 浏览器跳到锚点
+tocPanel.querySelectorAll('a[href^="#p-"]').forEach(function(a){
+  a.addEventListener("click", function(){
+    tocPanel.classList.remove("open"); ttog.classList.remove("on");
+    VIEW_HIDDEN=false; render();
+  });
 });
 render();
 </script>
