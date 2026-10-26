@@ -508,16 +508,21 @@ def extract_keywords(p):
     return out[:5]
 
 
-def translate(items, key, batch=8):
+def translate(items, key, batch=5):
     """给 name / summary 生成中文。失败无妨，页面回退英文。"""
     prompt_tpl = (
         "把下面加拿大政府补助项目改写成中文，供中文读者快速判断是否值得申请。\n"
         "输出三部分：\n"
         "n = 中文名称（意译，保留英文缩写）\n"
         "s = 一句话摘要，50-70 字，说清「谁能申请 + 钱做什么」\n"
-        "d = 详细说明，180-260 字，依次覆盖：适用对象（行业/规模/地区）、资金用途、"
-        "金额与自付比例、申请门槛或需要准备的材料；只依据给定信息，不要编造金额与日期，"
-        "信息不足就写「以官方指南为准」\n"
+        "d = 详细说明，300-450 字，用换行分成四段（每段以「适用对象：」「资金用途：」"
+        "「金额与自付：」「申请准备：」开头）：\n"
+        "   · 适用对象：行业、企业规模、地区、是否必须注册/盈利\n"
+        "   · 资金用途：钱能花在什么上、不能花在什么上\n"
+        "   · 金额与自付：最高多少、政府承担比例、是否需先垫付\n"
+        "   · 申请准备：需要哪些材料、有哪些常见门槛或注意事项\n"
+        "只依据给定信息；不准编造金额、日期、机构名。某段信息不足时写"
+        "「以官方指南为准」，不要省略该段。\n"
         "t = 3-5 个中文检索关键词（如：零售、数字化、培训、出口、女性创业）\n"
         "只输出 JSON 数组：{\"i\":序号,\"n\":..,\"s\":..,\"d\":..,\"t\":[..]}\n\n")
     order = _gemini_models(key) or GEMINI_MODELS
@@ -525,14 +530,15 @@ def translate(items, key, batch=8):
     for start in range(0, len(items), batch):
         chunk = items[start:start + batch]
         body = prompt_tpl + "\n".join(
-            "[%d] %s\n机构:%s\n摘要:%s\n资格:%s" % (
-                i, it["name"], it.get("org", ""),
-                (it.get("summary") or "")[:400], (it.get("eligibility") or "")[:300])
+            "[%d] %s\n机构:%s\n地区:%s\n原文摘要:%s\n资格:%s\n原文正文:%s" % (
+                i, it["name"], it.get("org", ""), it.get("region", ""),
+                (it.get("summary") or "")[:500], (it.get("eligibility") or "")[:500],
+                (it.get("detail") or "")[:1800])
             for i, it in enumerate(chunk))
         payload = {"contents": [{"role": "user", "parts": [{"text": body}]}],
                    "generationConfig": {"temperature": 0.2,
                                         "responseMimeType": "application/json",
-                                        "maxOutputTokens": 4096}}
+                                        "maxOutputTokens": 8192}}
         for model in order:
             try:
                 req = urllib.request.Request(

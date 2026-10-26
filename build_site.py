@@ -60,7 +60,7 @@ def anchor(p):
     return "p-" + re.sub(r"[^a-z0-9]+", "-", p["id"].lower()).strip("-")[-48:]
 
 
-def card(p):
+def card(p, idx=0):
     dl = days_left(p)
     status = p.get("status") or "unknown"
     tags = []
@@ -96,7 +96,20 @@ def card(p):
     detail = (p.get("zh_detail") or "").strip()
     if not detail:
         raw = (p.get("detail") or p.get("summary") or "").strip()
-        detail = raw[:420]
+        detail = raw[:900]
+
+    # 分段：优先按换行；没有换行就每 2 句一段
+    parts = [x.strip() for x in re.split(r"\n+", detail) if x.strip()]
+    if len(parts) <= 1 and len(detail) > 120:
+        sents = re.split(r"(?<=[。！？])", detail)
+        parts, buf = [], ""
+        for sen in sents:
+            buf += sen
+            if len(buf) >= 110:
+                parts.append(buf.strip()); buf = ""
+        if buf.strip():
+            parts.append(buf.strip())
+    detail_html = "".join("<p>%s</p>" % esc(x) for x in parts) or "<p>%s</p>" % esc(detail)
     how = (p.get("how_to_apply") or "").strip()
 
     rows = []
@@ -122,13 +135,13 @@ def card(p):
 <article class="card" id="{aid}" data-level="{level}" data-status="{status}"
  data-amt="{amt}" data-aud="{biz}" data-dl="{dlv}" data-text="{search}">
   <div class="tags">{tags}<span class="b lv">{lv} · {region}</span></div>
-  <h3>{zhname}</h3>
+  <h3><span class="num">{num}.</span> {zhname}</h3>
   {enname}
   <div class="org">{org}</div>
   <p class="sum">{summary}</p>
   {kwhtml}
   <details class="more"><summary>详情 / 资格 / 怎么申请</summary>
-    <p class="detail">{detail}</p>
+    <div class="detail">{detail}</div>
     <table class="meta">{rows}</table>
   </details>
   <div class="foot">
@@ -136,7 +149,7 @@ def card(p):
     <a class="top" href="#toc">回到目录 ↑</a>
   </div>
 </article>""".format(
-        aid=anchor(p), level=esc(p["level"]), status=esc(status),
+        aid=anchor(p), num=idx, level=esc(p["level"]), status=esc(status),
         amt=("hi" if (p.get("amount_max") or 0) >= 250000 else (
             "mid" if (p.get("amount_max") or 0) >= 50000 else (
                 "lo" if p.get("amount_max") else "none"))),
@@ -153,12 +166,12 @@ def card(p):
         org=esc(p.get("org", "")),
         summary=esc(p.get("zh_summary") or (p.get("summary") or "")[:200]),
         kwhtml=('<div class="kws">%s</div>' % kw) if kw else "",
-        detail=esc(detail), rows=rows_html,
+        detail=detail_html, rows=rows_html,
         url=esc(p.get("url") or p.get("source_url") or "#"),
     )
 
 
-def toc_block(progs):
+def toc_block(progs, progs_index):
     """目录：按层级分组，每项一个锚点。"""
     groups = [("省级（安大略）", "provincial"), ("市级（多伦多）", "municipal")]
     out = []
@@ -167,8 +180,8 @@ def toc_block(progs):
         if not items:
             continue
         lis = "".join(
-            '<li><a href="#%s">%s</a>%s</li>' % (
-                anchor(p),
+            '<li><a href="#%s"><span class="tnum">%d</span>%s</a>%s</li>' % (
+                anchor(p), progs_index[p["id"]] + 1,
                 esc(p.get("zh_name") or p["name"]),
                 '<span class="mini">%s</span>' % money(p["amount_max"]) if p.get("amount_max") else "")
             for p in items)
@@ -191,7 +204,9 @@ def main():
     n_amt = sum(1 for p in progs if p.get("amount_max"))
     n_ddl = sum(1 for p in progs if p.get("deadline"))
 
+    LV = {"provincial": 0, "municipal": 1, "federal": 2}
     progs = sorted(progs, key=lambda p: (
+        LV.get(p["level"], 3),
         0 if p.get("status") == "open" else 1,
         days_left(p) if days_left(p) is not None and days_left(p) >= 0 else 9999,
         -(p.get("amount_max") or 0)))
@@ -201,8 +216,9 @@ def main():
     hot = "".join('<span class="hk" data-k="%s">%s</span>' % (esc(k), esc(k))
                   for k, _ in freq.most_common(8))
 
-    cards = "\n".join(card(p) for p in progs)
-    toc = toc_block(progs)
+    cards = "\n".join(card(p, i + 1) for i, p in enumerate(progs))
+    progs_index = {p["id"]: i for i, p in enumerate(progs)}
+    toc = toc_block(progs, progs_index)
 
     new_names = (ch.get("new") or [])[:5]
     new_html = ""
@@ -256,6 +272,9 @@ padding:12px 16px;margin:14px 0}
 .toch{font-size:12.5px;color:var(--mut);margin:10px 0 6px;letter-spacing:.03em}
 details.toc ul{margin:0;padding-left:0;list-style:none;columns:2;column-gap:20px}
 @media(max-width:560px){details.toc ul{columns:1}}
+.tochint{font-size:12.5px;color:var(--mut);line-height:1.7;margin:8px 0 4px;
+background:var(--soft);border-radius:8px;padding:8px 10px}
+.tochint .btn{padding:3px 9px;font-size:12px}
 details.toc li{font-size:13.5px;padding:3px 0;break-inside:avoid}
 details.toc a{color:var(--fg);text-decoration:none;border-bottom:1px dotted var(--line)}
 details.toc a:hover{color:var(--acc)}
@@ -267,6 +286,9 @@ border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;margin:12px 0}
 padding:15px 16px;margin-bottom:11px;scroll-margin-top:60px}
 .card:target{border-color:var(--acc);box-shadow:0 0 0 2px rgba(31,58,95,.15)}
 .card h3{margin:6px 0 4px;font-size:17px;line-height:1.45}
+h3 .num{color:var(--acc);font-weight:500}
+.tnum{display:inline-block;min-width:22px;color:var(--acc);font-size:12px}
+.detail p{margin:0 0 8px;font-size:14px;opacity:.94;line-height:1.75}
 .en{color:var(--mut);font-size:12.5px;margin-bottom:6px;line-height:1.5}
 .org{color:var(--mut);font-size:12.5px;margin-bottom:8px}
 .sum{font-size:14.5px;margin:0 0 8px}
@@ -308,7 +330,8 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
  autocomplete="off" autocorrect="off" spellcheck="false">
 <div class="hot" id="hot">__HOT__</div>
 
-<details class="toc" id="toc" open><summary>目录（点击跳转到该项目）</summary>
+<details class="toc" id="toc" open><summary>目录 · 点击任一项目查看详情</summary>
+<div class="tochint">目录展开时，下面的项目列表会自动收起；点任意项目，或再点一次「目录」标题，就会显示正文。　<button class="btn" id="showall" type="button">显示项目列表</button></div>
 __TOC__
 </details>
 
@@ -338,6 +361,7 @@ __CARDS__
 </div>
 <script>
 var F={level:"",status:"",amt:"",aud:"biz"}, Q="", TOTAL=__TOTAL__;
+var toc=document.getElementById("toc"), VIEW_HIDDEN=toc.open;
 function render(){
   var q=Q.trim().toLowerCase(), n=0;
   document.querySelectorAll(".card").forEach(function(c){
@@ -347,11 +371,12 @@ function render(){
     if(F.amt && c.dataset.amt!==F.amt) ok=false;
     if(F.aud && c.dataset.aud!==F.aud) ok=false;
     if(ok && q && c.dataset.text.indexOf(q)<0) ok=false;
-    c.classList.toggle("hide", !ok);
+    c.classList.toggle("hide", !ok || VIEW_HIDDEN);
     if(ok) n++;
   });
-  document.getElementById("count").textContent =
-    (n<TOTAL ? "显示 "+n+" / "+TOTAL+" 个项目" : TOTAL+" 个项目");
+  document.getElementById("count").textContent = VIEW_HIDDEN
+    ? "目录模式 · 共 "+TOTAL+" 个项目，点目录项查看"
+    : (n<TOTAL ? "显示 "+n+" / "+TOTAL+" 个项目" : TOTAL+" 个项目");
 }
 document.querySelectorAll(".fg").forEach(function(g){
   g.querySelectorAll(".btn").forEach(function(b){
@@ -377,8 +402,18 @@ document.getElementById("hot").addEventListener("click",function(e){
 document.body.addEventListener("click",function(e){
   if(e.target.classList.contains("k")) setQ(e.target.dataset.k);
 });
-// 手机上目录默认收起（50 条会占满一屏），桌面上展开
-if(window.innerWidth < 560){ document.getElementById("toc").removeAttribute("open"); }
+// 手机上目录默认收起（这样一进来先看到正文），桌面上展开（先看目录）
+if(window.innerWidth < 560){ document.getElementById("toc").removeAttribute("open"); VIEW_HIDDEN=false; }
+toc.addEventListener("toggle", function(){ VIEW_HIDDEN = toc.open; render(); });
+document.getElementById("showall").addEventListener("click", function(e){
+  e.preventDefault(); e.stopPropagation();
+  toc.open = false; VIEW_HIDDEN = false; render();
+  window.scrollTo({top: document.getElementById("count").offsetTop - 80, behavior:"smooth"});
+});
+// 点目录项：关掉目录 → 恢复列表 → 浏览器跳到锚点
+toc.querySelectorAll('a[href^="#p-"]').forEach(function(a){
+  a.addEventListener("click", function(){ toc.open = false; VIEW_HIDDEN = false; render(); });
+});
 render();
 </script>
 </body></html>"""
