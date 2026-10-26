@@ -4,15 +4,21 @@
 加拿大补助库 · 静态站点构建
 
 输入：data/programs.json, data/changes.json
-输出：docs/index.html（单页，含筛选与搜索）、docs/meta.json、docs/.nojekyll
+输出：docs/index.html（单页）、docs/meta.json、docs/.nojekyll
 
-零第三方依赖。所有筛选在前端完成（数据量小，不必请求接口）。
+四个体验要点：
+  1. 顶部目录：一屏看完全部项目名，点一下直达该条（锚点）
+  2. 搜索：标题 / 机构 / 摘要 / 详情 / 关键词全索引
+  3. 热门关键词：一键填入搜索框
+  4. 每条有摘要 + 可展开的详细说明
 """
 
 import json
 import os
 import re
+from collections import Counter
 from datetime import date, datetime
+from html import unescape
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
@@ -21,8 +27,8 @@ BUILD = str(int(datetime.now().timestamp()))
 
 BRAND = "加拿大补助库"
 NAV_BG = "#1f3a5f"
-DISCLAIMER = ("本页只是索引与摘要，不是官方文件。金额、资格与截止日以政府原文为准；"
-              "申请前请点开官方页面核对。")
+DISCLAIMER = ("本页是索引与摘要，不是官方文件。金额、资格与截止日以政府原文为准；"
+              "申请前请点开「官方详情」核对。")
 
 
 def money(v):
@@ -40,15 +46,18 @@ def days_left(p):
     if not p.get("deadline"):
         return None
     try:
-        d = date.fromisoformat(p["deadline"])
+        return (date.fromisoformat(p["deadline"]) - date.today()).days
     except ValueError:
         return None
-    return (d - date.today()).days
 
 
 def esc(s):
     return (str(s or "").replace("&", "&amp;").replace("<", "&lt;")
             .replace(">", "&gt;").replace('"', "&quot;"))
+
+
+def anchor(p):
+    return "p-" + re.sub(r"[^a-z0-9]+", "-", p["id"].lower()).strip("-")[-48:]
 
 
 def card(p):
@@ -62,7 +71,7 @@ def card(p):
     if p.get("amount_max"):
         tags.append('<span class="b amt">上限 %s</span>' % money(p["amount_max"]))
     if p.get("cost_share"):
-        tags.append('<span class="b share">要求配比 %d%%</span>' % p["cost_share"])
+        tags.append('<span class="b share">需自付 %d%%</span>' % (100 - int(p["cost_share"])))
     if dl is not None:
         if dl < 0:
             tags.append('<span class="b over">已过期</span>')
@@ -78,37 +87,94 @@ def card(p):
         tags.append('<span class="b other">限机构/团体</span>')
     elif aud == "nonprofit":
         tags.append('<span class="b other">限非营利</span>')
-    level_cn = "省级" if p["level"] == "provincial" else (
-        "市级" if p["level"] == "municipal" else "联邦")
+
+    level_cn = {"provincial": "省级", "municipal": "市级"}.get(p["level"], "联邦")
+
+    kw = "".join('<span class="k" data-k="%s">%s</span>' % (esc(k), esc(k))
+                 for k in (p.get("keywords") or [])[:5])
+
+    detail = (p.get("zh_detail") or "").strip()
+    if not detail:
+        raw = (p.get("detail") or p.get("summary") or "").strip()
+        detail = raw[:420]
+    how = (p.get("how_to_apply") or "").strip()
+
+    rows = []
+    if p.get("amount_max"):
+        rows.append(("金额", "最高 %s" % money(p["amount_max"])))
+    if p.get("cost_share"):
+        rows.append(("自付比例", "至少 %d%%（政府承担 %d%%）" % (
+            100 - int(p["cost_share"]), int(p["cost_share"]))))
+    if p.get("deadline"):
+        rows.append(("截止", "%s（%s）" % (p["deadline"], p.get("deadline_text", "")[:60])))
+    elif p.get("deadline_kind") == "rolling":
+        rows.append(("截止", "滚动受理，随时可申请"))
+    if p.get("eligibility"):
+        rows.append(("资格", p["eligibility"][:220]))
+    if how:
+        rows.append(("怎么申请", how[:220]))
+    rows.append(("核对日期", p.get("last_verified", "")))
+
+    rows_html = "".join("<tr><th>%s</th><td>%s</td></tr>" % (esc(k), esc(v))
+                        for k, v in rows)
+
     return """
-<div class="card" data-level="{level}" data-status="{status}" data-amt="{amt}"
-     data-aud="{biz}" data-text="{search}" data-dl="{dlv}">
+<article class="card" id="{aid}" data-level="{level}" data-status="{status}"
+ data-amt="{amt}" data-aud="{biz}" data-dl="{dlv}" data-text="{search}">
   <div class="tags">{tags}<span class="b lv">{lv} · {region}</span></div>
   <h3>{zhname}</h3>
   {enname}
   <div class="org">{org}</div>
   <p class="sum">{summary}</p>
+  {kwhtml}
+  <details class="more"><summary>详情 / 资格 / 怎么申请</summary>
+    <p class="detail">{detail}</p>
+    <table class="meta">{rows}</table>
+  </details>
   <div class="foot">
-    <a href="{url}" target="_blank" rel="noopener">查看官方详情 ↗</a>
-    <span class="ver">核对于 {verified}</span>
+    <a href="{url}" target="_blank" rel="noopener">官方详情 ↗</a>
+    <a class="top" href="#toc">回到目录 ↑</a>
   </div>
-</div>""".format(
-        level=esc(p["level"]), status=esc(status),
+</article>""".format(
+        aid=anchor(p), level=esc(p["level"]), status=esc(status),
         amt=("hi" if (p.get("amount_max") or 0) >= 250000 else (
             "mid" if (p.get("amount_max") or 0) >= 50000 else (
                 "lo" if p.get("amount_max") else "none"))),
-        search=esc((p["name"] + " " + p.get("org", "") + " " + p.get("summary", "")).lower()[:600]),
-        dlv=("" if dl is None else dl),
-        tags="".join(tags),
-        lv=level_cn, region=esc(p.get("region", "")), name=esc(p["name"]),
         biz=("biz" if aud in ("business", "mixed", "unknown") else "other"),
+        dlv=("" if dl is None else dl),
+        search=esc(" ".join([
+            p.get("name", ""), p.get("zh_name", ""), p.get("org", ""),
+            p.get("summary", ""), p.get("zh_summary", ""), p.get("zh_detail", ""),
+            p.get("eligibility", ""), p.get("region", ""), " ".join(p.get("keywords") or [])]
+        ).lower()[:1200]),
+        tags="".join(tags), lv=level_cn, region=esc(p.get("region", "")),
         zhname=esc(p.get("zh_name") or p["name"]),
         enname=('<div class="en">%s</div>' % esc(p["name"])) if p.get("zh_name") else "",
         org=esc(p.get("org", "")),
-        summary=esc(p.get("zh_summary") or (p.get("summary") or "")[:260]),
+        summary=esc(p.get("zh_summary") or (p.get("summary") or "")[:200]),
+        kwhtml=('<div class="kws">%s</div>' % kw) if kw else "",
+        detail=esc(detail), rows=rows_html,
         url=esc(p.get("url") or p.get("source_url") or "#"),
-        verified=esc(p.get("last_verified", "")),
     )
+
+
+def toc_block(progs):
+    """目录：按层级分组，每项一个锚点。"""
+    groups = [("省级（安大略）", "provincial"), ("市级（多伦多）", "municipal")]
+    out = []
+    for label, key in groups:
+        items = [p for p in progs if p["level"] == key]
+        if not items:
+            continue
+        lis = "".join(
+            '<li><a href="#%s">%s</a>%s</li>' % (
+                anchor(p),
+                esc(p.get("zh_name") or p["name"]),
+                '<span class="mini">%s</span>' % money(p["amount_max"]) if p.get("amount_max") else "")
+            for p in items)
+        out.append('<div class="tocg"><div class="toch">%s · %d 个</div><ul>%s</ul></div>'
+                   % (esc(label), len(items), lis))
+    return "".join(out)
 
 
 def main():
@@ -125,17 +191,23 @@ def main():
     n_amt = sum(1 for p in progs if p.get("amount_max"))
     n_ddl = sum(1 for p in progs if p.get("deadline"))
 
-    # 默认排序：还开着的在前 → 截止日近的在前 → 金额大的在前
     progs = sorted(progs, key=lambda p: (
         0 if p.get("status") == "open" else 1,
         days_left(p) if days_left(p) is not None and days_left(p) >= 0 else 9999,
         -(p.get("amount_max") or 0)))
 
+    # 热门关键词：出现频次最高的 8 个
+    freq = Counter(k for p in progs for k in (p.get("keywords") or []))
+    hot = "".join('<span class="hk" data-k="%s">%s</span>' % (esc(k), esc(k))
+                  for k, _ in freq.most_common(8))
+
     cards = "\n".join(card(p) for p in progs)
-    new_names = (ch.get("new") or [])[:6]
+    toc = toc_block(progs)
+
+    new_names = (ch.get("new") or [])[:5]
     new_html = ""
     if new_names:
-        new_html = ('<div class="newbox"><b>最近新增 %d 项</b><br>%s</div>'
+        new_html = ('<div class="newbox"><b>最近新增 %d 项</b>　%s</div>'
                     % (len(ch.get("new") or []), "、".join(esc(x) for x in new_names)))
 
     html = """<!DOCTYPE html>
@@ -149,61 +221,96 @@ def main():
 <title>加拿大补助库 · 大多伦多小企业</title>
 <style>
 :root{--bg:#f7f6f3;--card:#fff;--fg:#1c1c1a;--mut:#6b6a66;--line:#e4e2dc;
---acc:#1f3a5f;--ok:#1f6f4a;--warn:#a8551a;--bad:#a32d2d}
+--acc:#1f3a5f;--ok:#1f6f4a;--warn:#a8551a;--bad:#a32d2d;--soft:#eef2f7}
 @media(prefers-color-scheme:dark){:root{--bg:#141413;--card:#1f1f1e;--fg:#eceae4;
---mut:#a5a29b;--line:#33322f;--acc:#8ab4e0;--ok:#5dcaa5;--warn:#e0a458;--bad:#e2645c}}
+--mut:#a5a29b;--line:#33322f;--acc:#8ab4e0;--ok:#5dcaa5;--warn:#e0a458;--bad:#e2645c;--soft:#242628}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--fg);
 font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",sans-serif}
-.bar{position:sticky;top:0;z-index:9;background:__NAV_BG__;color:#fff;padding:10px 14px;
-font:14px/1.4 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif}
-.wrap{max-width:720px;margin:0 auto;padding:16px 16px 60px}
-h1{font-size:21px;margin:6px 0 6px;line-height:1.35}
-.sub{color:var(--mut);font-size:13px;margin-bottom:14px}
+.bar{position:sticky;top:0;z-index:20;background:__NAV_BG__;color:#fff;padding:10px 14px;
+font:14px/1.4 -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;
+display:flex;justify-content:space-between;align-items:center}
+.bar a{color:#fff;text-decoration:none;font-size:13px;border:1px solid rgba(255,255,255,.5);
+border-radius:6px;padding:2px 9px}
+.wrap{max-width:760px;margin:0 auto;padding:16px 16px 70px}
+h1{font-size:21px;margin:4px 0 6px}
+.sub{color:var(--mut);font-size:13px;margin-bottom:14px;line-height:1.7}
 input[type=search]{width:100%;padding:11px 14px;font-size:16px;border-radius:11px;
 border:1px solid var(--line);background:var(--card);color:var(--fg);outline:none;font-family:inherit}
 input[type=search]:focus{border-color:var(--acc)}
+.hot{display:flex;flex-wrap:wrap;gap:6px;margin:9px 0 0}
+.hk{font-size:12.5px;padding:4px 10px;border-radius:999px;background:var(--soft);
+color:var(--acc);cursor:pointer;user-select:none}
 details.f{background:var(--card);border:1px solid var(--line);border-radius:12px;
-padding:10px 14px;margin:12px 0 6px}
-details.f summary{cursor:pointer;font-size:14px;color:var(--acc);list-style:none}
-details.f summary::-webkit-details-marker{display:none}
+padding:10px 14px;margin:12px 0 0}
+details.f summary,details.toc summary{cursor:pointer;font-size:14px;color:var(--acc);list-style:none}
+details.f summary::-webkit-details-marker,details.toc summary::-webkit-details-marker{display:none}
 .fg{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
 .fg .lb{font-size:12px;color:var(--mut);width:100%;margin-top:4px}
 .btn{font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);
 background:transparent;color:var(--mut);cursor:pointer;font-family:inherit}
 .btn.on{background:var(--acc);border-color:var(--acc);color:#fff}
-.count{color:var(--mut);font-size:13px;margin:12px 0 10px}
+details.toc{background:var(--card);border:1px solid var(--line);border-radius:12px;
+padding:12px 16px;margin:14px 0}
+.tocg{margin-top:10px}
+.toch{font-size:12.5px;color:var(--mut);margin:10px 0 6px;letter-spacing:.03em}
+details.toc ul{margin:0;padding-left:0;list-style:none;columns:2;column-gap:20px}
+@media(max-width:560px){details.toc ul{columns:1}}
+details.toc li{font-size:13.5px;padding:3px 0;break-inside:avoid}
+details.toc a{color:var(--fg);text-decoration:none;border-bottom:1px dotted var(--line)}
+details.toc a:hover{color:var(--acc)}
+.mini{color:var(--acc);font-size:11.5px;margin-left:6px}
+.count{color:var(--mut);font-size:13px;margin:14px 0 10px}
+.newbox{background:rgba(31,111,74,.08);border-left:3px solid var(--ok);
+border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;margin:12px 0}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
-padding:15px 16px;margin-bottom:11px}
-.card h3{margin:6px 0 4px;font-size:16.5px;line-height:1.45}
+padding:15px 16px;margin-bottom:11px;scroll-margin-top:60px}
+.card:target{border-color:var(--acc);box-shadow:0 0 0 2px rgba(31,58,95,.15)}
+.card h3{margin:6px 0 4px;font-size:17px;line-height:1.45}
+.en{color:var(--mut);font-size:12.5px;margin-bottom:6px;line-height:1.5}
 .org{color:var(--mut);font-size:12.5px;margin-bottom:8px}
-.sum{font-size:14.5px;color:var(--fg);opacity:.9;margin:0 0 10px}
+.sum{font-size:14.5px;margin:0 0 8px}
+.kws{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.k{font-size:11.5px;padding:2px 8px;border-radius:6px;background:var(--soft);
+color:var(--acc);cursor:pointer}
+details.more{margin:2px 0 10px}
+details.more summary{font-size:13px;color:var(--acc);cursor:pointer;list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more summary::before{content:"＋ ";}
+details.more[open] summary::before{content:"− ";}
+.detail{font-size:14px;color:var(--fg);opacity:.92;margin:8px 0 10px;
+border-left:2px solid var(--line);padding-left:12px}
+table.meta{width:100%;border-collapse:collapse;font-size:13px}
+table.meta th{text-align:left;color:var(--mut);font-weight:400;width:74px;
+padding:5px 8px 5px 0;vertical-align:top;border-top:1px solid var(--line)}
+table.meta td{padding:5px 0;border-top:1px solid var(--line)}
 .foot{display:flex;justify-content:space-between;align-items:center;gap:10px;
 border-top:1px solid var(--line);padding-top:10px;font-size:12.5px}
 .foot a{color:var(--acc);text-decoration:none}
-.ver{color:var(--mut);font-size:11.5px}
-.tags{display:flex;flex-wrap:wrap;gap:6px}
-.en{color:var(--mut);font-size:12.5px;margin-bottom:6px;line-height:1.5}
-.b.other{color:var(--mut);opacity:.75}
 .b{font-size:11.5px;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--mut)}
 .b.open{color:var(--ok);border-color:var(--ok)}
-.b.rest{color:var(--warn);border-color:var(--warn)}
+.b.rest,.b.share{color:var(--warn);border-color:var(--warn)}
 .b.soon{color:var(--bad);border-color:var(--bad)}
 .b.over{color:var(--mut);text-decoration:line-through}
 .b.amt{color:var(--acc);border-color:var(--acc);font-weight:500}
-.newbox{background:rgba(31,111,74,.08);border-left:3px solid var(--ok);
-border-radius:0 8px 8px 0;padding:10px 14px;font-size:13.5px;margin:12px 0}
+.b.other{opacity:.7}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
 footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 .hide{display:none}
 </style></head><body>
-<div class="bar">__BRAND__ · 大多伦多小企业补助索引</div>
+<div class="bar"><span>__BRAND__</span><a href="#toc">目录</a></div>
 <div class="wrap">
 <h1>加拿大补助库</h1>
-<div class="sub">共 <b>__N__</b> 个项目（开放 __NOPEN__ · 有金额 __NAMT__ · 有截止日 __NDDL__）<br>
-数据源：安省政府资金门户、多伦多市政府商务激励页 · 更新于 __BUILT__</div>
+<div class="sub">共 <b>__N__</b> 个项目 · 开放 <b>__NOPEN__</b> · 有金额 <b>__NAMT__</b> · 有截止日 <b>__NDDL__</b><br>
+数据源：安省政府资金门户、多伦多市政府商务激励 · 更新于 __BUILT__</div>
 
-<input id="q" type="search" placeholder="搜项目名、机构、关键词…（如 培训 / 数字化 / 出口）"
+<input id="q" type="search" placeholder="搜项目名、机构、关键词…（如 培训 / 数字化 / 出口 / 零售）"
  autocomplete="off" autocorrect="off" spellcheck="false">
+<div class="hot" id="hot">__HOT__</div>
+
+<details class="toc" id="toc" open><summary>目录（点击跳转到该项目）</summary>
+__TOC__
+</details>
 
 <details class="f"><summary>筛选 ▾</summary>
   <div class="fg" data-g="level"><span class="lb">层级</span>
@@ -227,11 +334,10 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 __NEWBOX__
 __CARDS__
 <footer>__DISC__
-<br><br>本页由程序自动生成，只收录「小企业可申请」的项目；<br>
-每条都标注核对日期，数据源均为官方页面。</footer>
+<br><br>只收录「小企业可申请」的项目；每条标注核对日期，数据源均为官方页面。</footer>
 </div>
 <script>
-var F={level:"",status:"",amt:"",aud:"biz"}, Q="";
+var F={level:"",status:"",amt:"",aud:"biz"}, Q="", TOTAL=__TOTAL__;
 function render(){
   var q=Q.trim().toLowerCase(), n=0;
   document.querySelectorAll(".card").forEach(function(c){
@@ -244,7 +350,8 @@ function render(){
     c.classList.toggle("hide", !ok);
     if(ok) n++;
   });
-  document.getElementById("count").textContent = n + " 个项目";
+  document.getElementById("count").textContent =
+    (n<TOTAL ? "显示 "+n+" / "+TOTAL+" 个项目" : TOTAL+" 个项目");
 }
 document.querySelectorAll(".fg").forEach(function(g){
   g.querySelectorAll(".btn").forEach(function(b){
@@ -255,11 +362,23 @@ document.querySelectorAll(".fg").forEach(function(g){
     };
   });
 });
-var t=null;
-document.getElementById("q").addEventListener("input",function(e){
+var box=document.getElementById("q"), t=null;
+function setQ(v){
+  box.value=v; Q=v; render();
+  window.scrollTo({top: box.getBoundingClientRect().top+window.scrollY-70, behavior:"smooth"});
+}
+box.addEventListener("input",function(e){
   clearTimeout(t); var v=e.target.value;
   t=setTimeout(function(){Q=v; render();},120);
 });
+document.getElementById("hot").addEventListener("click",function(e){
+  if(e.target.classList.contains("hk")) setQ(e.target.dataset.k);
+});
+document.body.addEventListener("click",function(e){
+  if(e.target.classList.contains("k")) setQ(e.target.dataset.k);
+});
+// 手机上目录默认收起（50 条会占满一屏），桌面上展开
+if(window.innerWidth < 560){ document.getElementById("toc").removeAttribute("open"); }
 render();
 </script>
 </body></html>"""
@@ -267,7 +386,9 @@ render();
     html = (html.replace("__NAV_BG__", NAV_BG).replace("__BRAND__", BRAND)
                 .replace("__N__", str(len(progs))).replace("__NOPEN__", str(n_open))
                 .replace("__NAMT__", str(n_amt)).replace("__NDDL__", str(n_ddl))
+                .replace("__TOTAL__", str(len(progs)))
                 .replace("__BUILT__", d.get("built_at", "")[:16])
+                .replace("__HOT__", hot).replace("__TOC__", toc)
                 .replace("__NEWBOX__", new_html).replace("__CARDS__", cards)
                 .replace("__DISC__", DISCLAIMER))
 

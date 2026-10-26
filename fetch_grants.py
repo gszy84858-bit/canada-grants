@@ -73,6 +73,37 @@ def strip_tags(s, limit=None):
     return s[:limit] if limit else s
 
 
+def fetch_detail_text(url, name="", limit=1600):
+    """抓详情页正文并清洗：去掉导航、面包屑、页脚样板文字。"""
+    try:
+        html = http_get(url, timeout=25)
+    except Exception:
+        return ""
+    m = re.search(r"<main[\s\S]*?</main>", html, re.I)
+    body = m.group(0) if m else html
+    body = re.sub(r"<(nav|footer|header|script|style|form)[\s\S]*?</\1>", " ", body, flags=re.I)
+    body = re.sub(r'<[^>]+class="[^"]*(breadcrumb|menu|nav|skip|share|related|newsletter)[^"]*"[\s\S]{0,400}?>',
+                  " ", body, flags=re.I)
+    txt = strip_tags(body)
+
+    # 从项目名第一次出现处开始，砍掉前面整段站点导航
+    if name:
+        key = name[:40].lower()
+        i = txt.lower().find(key)
+        if 0 < i < 600:
+            txt = txt[i:]
+
+    # 去掉「项目名 – 站点名」这种标题残留
+    txt = re.sub(r"^.{0,90}?\s[–—|-]\s(City of Toronto|Government of Ontario)\s*", " ", txt)
+
+    noise = ["skip to content", "français", "search", "menu", "sign in",
+             "you are here", "home >", "share this page", "was this page helpful"]
+    for n in noise:
+        txt = re.sub(re.escape(n), " ", txt, flags=re.I)
+    txt = re.sub(r"\s{2,}", " ", txt).strip()
+    return txt[:limit]
+
+
 def parse_amount(text):
     """从描述里抽「单个申请人能拿多少」，不是基金总规模。
 
@@ -191,8 +222,10 @@ def parse_ontario(html, src):
         org = org_m.group(1).strip() if org_m else src["org_default"]
         dl_m = re.search(r"<h3>Deadline</h3>\s*<p>(.*?)</p>", body, re.S)
         dl_text = strip_tags(dl_m.group(1)) if dl_m else ""
-        desc_m = re.search(r"<h3>Description</h3>\s*<p>(.*?)</p>", body, re.S)
-        desc = strip_tags(desc_m.group(1)) if desc_m else ""
+        desc_m = re.search(r"<h3>Description</h3>([\s\S]*?)(?=<h3>|$)", body)
+        desc = strip_tags(desc_m.group(1), 1200) if desc_m else ""
+        how_m = re.search(r"<h3>How to apply</h3>([\s\S]*?)(?=<h3>|$)", body)
+        how = strip_tags(how_m.group(1), 500) if how_m else ""
         elig_m = re.search(r"<h3>Eligibility</h3>([\s\S]*?)(?=<h3>|$)", body)
         elig = strip_tags(elig_m.group(1), 600) if elig_m else ""
         apply_m = re.search(r'<a class="button" href="([^"]+)"', body)
@@ -216,6 +249,8 @@ def parse_ontario(html, src):
             "amount_max": mx,
             "cost_share": share,
             "summary": desc[:600],
+            "detail": desc,
+            "how_to_apply": how,
             "eligibility": elig,
             "url": url or src["url"],
             "source": src["id"],
@@ -250,6 +285,8 @@ def parse_toronto(html, src):
             "amount_max": mx,
             "cost_share": share,
             "summary": desc[:600],
+            "detail": fetch_detail_text(url, name) if url else desc,
+            "how_to_apply": "",
             "eligibility": "",
             "url": url,
             "source": src["id"],
@@ -305,11 +342,20 @@ def main():
         seen[key] = p
         uniq.append(p)
 
+    for p in uniq:
+        p.setdefault("detail", p.get("summary", ""))
+        p.setdefault("how_to_apply", "")
+        p.setdefault("keywords", [])
+
     # 受众判定 + 可选中文
     for p in uniq:
         p["audience_type"] = classify_audience(p)
     from collections import Counter
     print("  · 受众分布:", dict(Counter(p["audience_type"] for p in uniq)))
+
+    for p in uniq:
+        if not p.get("keywords"):
+            p["keywords"] = extract_keywords(p)
 
     key = (os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or "").strip()
     if key and uniq:
@@ -428,13 +474,52 @@ def _gemini_models(key):
         return []
 
 
+KW_VOCAB = {
+    "零售": ["retail", "storefront", "shop"],
+    "制造": ["manufactur", "factory", "production"],
+    "科技": ["technolog", "software", "digital", "ai ", "artificial intelligence"],
+    "餐饮": ["restaurant", "food service", "cafe", "hospitality"],
+    "农业": ["agri", "farm", "food processing"],
+    "旅游": ["tourism", "visitor", "hospitality"],
+    "培训": ["training", "skills", "workforce"],
+    "设备": ["equipment", "capital", "machinery"],
+    "数字化": ["digital", "e-commerce", "online", "automation"],
+    "出口": ["export", "international market", "trade"],
+    "研发": ["research", "r&d", "innovation", "prototype"],
+    "能效": ["energy efficien", "retrofit", "emission", "clean"],
+    "租金": ["rent", "lease", "property tax"],
+    "新创": ["startup", "start-up", "new business", "entrepreneur"],
+    "青年": ["youth", "student", "young"],
+    "女性": ["women", "woman"],
+    "原住民": ["indigenous", "first nation"],
+    "非营利": ["not-for-profit", "charit"],
+    "雇佣": ["hire", "hiring", "wage", "job"],
+}
+
+
+def extract_keywords(p):
+    """规则兜底：没有 AI 也能给出可检索的标签。"""
+    blob = ((p.get("name") or "") + " " + (p.get("summary") or "") + " "
+            + (p.get("eligibility") or "") + " " + (p.get("detail") or "")).lower()
+    out = []
+    for kw, needles in KW_VOCAB.items():
+        if any(n in blob for n in needles):
+            out.append(kw)
+    return out[:5]
+
+
 def translate(items, key, batch=8):
     """给 name / summary 生成中文。失败无妨，页面回退英文。"""
     prompt_tpl = (
         "把下面加拿大政府补助项目改写成中文，供中文读者快速判断是否值得申请。\n"
-        "要求：名称意译（保留括号里的英文缩写）；摘要 60-90 字，必须说清"
-        "「谁可以申请、钱用来做什么、要不要自付一部分」；不要编造金额与日期。\n"
-        "只输出 JSON 数组，每项 {\"i\":序号,\"n\":中文名称,\"s\":中文摘要}。\n\n")
+        "输出三部分：\n"
+        "n = 中文名称（意译，保留英文缩写）\n"
+        "s = 一句话摘要，50-70 字，说清「谁能申请 + 钱做什么」\n"
+        "d = 详细说明，180-260 字，依次覆盖：适用对象（行业/规模/地区）、资金用途、"
+        "金额与自付比例、申请门槛或需要准备的材料；只依据给定信息，不要编造金额与日期，"
+        "信息不足就写「以官方指南为准」\n"
+        "t = 3-5 个中文检索关键词（如：零售、数字化、培训、出口、女性创业）\n"
+        "只输出 JSON 数组：{\"i\":序号,\"n\":..,\"s\":..,\"d\":..,\"t\":[..]}\n\n")
     order = _gemini_models(key) or GEMINI_MODELS
     ok = 0
     for start in range(0, len(items), batch):
@@ -466,6 +551,10 @@ def translate(items, key, batch=8):
                     if 0 <= i < len(chunk):
                         chunk[i]["zh_name"] = (row.get("n") or "").strip()
                         chunk[i]["zh_summary"] = (row.get("s") or "").strip()
+                        chunk[i]["zh_detail"] = (row.get("d") or "").strip()
+                        tags = row.get("t") or []
+                        if isinstance(tags, list):
+                            chunk[i]["keywords"] = [str(x).strip() for x in tags if str(x).strip()][:6]
                         if chunk[i]["zh_name"]:
                             ok += 1
                 break

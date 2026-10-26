@@ -1,5 +1,5 @@
 {
- "built_at": "2026-10-25 23:21:08",
+ "built_at": "2026-10-26 13:36:05",
  "count": 50,
  "errors": [],
  "programs": [
@@ -17,16 +17,20 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Brownfield property owners can offset the remediation costs incurred at sites where contamination has rendered the property vacant, under-utilized, unsafe, unproductive or abandoned.",
+   "detail": "Brownfield Remediation Tax Assistance (BRTA) Brownfield Remediation Tax Assistance (BRTA) is a component of the Economic Development & Growth in Employment Incentive Program. The BRTA program encourages investment in sites where contamination has rendered the property vacant, under-utilized, unsafe, unproductive or abandoned. Remediation of sites and their subsequent development may result in an increase in the assessed of value of a property. The BRTA allows the City of Toronto to cancel all or a portion of the tax increase directly attributed to the increase in assessed value related to the remediation and development to help brownfield property owners offset the remediation costs incurred. Incentive Duration BRTA may be provided for either: Up to two years or until all eligible remediation costs are compensated through the program (whichever occurs first), or Up to three years or until all eligible remediation costs are compensated through the program (whichever occurs first), if the property is also receiving development grants. In this case, the property is eligible for combined BRTA and Development Grants for a maximum of seven years. In addition, the Province of Ontario, through their Brownfield Tax Incentive Program may allow for the cancellation of all or a portion of the education property taxes for up to three years as a proportionate match to the City of Toronto BRTA incentive. Eligibility To qualify for BRTA, the property must be developed for employment generating uses. Ancillary retail (up to a maximum of 20 per cent of the gross floor area of the development",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/brownfield-remediation-tax-assistance-brta/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Developer, land owner or property owner",
+   "keywords": [
+    "零售",
+    "租金"
+   ],
    "audience_type": "unknown",
-   "zh_name": "棕地修复税收援助",
-   "zh_summary": "多伦多市受污染闲置土地的业主可申请税收减免，以抵消场地修复成本。该援助用于解决土地闲置与污染问题，需业主自行承担部分修复费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/business-incubation-commercialization-grant-program",
@@ -42,16 +46,23 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Not-for-profit organizations including incubators, accelerators and entrepreneurial organizations aimed at creating business formation, innovation and job creation may receive grants to help provide programming to nascent entrepreneurs, businesses and startups.",
+   "detail": "Business Incubation & Commercialization Grant Program Applications are now closed. Subscribe to the BusinessTO newsletter to stay informed about future rounds of funding. Overview The Business Incubation and Commercialization Grant Program provides financial support to incubators and entrepreneurship organizations interested in creating business formation, innovation, and job creation in Toronto and who provide robust programming to new entrepreneurs, businesses and start-ups. This program is designed to support not-for-profit entrepreneurship, incubation and accelerator activities whose primary goals are to create businesses and jobs, encourage the development of new ideas, and work towards organizational efficiency, sustainability and while utilizing industry best practices. This program does not provide grants to individual for-profit businesses, but instead is aimed at not-for-profit organizations that offer entrepreneurship and incubation or acceleration programming to entrepreneurs. For more detail, refer to the program guidelines. Objective The Business Incubation and Commercialization Grant Program supports the development of entrepreneurship and incubation activity in a manner that is fully accessible, transparent and accountable and aligned with the City of Toronto’s goals of access, equity and inclusion. Funding Available There are two streams within the program offering funding: Programs and Events Up to 50 per cent of eligible expenses, to a maximum of $20,000, for programs. Program grants will be dispensed in two parts: 75 per cent provided upfront and 25 per ",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/business-incubation-commercialization-grant-program/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Not-for-profit organization",
+   "keywords": [
+    "研发",
+    "租金",
+    "新创",
+    "非营利",
+    "雇佣"
+   ],
    "audience_type": "nonprofit",
-   "zh_name": "企业孵化与商业化拨款计划",
-   "zh_summary": "多伦多市的非营利孵化器、加速器及创业组织可申请拨款，用于为初创企业提供培训和项目支持。该计划旨在促进创新就业，通常需自付部分运营资金。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/caf-to-grants",
@@ -67,16 +78,20 @@
    "amount_max": null,
    "cost_share": 50,
    "summary": "Business operators can receive matching funding of 50 per cent for the cost of improvements to café spaces on City property (where a valid permit has been issued) or on private property.",
+   "detail": "CaféTO Grant Applications are currently closed. Subscribe to the Business TO newsletter for updates on future funding opportunities. The CaféTO Grant is available to commercial and industrial property owners and tenants in Toronto to improve the appearance and/or function of their curb lane cafés, commercial patios and sidewalk cafés. Objective Small retail businesses are essential to the vitality and success of Toronto’s main streets and neighbourhoods, and key drivers of economic prosperity for residents, families, communities and the city as a whole. Funding Available The grants covers one-half of the costs of eligible property or site improvements up to a maximum amount of $5,000 (based on a minimum of $10,000 of improvements). Funding can include patio improvements on private property and spaces on public property for which a valid permit has been issued. Additional grant funding of up to $2,500 is available for exterior accessibility improvements such as the installation of temporary platforms level to the sidewalk for a curb lane café (rented, leased, or purchased), accessible ramps for patios on private property, handrails and other exterior accessibility devices which meet Accessibility for Ontarians with Disabilities Act (AODA) design standards. Architectural, engineering from a certified Accessibility for Ontarians with Disabilities Act (AODA) specialist and Building Code Identification Number (BCIN) registered designer fees may be covered to a maximum of $1,000 per application. Eligibility The grant is available to owners and tenants of street-level commercial a",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/cafeto-grants/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
+   "keywords": [
+    "零售",
+    "租金"
+   ],
    "audience_type": "business",
-   "zh_name": "露天咖啡馆补助金 (CaféTO Grants)",
-   "zh_summary": "面向企业经营者，提供50%的匹配资金用于改善市政或私人场地的咖啡馆空间。申请人需自付剩余的一半费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/capacity-buyback-program",
@@ -92,16 +107,20 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Organizations can receive a free water audit to learn how to reduce water use and be a candidate for a one-time cash rebate of up to 30 cents per litre of water saved per average day.",
+   "detail": "Capacity Buyback Program The City’s Capacity Buy Back Program encourages and rewards industrial, commercial and institutional organizations that reduce water use by: offering industrial customers consuming up to 15,000 cubic metres annually (m3/yr), commercial, and institutional customers a free water audit to help identify ways to reduce water use; rewarding industrial customers consuming up to 5,000 m3/yr, and commercial and institutional customers that implement permanent water savings measures with a one-time cash rebate up to 30 cents per litre of water saved per average day; helping participants save money over the long-term with reduced water bills. This program allows the City to buy back water capacity that has been freed up by participants who have reduced water use in their operations. How it Works Step 1: Let us know you are interested in the program Email: savewater@toronto.ca Call: 416-392-7000 Step 2: Eligibility and options The City will contact you to discuss your eligibility. If you meet the criteria, the City will arrange to have a professional engineer complete a thorough walkthrough and review of your organization’s water use. Step 3: The audit and report Based on the visit, an engineer will develop a detailed water audit report that will include a list of eligible process or equipment changes your organization can make and the estimated savings you can expect. View a sample audit report. Water efficiency upgrades eligible under the program are: cooling towers boilers refrigeration equipment food service equipment process equipment and other site-specif",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/services-payments/water-environment/how-to-use-less-water/water-efficiency-for-business/capacity-buyback-program/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
+   "keywords": [
+    "餐饮",
+    "设备"
+   ],
    "audience_type": "business",
-   "zh_name": "节水回购计划 (Capacity Buyback Program)",
-   "zh_summary": "面向各类组织提供免费用水审计，并根据节水量提供一次性现金返还。此项目无需企业自付前期改造费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/circular-food-innovators-fund",
@@ -117,16 +136,23 @@
    "amount_max": 35000.0,
    "cost_share": null,
    "summary": "Businesses and not-for-profit organizations can receive between $5,000 and $35,000 to implement reuse systems that replace single-use and takeaway items with reusable foodservice ware that is collected and redistributed for further use.",
+   "detail": "Circular Food Innovators Fund The Circular Food Innovators Fund (CFIF) launched in 2024 to support local small businesses deliver projects that will help build a more circular food system in Toronto. The first phase focused on helping businesses set up and expand reuse systems that replace single-use and take-away items with reusable foodservice ware. In the first round of funding (2024/2025), $262,500 was provided to nine small Toronto businesses. The second funding round (2026/2027) will provide $250,000 to another nine Toronto small businesses. An additional $25,000 of funding will also be provided to five of the nine recipients to support green workforce development projects, including training and job development in Toronto’s circular food economy. The Circular Food Innovators Fund is not currently offered every year. As part of the implementation of Circular Toronto, consideration will be given to if and how the program could be expanded to further support circular business innovations across the food system. For questions, please contact circulareconomy@toronto.ca. 2026/2027 Recipients Over the next year, the following nine organizations will work to implement projects that will contribute to the City’s goal of eliminating single-use and takeaway items in Toronto and achieving a more green and circular food system. Below are the recipients from 2026/2027: Canadian National Exhibition Association Project: Reusable Beverageware Pilot and Training Initiative Total Funding Awarded: $12,386 The Canadian National Exhibition Association (CNEA) will pilot a reusable beverage",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/services-payments/grants-incentives-rebates/circular-food-innovators-fund/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner, not-for-profit organization, charity or BIA",
+   "keywords": [
+    "培训",
+    "研发",
+    "租金",
+    "非营利",
+    "雇佣"
+   ],
    "audience_type": "business",
-   "zh_name": "循环食品创新者基金 (Circular Food Innovators Fund)",
-   "zh_summary": "面向企业和非营利组织，资助5,000至35,000加元用于推行可重复使用餐饮具系统。申请人需明确自付金额。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/commercial-fa-ade-improvement-grant-program",
@@ -142,16 +168,22 @@
    "amount_max": 12500.0,
    "cost_share": null,
    "summary": "Commercial property owners can receive up to half of the costs of improvements to redesign, renovate or restore commercial building façade up to a maximum $12,500 grant for $25,000 worth of improvements.",
+   "detail": "Commercial Façade Improvement Grant Program Applications are currently closed. Subscribe to the BusinessTO newsletter for updates on future rounds of funding. Overview The Commercial Façade Improvement Grant Program provides funding to commercial property owners and tenants of commercial property, to redesign, renovate or restore facades on commercial buildings that are commercial use at street level and may have commercial and or residential uses on upper floors. The building façade must face a public road or a right-of-way that is accessible to the public. Objectives The program helps to improve the appearance of a commercial building’s façade by providing a new look, enhancing neighborhoods streetscapes and providing a more pleasant environment to work, shop and eat. Eligibility An applicant must be the property owner or a commercial tenant that has the permission of the property owner. Eligibility improvements include, but are not limited to, masonry, brick cleaning and restoration, new doors, new windows, outdoor decorative or security lighting, outdoor security equipment, outdoor entrance tiling, installation of canopies or awnings, repair of cornice, parapets and other architectural features, outdoor wall mounted signs and exterior painting as part of the eligible improvements. Wheelchair accessibility ramping, accessible railings and accessible door openers that meet Accessibility for Ontarians with Disabilities Act (AODA) standards are also eligible. A minimum of three eligible improvements are required for an application. Ineligibility The following types of impro",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/commercial-facade-improvement/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
+   "keywords": [
+    "零售",
+    "设备",
+    "能效",
+    "租金"
+   ],
    "audience_type": "business",
-   "zh_name": "商业门面改善补助计划 (Commercial Façade Improvement Grant Program)",
-   "zh_summary": "面向商业房产业主，提供最高50%（上限12,500加元）的改造资金，用于翻新建筑外观。申请人需自付至少一半费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/commercial-space-renovation-grant-program",
@@ -167,16 +199,19 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Commercial business operators and owners of storefronts that are vacant (or at risk of becoming vacant) may receive matching funding of 50 per cent to undertake interior improvements.",
+   "detail": "Commercial Space Renovation Grant Program Applications are now closed. Subscribe to the BusinessTO newsletter for updates on future rounds of funding. The Commercial Space Renovation Grant Program offers matching funding of 50 per cent to commercial business operators and owners of storefronts that are vacant. Occupied commercial properties are also eligible under the specific criteria outlined in the eligibility section. This program is funded by the Government of Canada through the Federal Economic Development Agency for Southern Ontario (FedDev Ontario). Objective Small retail businesses are essential to the vitality and success of Toronto’s main streets and neighbourhoods. They are also key drivers of economic prosperity for residents, families, communities and the city as a whole. The Commercial Space Renovation Grant Program was developed in support of the recovery and long-term success of local small businesses. Funding Available The program offers matching funding equal to 50 per cent of the cost of interior improvements to properties that are commercial at street level. The maximum base grant under the program is $20,000 (based on a minimum of $40,000 of improvements). Further funding of up to $4,000, for a total maximum grant of $24,000, is available for upgrades to meet AODA accessibility standards. Additional funding of up to $20,000 ($4,000 per additional unit, for up to five units) is available for multi-unit properties. Eligibility The Commercial Space Renovation Grant Program is available to owners and tenants of vacant properties. It is also available to ow",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/commercial-space-renovation-grant-program/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
+   "keywords": [
+    "零售"
+   ],
    "audience_type": "business",
-   "zh_name": "商业空间装修补助计划 (Commercial Space Renovation Grant Program)",
-   "zh_summary": "面向商业经营者及空置店面业主，提供50%的匹配资金用于内部装修。申请人需自付剩余的一半装修成本。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/creative-co-location-facilities-property-tax-subclass-design",
@@ -192,16 +227,21 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Creative enterprises and live music venues can apply for to be included under the Creative Co-Location Facilities Property Tax Subclass.",
+   "detail": "Creative Co-Location Facilities Property Tax Subclass Designation Applications for the 2026 Creative Co-Location Facilities Property Tax Subclass are now closed. The Creative Co-Location Facilities Property Tax Subclass supports the sustainability and growth of creative enterprises and live music venues in Toronto. By incentivizing creative collaboration, arts accessibility and local live music, the Tax Subclass allows hubs of creative activity to thrive in the city. Properties must be designated as a Creative Co-Location Facility by the City of Toronto to be included under the property tax subclass. A property may apply for inclusion in the Creative Co-Location Facilities Property Tax Subclass in one of the following categories: Tenant-Based Operating Model Membership-Based Co-Working Model Live Music Venues Creative enterprises are entities that produce cultural goods or services as defined by the Canadian Framework for Cultural Statistics. Tenant-based Operating Model A qualifying property must have creative enterprises as tenants that are charged a below average market rent, that produce cultural goods and/or provide cultural services. Eligible creative enterprises can be either not-for-profit or for-profit entities, depending on which category they belong to, as listed below. Eligible Creative Enterprises for Tenant-based Operating Model Either Not-For-Profit or For-profit Heritage and libraries Archives Libraries Cultural heritage Natural heritage Live performance Performing arts Festivals and celebrations Visual and applied arts Original visual art Art reproductions ",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/creative-co-location-facilities-property-tax-subclass-designation/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant, entrepreneur, not-for-profit organization or property owner",
+   "keywords": [
+    "制造",
+    "租金",
+    "非营利"
+   ],
    "audience_type": "business",
-   "zh_name": "创意合办设施房产税分类认定 (Creative Co-Location Facilities Property Tax Subclass Designation)",
-   "zh_summary": "面向创意企业和现场音乐场所，申请纳入特定的房产税减免分类。该项目主要用于减轻税收负担，无直接现金发放。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/creative-industries-funding",
@@ -217,16 +257,21 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Organizations can apply for grants and sponsorships for programs or events that foster entrepreneurship, create pathways to employment and position Toronto as a industry leader on a global scale in the film, music and creative technology industries.",
+   "detail": "Creative Industries Funding 's in if you want left *and* right alignment. 's are not needed if just left aligned --> Entagled Dimensions: Art in the Age of Neural Media, part of Future Makers, a partnership between the City of Toronto and The Creative School at Toronto Metropolitan University. Photo Credit: Arthur Mola Toronto’s film, music and creative technology (video games, immersive, XR, esports) industries contribute greatly to Toronto’s economy and help reinforce the city’s status as a creative leader on a global scale. To support growth in these creative industries, through the Action Plan for Toronto’s Culture, the City of Toronto offers grants and sponsorships that make pathways to employment more accessible, expand business opportunities for creative entrepreneurs and showcase Toronto’s industries to engage residents, visitors and the world. Choose the creative industry sector below that best aligns with your initiative. Applications are considered for cross-sectoral projects with relevance to the other sectors but only apply once to the most relevant stream for your initiative. Ensure the language in the application highlights how the project applies across sectors. Film Find funding focused on supporting film, television and other screen sectors initiatives. Music Find funding focused on supporting music initiatives. Creative Technology Find funding focused on supporting creative technology initiatives. Contact the relevant sector office if you have questions about timelines. Applications received after the deadline are not normally considered. Exceptions may b",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/creative-industries-funding/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Not-for-profit organization, charity, urban off-reserve Indigenous-led organization or community centre part of the Association of Community Centres",
+   "keywords": [
+    "科技",
+    "旅游",
+    "新创"
+   ],
    "audience_type": "nonprofit",
-   "zh_name": "创意产业资金 (Creative Industries Funding)",
-   "zh_summary": "面向影视、音乐和创意科技领域的组织，资助促进创业和就业的项目或活动。申请人需确认具体的自付比例要求。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/dining-district-program",
@@ -242,16 +287,22 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Provides funding to BIAs, business associations and other non-profit organizations for projects aimed at supporting restaurants and bars with expanded outdoor dining opportunities.",
+   "detail": "Dining District Program 's in if you want left *and* right alignment. 's are not needed if just left aligned --> Applications are currently closed. Subscribe to the BusinessTO newsletter for updates on future rounds of funding. Toronto is a city where a world of flavours is always within reach. Its vibrant culinary scene showcases restaurants from various countries, allowing residents and visitors to savor delicious dishes from around the globe. This program supports Toronto’s diverse culinary and restaurant scene, particularly in areas where outdoor dining is not as common (although not exclusively). The Dining District Program provides funding to Business Improvement Areas (BIAs), business associations and other not-for-profit organizations for projects that enhance outdoor dining, support restaurants and bars, and attract visitors to dining areas across Toronto. This program is funded by the Government of Canada through the Federal Economic Development Agency for Southern Ontario. Stream One: For Initiatives Up To $5,000 Stream Two: For Larger-Scale Projects Objective Stream One supports practical, ready-to-implement projects that enhance outdoor dining opportunities for eating establishments. The program focuses on targeted public realm improvements and minor enhancements that strengthen local dining areas, build on planned or existing activations, and improve the overall appearance and functionality of outdoor café environments while supporting main street vitality. Funding Available Funding for BIAs, not-for-profit organizations and business associations to cover one-",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/dining-district-grant-program/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA, not-for-profit organization or business association",
+   "keywords": [
+    "餐饮",
+    "旅游",
+    "租金",
+    "非营利"
+   ],
    "audience_type": "business",
-   "zh_name": "餐饮区项目 (Dining District Program)",
-   "zh_summary": "面向商业促进区等非营利组织，资助扩大户外餐饮的项目。申请人需了解具体资助比例，用于支持餐饮企业发展。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/eco-roof-incentive-program",
@@ -267,16 +318,20 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Residential, industrial, commercial and institutional buildings can receive grants for the installation of green roofs and cool roofs.",
+   "detail": "Eco-Roof Incentive Program 's in if you want left *and* right alignment. 's are not needed if just left aligned --> Applications are open for the Eco-Roof Incentive Program. Apply Funding for Green Roofs and Cool Roofs Incentives are available to support the installation of green roofs and cool roofs on Toronto homes and buildings. Applications are accepted and reviewed on an on-going basis. Please apply before you begin work on your roof. Green Roof Incentives (up to $100,000) $100 / m2 installed up to $1,000.00 for a structural assessment Cool Roof Incentives (up to $50,000) $5 / m2 for a cool roof with a new membrane $2 / m2 for a cool roof coating over an existing roof What is an Eco-Roof? The City of Toronto established the Eco-Roof Incentive Program to help fund the expansion of green roof and cool roof installations across the city. Known collectively as eco-roofs, these technologies along with other City strategies help to make Toronto more resilient and better adapted to climate change. Green roofs Green roofs, also known as living roofs or vegetated roofs, support the growth of vegetation. Toronto’s Green Roof Bylaw defines a green roof as an extension of an above-grade roof, built on top of a human-made structure, that allows vegetation to grow in a growing medium and which is designed, constructed and maintained in accordance with the Toronto Green Roof Construction Standard. A green roof assembly includes, as a minimum, a root-repellent system, a drainage system, a filtering layer, a growing medium (soil) and plants, and is installed on a waterproof membrane of",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/services-payments/water-environment/environmental-grants-incentives/green-your-roof/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Developer or property owner",
+   "keywords": [
+    "科技",
+    "租金"
+   ],
    "audience_type": "unknown",
-   "zh_name": "多伦多生态屋顶激励计划",
-   "zh_summary": "住宅、工商业及机构建筑的业主可申请补助，用于安装绿色屋顶或凉爽屋顶。项目需自筹部分资金，补助仅涵盖部分安装成本。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/economic-development-growth-in-employment-incentive-program",
@@ -292,16 +347,19 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "New building construction or major renovation in targeted sectors can benefit from a grant of 60 per cent of the increase in the municipal taxes attributable to the eligible development over a five-year period.",
+   "detail": "Economic Development & Growth in Employment (EDGE) Incentive Program Grant amounts have temporarily increased from 60 per cent to 100 per cent of the Municipal Tax Increment for the duration of the five-year grant period, as part of the Mayor’s Economic Action Plan in Response to U.S. Tariffs. For this temporary enhancement, applications must be received prior to December 31, 2027. The Economic Development and Growth in Employment (EDGE) Incentive Program supports new construction or major renovation of buildings in targeted employment sectors. The program provides tax increment equivalent grants, whereby the City refunds a portion of the increase in property taxes that results from new development or redevelopments. Approved developments benefit from a grant of 100 per cent of the increase in the municipal taxes attributable to the eligible development over a five-year period. This can be combined with Brownfield Remediation Tax Assistance for a total grant period of up to seven years. Applications for eligible development are considered on a first-come-first-served basis until such time as future annual grants are projected to exceed the budget cap in any given year. The provision of development incentives through the EDGE Incentive Program is enabled by the Community Improvement Plan (CIP) By-law 1386-2024 (amended by By-law 1553-2025) and authorized under Section 28 of the Planning Act. Eligible Sectors & Uses Development grants are available for buildings and facilities that are wholly or partially occupied by one of the following sectors or uses, including ancillary u",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/edge-incentive-program/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
+   "keywords": [
+    "租金"
+   ],
    "audience_type": "business",
-   "zh_name": "多伦多经济发展与就业增长激励计划",
-   "zh_summary": "目标行业的企业新建或大修厂房可获补助，抵扣5年内因开发导致市政房产税增量的60%。申请人需自付其余40%的税费及全部建设成本。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/energy-retrofit-loans",
@@ -317,16 +375,23 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Building owners can receive low-interest financing for building retrofits that reduce energy use and greenhouse gas emissions.",
+   "detail": "Energy Retrofit Loans Through the Energy Retrofit Loan (ERL) program, the City offers fixed, long-term, low-interest financing to enable building owners to invest in low-carbon, energy-efficient capital improvements. Highlights include: Financing for up to 100 per cent of project costs at a rate equal to the City’s cost of borrowing, with repayment terms up to 30 years for qualifying projects Funds are advanced at project start Unsecured loans may be available Up to one-year interest free and payment free Support to access utility incentives and federal grant programs Note: Building owners seeking financing for retrofit projects through the ERL program are required to submit a feasibility study for their building. The study requirements are detailed below, and includes a comprehensive long-term decarbonization plan that goes beyond the specific retrofits for which they are requesting financing. Eligible Buildings All buildings located in Toronto are eligible, including: Commercial, retail and industrial Multi-family residential Condominium (common areas only, not individual units) Social housing Hospitals and long-term care Schools, colleges and universities Not-for-profit Hospitality Authorized third-parties are eligible to apply on behalf of the building owner. Funds will be dispersed to the building owner. Eligible Measures/Technologies Eligible measures/technologies include: Heat pumps High-efficiency boilers, chillers and HVAC systems Building envelope Building automation systems and controls Lighting Renewable energy systems Energy/battery storage Fuel switching Other",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/services-payments/water-environment/environmental-grants-incentives/energy-retrofit-loans/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Developer or property owner",
+   "keywords": [
+    "零售",
+    "科技",
+    "餐饮",
+    "旅游",
+    "设备"
+   ],
    "audience_type": "unknown",
-   "zh_name": "多伦多节能改造贷款",
-   "zh_summary": "建筑业主可获得低息贷款，用于开展减少能耗和温室气体排放的建筑改造。贷款资金需全额偿还，业主须自付改造总成本。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/heritage-tax-rebate-program",
@@ -342,16 +407,19 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Property owners may receive rebates for eligible maintenance and conservation work done on designated heritage properties.",
+   "detail": "Heritage Tax Rebate Program We are in the process of updating our application forms. To receive a form and more information, contact Clint Robertson, Heritage Planner, at 416-396-4946 or Clint.Robertson@toronto.ca. 176 Yonge Street, participant in the Heritage Tax Rebate Program Since 2007, the City of Toronto has provided the Heritage Property Tax Rebate Program to eligible heritage properties. In 2015 the program was significantly restructured to focus eligibility on commercial and industrial properties designated under Part IV (individually) or Part V (part of a Heritage Conservation District) of the Ontario Heritage Act, and to calculate rebates to provide matching funds for eligible conservation work. The provincial government shares the cost of the rebates with the City according to the education portion of the property taxes. You can use the rebate calculator to estimate how much of a Heritage Property Tax Rebate you may be eligible to receive. Rebate Calculator Properties Eligible for a Tax Rebate Your property is eligible to apply for a Heritage Property Tax Rebate if it meets the following requirements: The property is classified commercial and industrial for property tax purposes, where 50 per cent of the current value assessment (CVA) is applied to the calculation of commercial or industrial taxes. The property is designated under the Ontario Heritage Act If designated individually (under Part IV of the Ontario Heritage Act), the property must be subject to a Heritage Easement Agreement, or the property owner must be willing to enter into a Heritage Easement Agr",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/city-government/planning-development/heritage-preservation/tax-rebates-grants/heritage-tax-rebate/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Developer or property owner",
+   "keywords": [
+    "租金"
+   ],
    "audience_type": "unknown",
-   "zh_name": "多伦多历史建筑税收减免计划",
-   "zh_summary": "指定历史建筑的业主对物业进行合规维护和保护时可获得税费返还。业主需先自付全部修缮费用，再按比例获得部分税费退款。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/high-rise-retrofit-improvement-support-program",
@@ -367,16 +435,21 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Apartment building owners can access low-cost financing to make energy-saving retrofits and upgrades to their buildings.",
+   "detail": "High-Rise Retrofit Improvement Support Program (Hi-RIS) We have made some recent changes to Hi-RIS. Buildings may now submit decarbonization studies to support their applications. Read more below and Submit an Expression of Interest. The High-Rise Retrofit Improvement Support Program (Hi-RIS) program makes low-cost financing available for owners of older multi-unit residential apartment buildings to make improvements that reduce energy and water consumption and support the building’s resilience against extreme weather. Benefits of Participating in Hi-RIS Benefits of Hi-RIS energy-based retrofit work for building owners and residents include: Reduced utility usage and bills. Savings on maintenance, replacement or major repair costs. Zero percent interest during construction. Savings on insurance premiums. Improved indoor air quality and tenant comfort and health. Reduced greenhouse gas emissions. Access lower interest rates and choose a fixed repayment term of five-, 10-, 15- or 20-years. Hire your preferred energy auditors and contractors. Eligibility Criteria To be eligible for the Hi-RIS Program: The property must be a multi-unit residential building in the City of Toronto that is at least 20 years old. The building must contain a minimum of seven (7) units with a height of three storeys. Private rental apartment buildings, social housing and housing co-operatives ( including non-profit co-ops and equity co-ops) may qualify for the program. All registered owner(s) of a building must consent to participating in the Program. Property taxes, utility bills and all other payme",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/community-people/community-partners/apartment-building-operators/hi-ris/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Developer or property owner",
+   "keywords": [
+    "能效",
+    "租金",
+    "雇佣"
+   ],
    "audience_type": "unknown",
-   "zh_name": "多伦多高层建筑改造提升支持计划",
-   "zh_summary": "公寓建筑业主可申请低成本融资，用于建筑的节能改造和升级。资金为需偿还的贷款，业主须自付工程尾款。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/indigenous-arts-culture-partnership-fund",
@@ -392,16 +465,19 @@
    "amount_max": 10000.0,
    "cost_share": null,
    "summary": "Individuals, groups, collectives or organizations can apply for funding up to $10,000 for pilot projects or $30,000 for longer-term projects centred on Indigenous-led arts and culture initiatives.",
+   "detail": "Indigenous Arts & Culture Fund 's in if you want left *and* right alignment. 's are not needed if just left aligned --> A colourfully-decorated canoe is part of the 2018 Indigenous Arts Festival at Fort York National Historic Site. Applications for 2026 are now closed. The Indigenous Arts & Culture Fund supports projects that create new opportunities and visibility for Indigenous-led arts and culture. The fund aims to spark new relationships between Indigenous artists, arts and culture professionals and potential partners at both the grassroots and institutional levels. Toronto has been an important site for gathering, trading and celebration for Indigenous people for thousands of years. It is the treaty territory of the Mississaugas of the Credit and its land and waters have been stewarded by the Haudenosaunee, the Huron Wendat and the Anishinaabe. Toronto continues to be home to many diverse Indigenous peoples, whose artistic and creative contributions are vital to the fabric of the city. The City of Toronto recognizes the rich Indigenous history of this land, and our responsibility in fostering strong relations between the municipality and the First Nations, Inuit and Métis people who call Toronto home. Incubation Stream Incubation funding supports first-time initiatives, project re or pilot phases. This funding supports incubation or development activities that allow eligible applicants to apply for a larger amount through the Activation Stream at a later deadline. Funding Available Maximum grant is $10,000 per project. Eligible Applicants Open to Indigenous (Status and",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/services-payments/grants-incentives-rebates/arts-culture-grants/indigenous-arts-culture-partnerships-fund/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Indigenous individual, group, collective or organization",
+   "keywords": [
+    "原住民"
+   ],
    "audience_type": "unknown",
-   "zh_name": "多伦多原住民艺术与文化伙伴关系基金",
-   "zh_summary": "个人、团体或组织可申请最高1万或3万元资金，用于开展原住民艺术文化试点或长期项目。资金用于项目运营，超出部分需自筹。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/industrial-water-rate-program",
@@ -417,16 +493,20 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Manufacturers can receive a discounted water rate to to help support economic growth and encourage water conservation (also called the Block 2 water rate).",
+   "detail": "Industrial Water Rate Program The Industrial Water Rate Program offers a discounted water rate to manufacturers in Toronto to help support economic growth and encourage water conservation (also called the Block 2 water rate). The Program is open to manufacturers that: Use more than 5,000 cubic metres annually (m3/yr) Fall within the industrial property tax class Are in full compliance with the City’s Sewers By-law Submit a comprehensive water conservation plan to the satisfaction of the General Manager, Toronto Water. How it Works Step 1: Let us know you are interested in the Program Email savewater@toronto.ca Call: 416-392-7000 Step 2: Eligibility assessment The City will confirm that you meet the eligibility requirements listed above. Companies classified as \"mixed\" industrial and commercial may still be eligible. Step 3: Submit documents If your company meets the eligibility requirements, you must prepare and submit a water conservation plan for approval. Documentation receipt is confirmed within 48 hours of submission. Step 4: Enjoy the savings of a reduced water rate Should the plan be approved: Your business will receive the Industrial Water Rate effective the date that you submitted the water conservation plan. After the initial application, to continue to receive the discounted rate, you must submit an annual water conservation progress report by July 1 of each calendar year and continue to meet the other eligibility criteria. Case Study: Example of Savings Customers are charged the general water rate on the first 5,000 m3 of water use. Water use over that amount is",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/industrial-water-rate-program/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
+   "keywords": [
+    "制造",
+    "租金"
+   ],
    "audience_type": "business",
-   "zh_name": "多伦多工业水费优惠计划（Block 2水费）",
-   "zh_summary": "制造业企业可享受水费折扣，以支持经济增长并鼓励节水。企业仍需支付优惠后的水费，并非全额免单。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/main-street-innovation-fund",
@@ -442,16 +522,20 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Organizations can receive funding for projects costing $25,000 or $50,000 to address main street challenges, engage in innovative place-making and animate main streets to support business recovery and success.",
+   "detail": "Main Street Innovation Fund Applications are now being accepted until 5 p.m. on Thursday, October 29. Overview The Main Street Innovation Fund provides funding for innovative and creative solutions to Toronto’s main street business challenges. This year, the Main Street Innovation Fund is focused on Little Jamaica. Eligible organizations in the Little Jamaica community can submit proposals to help strengthen neighborhood businesses and keep with the objectives of the Cultural District Plan. Projects must support increasing commercial vibrancy, business engagement and economic activity within Toronto’s Little Jamaica community. Objective This grant provides funding to Business Improvement Areas (BIAs) and not-for-profit organizations with ties to the business community to bring innovative and creative solutions to local challenges in the Little Jamaica community. The Little Jamaica focus aims to: Support Black-owned and operated businesses in Little Jamaica to prevent vacancy, build resiliency and grow the local economy Support new projects within Toronto’s Little Jamaica main street business community Expand the range of community improvement strategies that are available to Toronto’s main street business communities Showcase innovative, scalable solutions to challenges faced by Toronto’s main street neighbourhoods Pilot highly creative and exceptional projects in Toronto. Funding Available Eligible organizations in the Little Jamaica community may apply for grants of up to $25,000. Eligibility To be eligible, organizations must be: One of the following types of organizatio",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/main-street-innovation-fund/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA, business association, charity or not-for-profit organization",
+   "keywords": [
+    "研发",
+    "非营利"
+   ],
    "audience_type": "business",
-   "zh_name": "多伦多主街创新基金",
-   "zh_summary": "各类组织可申请定额资金，用于解决商业主街面临的挑战、开展创新场地建设以助力商业复苏。若项目总成本高于资助额，差额需自付。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/outdoor-mural-street-art-program",
@@ -467,16 +551,21 @@
    "amount_max": 7500.0,
    "cost_share": null,
    "summary": "Business associations and community groups with strong business participation can receive one-time funding up to $7,500 for outdoor mural projects that help promote a local theme and facilitate commercial or industrial neighbourhood identity.",
+   "detail": "Outside Mural & Street Art Program Applications are closed. Subscribe to the BusinessTO newsletter to be notified on future rounds of funding. Business associations and community groups with strong business participation can receive one-time funding for outside mural projects that help promote a local theme and facilitate commercial or industrial neighbourhood identity. The mural program helps local businesses and communities create an attractive and positive identity for their area. Program Benefits Funding Eligibility Application Successful projects: Contribute to community and business pride Promote a unique community theme Leverage partnerships (business contributions, funding, in-kind services and volunteer resources are encouraged) Attract customers to commercial or industrial areas Provide benefits to the community, in terms of economic development, community development, youth and local arts involvement, among others Involve and encourage business, residents and other community representatives to participate in the project One-time funding is available up to $7,500 for murals in commercial or employment districts. Eligible expenses for murals include: Artist fees Materials Installation, and Equipment rental. Maintenance of the murals is the responsibility of the applicant. Eligible applicants: Business Improvement Areas Business associations Community groups that include strong business participation are eligible Elements of successful projects: Have good exposure Are visible from a public road Have the support of local businesses Build community partnerships (finan",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-improvement-areas/bia-financial-incentives/mural-street-art-program/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA, business association or community group",
+   "keywords": [
+    "设备",
+    "租金",
+    "青年"
+   ],
    "audience_type": "business",
-   "zh_name": "户外壁画与街头艺术项目",
-   "zh_summary": "面向商业协会及社区团体，资助户外壁画项目以促进商业街区特色。提供最高7,500加元一次性资金，需企业积极参与，未明确说明是否须自付。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/property-tax-rebate-for-registered-charities",
@@ -492,16 +581,20 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Registered charities may be eligible for a rebate of 40 per cent of their property taxes.",
+   "detail": "Property Tax Rebate for Registered Charities If you operate a registered charity, you may be eligible for a rebate of 40 per cent of the property taxes paid if you meet the eligibility requirements, as outlined in Section 329 of the City of Toronto Act, 2006. Program Requirements Eligibility Criteria Documents How to Apply To be eligible, you must: be a registered charity under subsection 248(1) of the Income Tax Act (Canada) and must have a valid Canada Revenue Agency BN/Registration Number own and occupy the commercial or industrial property for which the rebate is being sought, or be a tenant and occupy the commercial or industrial property for which the rebate is being sought agree to supply any additional information requested by the City to substantiate the application ensure tax or other charges for the prior year are fully paid. Note: HST (Harmonized Sales Tax), maintenance fees and other miscellaneous charges are not eligible for a property tax rebate. Required Documents: The applicant’s current registration status document referencing the BN/Registration Number and Effective Date of Registration from Canada Revenue Agency (CRA). Registration status documents may be downloaded from the Government of Canada website. Lease agreements or other documents confirming all the information indicated on the application. Submit only relevant sections that identify all parties, outline terms and conditions, occupancy space and periods, property tax obligations and signature pages. The tax reconciliation statement specifies how the eligible property tax amount is determined. Th",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/services-payments/property-taxes-utilities/property-tax/property-tax-rebates-and-relief-programs/property-tax-rebate-for-registered-charities/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Charity",
+   "keywords": [
+    "租金",
+    "非营利"
+   ],
    "audience_type": "nonprofit",
-   "zh_name": "注册慈善机构房产税退税",
-   "zh_summary": "面向已注册的慈善机构，可获得房产税40%的退税补贴。具体自付比例取决于剩余60%的税款需机构自行承担。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/sewer-surcharge-rebate-program",
@@ -517,16 +610,19 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "Businesses may be eligible for a rebate on water that is used on-site for their industrial or commercial processes.",
+   "detail": "Sewer Surcharge Rebate Program Businesses in Toronto may be eligible for a rebate on water that is used on-site for their industrial, commercial or institutional processes. The rebate is based on the percentage of purchased drinking water not returned to the City via the sanitary sewer system and is applied to the sewer portion of the water rate. Eligibility Criteria The program is open to industrial, commercial, and institutional (ICI) water customers that use purchased water for their on-site operations. The percentage by which the sewage discharge is reduced in relation to the amount of water purchased must meet the following criteria: Property’s Total Annual Water Consumption Sanitary Contribution Amount ≤1500 m3 ≤ 80% >1500 m3 but ≤15,000 m3 ≤ 85% >15,000 m3 but ≤ 1,500,000 m3 ≤ 90% >1,500,000 m3 ≤ 95% Drinking water that is discharged to sanitary, storm or combined sewer systems, used outdoors (for irrigation) or transported off-site is not eligible for the Sewer Surcharge Rebate Program. For full eligibility criteria, refer to Toronto Municipal Code Chapter 849, Water and Sewage Services and Utility Bill. How to Participate Step 1: Submit a letter of intent Submit a letter of intent by email to ssr@toronto.ca that includes: Company name Facility address Contact information (full name, phone number, email address) Water account number(s) Water meter number(s) Step 2: Submit the application* Applicants will have nine months from the date the letter of intent is received by the City to submit the application with all required documentation to ssr@toronto.ca (refer to On",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/sewer-surcharge-rebate-program/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner/tenant or property owner",
+   "keywords": [
+    "雇佣"
+   ],
    "audience_type": "business",
-   "zh_name": "下水道附加费退税计划",
-   "zh_summary": "面向企业，针对现场工业或商业生产过程中消耗的水量提供退税。未提及具体资助金额及是否需自付部分费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/small-business-property-tax-subclass",
@@ -542,16 +638,20 @@
    "amount_max": null,
    "cost_share": 50,
    "summary": "BIAs may receive matching funding of 50 per cent for capital projects ranging in cost from $10,000 to $1 million.",
+   "detail": "Small Business Property Tax Subclass Enter in your address to find out if your property is located within the small business subclass designated area. by Address On February 10, City Council approved increasing the municipal tax rate reduction, from 15 per cent to 20 per cent for properties within the Small Business Property Tax Subclass. This change will take effect for the 2026 tax year. In November of 2021, Toronto City Council adopted the report Implementing a Small Business Property Tax Subclass, which provides a reduction in the tax rate for eligible small business properties. The Province of Ontario will provide a matching reduction in the provincial education portion of property taxes for eligible properties. Business property owners whose property has been included in the small business property tax subclass do not need to take any further action – the small business subclass classification and reduction in tax rates will be reflected in your final property tax bill. Tenants of eligible small business properties should speak to their landlord about receiving this reduction. Learn more about available funding and programs to help Toronto businesses thrive. Eligibility Criteria To be eligible for inclusion in the Small Business subclass, a property must meet either of the criteria set out below, depending on the location of the property. Property location Criteria to qualify for the subclass Anywhere in the city Property must be classified within the Commercial or New Commercial Property Tax Class (CT or XT classification), with certain property types excluded – refe",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/services-payments/property-taxes-utilities/small-business-property-tax-subclass/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA",
+   "keywords": [
+    "设备",
+    "租金"
+   ],
    "audience_type": "nonprofit",
-   "zh_name": "小企业房产税子类别",
-   "zh_summary": "面向商业促进区（BIA），为1万至100万加元的资本项目提供50%的匹配资金。申请人必须自付另外50%的费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/starter-company-plus-grant",
@@ -567,16 +667,21 @@
    "amount_max": 5000.0,
    "cost_share": null,
    "summary": "Small business entrepreneurs may be eligible to apply for a micro-grant of $5,000, mentoring and advice to assist with growth and expansion of their business.",
+   "detail": "Starter Company Plus Grant Applications are currently closed. Subscribe to the BusinessTO newsletter to stay informed about future rounds of funding. Starter Company Plus supports eligible entrepreneurs looking to build their small businesses. Select entrepreneurs will receive training, mentoring and advice and will be eligible to apply for a micro-grant of $5,000 to assist with growth and expansion of their business. Starter Company Plus includes: Up to 15 hours of business training, A micro-grant of $5,000, and Up to three months of advisory and mentoring services. Eligibility & Requirements Applicant Requirements Starter Company Plus is available to entrepreneurs that meet the following criteria: Be a Canadian citizen or permanent resident Be 18 years of age or older Not be attending school or planning to return to school while enrolled in the program Be devoting a minimum of 35 hours per week to their small business and not employed anywhere else Not be enrolled in any other government-funded employment program Be a resident of Toronto with ability to demonstrate proof of physical address. Business Requirements Eligible entrepreneurs must also have small businesses that meet the following criteria: Must be a registered business at the time of application (Sole Proprietor, Partnership or Corporation) and this business registration documentation (Master Business Licence or Articles of Incorporation) must show a Toronto address Must have a commercial business bank account at the time of application which corresponds with Business Registration documentation Must have been i",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/starter-company-plus-grant/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner",
+   "keywords": [
+    "培训",
+    "租金",
+    "新创"
+   ],
    "audience_type": "business",
-   "zh_name": "初创企业增强版拨款（Starter Company Plus Grant）",
-   "zh_summary": "面向小企业创业者，提供5,000加元微型资助以及业务指导和建议，以助力企业发展扩张，未明确是否须自付。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/streetscape-improvement-program",
@@ -592,16 +697,20 @@
    "amount_max": null,
    "cost_share": 50,
    "summary": "BIAs may receive matching funding of 50 per cent for capital projects ranging in cost from $10,000 to $1 million.",
+   "detail": "Streetscape Improvement Program The BIA Office implements more than 80 capital projects a year that range in cost from $10,000 to $1 million, with an annual gross budget of $3.5 million. Project costs are shared between the City and the BIA, usually on a 50/50 basis. Capital streetscape projects not only beautify the city, but also make economic sense. Streetscape improvements create safe and attractive retail areas that help BIAs and their members sustain and grow business. Program Overview A streetscape is made up of paving, lighting, trees, street furniture and sidewalks, framed by buildings and open spaces. Together these elements create an aesthetic identity for a Business Improvement Area. Capital streetscape projects not only beautify the city, but also make economic sense. Streetscape improvements create safe and attractive retail areas that help BIAs and their members sustain and grow business. Budget Allocation Process The BIA allocates funds and resources for the projects for the coming year after preliminary consultation with the City of Toronto capital project coordinator. The BIA submits its proposal to the City for approval, usually by August, and budgets must be approved by City Council. Total budget for the capital cost-sharing program is divided between all BIAs based on received requests and priorities. Funds for BIA capital projects come from several sources: levy/savings; City of Toronto contribution; payments from developers collected under the Community Benefits Charge (as per Planning Act); coordinated projects with other divisions and utilities. Cap",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-improvement-areas/bia-financial-incentives/streetscape-improvement-program/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA",
+   "keywords": [
+    "零售",
+    "设备"
+   ],
    "audience_type": "nonprofit",
-   "zh_name": "街景改善计划",
-   "zh_summary": "面向商业促进区（BIA），为1万至100万加元的资本项目提供50%的匹配资金。申请人需自付剩余50%的资本项目费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/streetscape-master-plan-program",
@@ -617,16 +726,20 @@
    "amount_max": 25000.0,
    "cost_share": null,
    "summary": "BIAs may receive one-time cost-matched funding up to $25,000 to acquire consulting services to create comprehensive streetscape plans that guide future improvements.",
+   "detail": "Streetscape Master Plan Program The Streetscape Master Plan Program provides eligible BIAs with one-time funding to acquire consulting services to create comprehensive streetscape plans that guide future improvements. Program Benefits Funding Eligibility Application BIA streetscape master plans help identify a long-term vision for streetscape improvements that can be implemented with support from the BIA Capital Cost-Share Program and other funding sources. Capital Plans provide a framework for the goals and aspirations of the BIA and a reference for City Divisions and Agencies when other works are planned for the area. One-time cost-matched funding up to $25,000 is available for professional consulting services. To obtain funding under the program, the BIA must include in its application a draft Request for Proposal for the consulting services. Any work begun on a streetscape master plan prior to obtaining grant approval by the Manager of the City of Toronto BIA Office is ineligible for grant funding. The grant funding is administered to the BIA after completion of the Streetscape Master Plan. BIAs interested in the program must: Have an established Board of Management approved by the current Council Have an operating budget, adopted at a general meeting of the BIA and approved by Council, for the year the project is to be implemented Be in good standing with the City Auditor and the City’s Finance Planning Division with respect to the preparation and audit of the BIA annual financial statements Please contact your respective Streetscape Designer. In This Section Date modi",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-improvement-areas/bia-financial-incentives/mural-street-art-program-copy/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA",
+   "keywords": [
+    "设备",
+    "租金"
+   ],
    "audience_type": "nonprofit",
-   "zh_name": "街景总体规划项目",
-   "zh_summary": "面向商业促进区（BIA），提供最高25,000加元的一次性费用匹配资金，用于聘请顾问制定街景总体规划。申请人需承担50%的匹配费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/summer-company-grant",
@@ -642,16 +755,23 @@
    "amount_max": 3000.0,
    "cost_share": null,
    "summary": "Student entrepreneurs, aged 15 to 29, can receive mentorship, training and up to $3,000 to launch and operate a small business during the summer.",
+   "detail": "Summer Company Grant Applications are currently closed, reopening January 2027. Subscribe to the BusinessTO newsletter to stay informed about future rounds of funding. Overview Are you an Ontario student with a business idea? Summer Company supports eligible young student entrepreneurs, aged 15 to 29, looking to launch and operate a small business during the summer. Summer Company provides: Business fundamentals training Group and one-to-one mentorship sessions with a trained business professional An opportunity for a grant of up to $3,000 to help launch your small business. For more information, review the program overview and detailed guidelines. Funding Available Summer Company offers grants of up to $3,000: A first payment of up to $1,500 for start-up costs A second payment of up to $1,500 once the student successfully completes the program. Eligibility Requirements Summer Company is available to students that have a desire to be entrepreneurs during the summer. To apply, applicants must meet the following criteria: Be a Canadian citizen or permanent resident Be 15 to 29 years old Returning to school, university, college, trade school or an eligible academic institution in the fall Starting a new business (i.e. not growing an existing business) Planning to operate this new business on Ontario Available to work full-time on developing and launching this new business (i.e. no part-time work or school exceeding 12 hours per week during the summer) Not been a recipient of the Summer Company program in the past. How to Apply Applications are currently closed. Subscribe to th",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/summer-company-grant/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner",
+   "keywords": [
+    "培训",
+    "出口",
+    "租金",
+    "新创",
+    "青年"
+   ],
    "audience_type": "business",
-   "zh_name": "夏季公司拨款（Summer Company Grant）",
-   "zh_summary": "面向15至29岁的学生创业者，提供导师辅导、培训以及最高3,000加元的资金，用于在夏季启动并运营小企业，未明确是否须自付。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/trade-accelerator-program",
@@ -667,16 +787,23 @@
    "amount_max": 5000.0,
    "cost_share": null,
    "summary": "Small to medium-sized business owners and entrepreneurs may receive a micro-grant of $5,000, mentoring and advice to assist with trade diversification of their business.",
+   "detail": "Trade Accelerator Program Applications are now closed. Subscribe to the BusinessTO newsletter to stay informed about future rounds of funding. The Trade Accelerator Program (TAP) supports export-ready small and medium-sized businesses looking to expand into international markets. Through expert-led training, mentorship and customized export planning, program participants gain the knowledge, tools and connections needed to successfully pursue global growth opportunities. TAP helps businesses develop practical export strategies, navigate international markets and build long-term competitiveness in the global economy. This program is funded by the Government of Canada through the Federal Economic Development Agency for Southern Ontario (FedDev Ontario). Funding Available Micro-grants of $5,000 are available to businesses implementing their export growth strategies and pursuing international market opportunities. Eligibility Applicant Eligibility Applicants must meet the following criteria: Be 18 years of age or older Be a Canadian citizen or permanent resident Be operating a small or medium-sized business within Toronto Be full-time self-employed and majority owner of the business Provide proof of a current lease agreement or ownership documentation for the business location, if applicable Commit to all in-person and/or online training and workshop components of the program Provide proof of expenses upon request by the City of Toronto Complete a post-program evaluation survey. Business Eligibility Applicants’ businesses must meet the following criteria: Be incorporated under t",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/trade-accelerator-program/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "Business owner",
+   "keywords": [
+    "零售",
+    "培训",
+    "数字化",
+    "出口",
+    "租金"
+   ],
    "audience_type": "business",
-   "zh_name": "贸易加速计划 (TAP)",
-   "zh_summary": "中小企业主和创业者可申请5000加元微型补助及导师指导以实现贸易多元化，未提及是否需自付费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "toronto-incentives/transit-construction-mitigation-fund",
@@ -692,16 +819,20 @@
    "amount_max": 100000.0,
    "cost_share": null,
    "summary": "BIAs and not-for-profit organizations with ties to main streets may be eligible for grants of up to $100,000 for community-driven initiatives that mitigate the impacts of multi-year transit construction on local businesses.",
+   "detail": "Transit Construction Mitigation Fund Applications are currently closed. Subscribe to the Business TO newsletter for updates on future rounds of funding. Overview The Transit Construction Mitigation Fund provides funding to Business Improvement Areas (BIAs) and non-profit organizations for initiatives that support local business that are impacted by transit construction. This program is funded by the Government of Canada through the Federal Economic Development Agency for Southern Ontario (FedDev Ontario). Objectives The program provides funding to local business communities impacted by sustained transit construction projects on main street business communities, assisting BIAs and other eligible not-for-profit organizations to advance local, community-driven initiatives that will help to mitigate construction impacts through implementation of effective, innovative and creative solutions. The program goals are to: Support local businesses impacted by major construction works Encourage the development and testing of innovative and effective construction mitigation strategies and expand their use across the City of Toronto Pilot and showcase innovative, scalable construction mitigation solutions to challenges faced by BIAs and local business communities. Funding Available Grants are available up to $10,000, $25,000 or $50,000 for projects that meet eligibility requirements. Eligibility Eligible Organizations The Transit Construction Mitigation Fund program is available to the following organizations: Toronto BIAs Not-for-profit organizations including business associations and ",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.toronto.ca/business-economy/business-operation-growth/business-incentives/transit-construction-mitigation-fund/",
    "source": "toronto-incentives",
    "source_url": "https://www.toronto.ca/business-incentives",
    "audience": "BIA or not-for-profit organization",
+   "keywords": [
+    "租金",
+    "非营利"
+   ],
    "audience_type": "nonprofit",
-   "zh_name": "公共交通建设缓解基金",
-   "zh_summary": "商业促进区和非营利组织可申请最高10万加元补助，用于开展缓解长期交通施工影响的社区活动，未提及是否需自付。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/bail-compliance-and-warrant-apprehension-bcwa-grant",
@@ -716,17 +847,21 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Bail Compliance and Warrant Apprehension (BCWA) Grant is continuing through a new one-year cycle for 2026-27. This grant is to support police services across Ontario in strengthening bail compliance and warrant apprehension efforts, with a focus on high-risk individuals, including repeat and serious violent offenders.",
+   "summary": "The Bail Compliance and Warrant Apprehension (BCWA) Grant is continuing through a new one-year cycle for 2026-27. This grant is to support police services across Ontario in strengthening bail compliance and warrant apprehension efforts, with a focus on high-risk individuals, including repeat and serious violent offenders.Funding may be used to support initiatives such as:establishing or expanding dedicated bail compliance and warrant apprehension teams or both, to monitor and follow up with high-risk individualssupporting police bail units to assist Crown attorneys during bail hearings, includ",
+   "detail": "The Bail Compliance and Warrant Apprehension (BCWA) Grant is continuing through a new one-year cycle for 2026-27. This grant is to support police services across Ontario in strengthening bail compliance and warrant apprehension efforts, with a focus on high-risk individuals, including repeat and serious violent offenders.Funding may be used to support initiatives such as:establishing or expanding dedicated bail compliance and warrant apprehension teams or both, to monitor and follow up with high-risk individualssupporting police bail units to assist Crown attorneys during bail hearings, including preparing enhanced bail packages and identifying public safety risksimplementing tools or technology to support bail compliance monitoring, including systems that are compatible with the Provincial Bail Compliance Dashboard",
+   "how_to_apply": "",
    "eligibility": "Eligible applicants include:Municipal police services in OntarioFirst Nations police services in OntarioMunicipalities policed by the Ontario Provincial Police (OPP)An eligible applicant may submit up to two applications in total, whether as a lead applicant or as a partner in a joint application.For municipalities policed by the OPP, up to two applications will be accepted per OPP detachment. Municipalities served by the same detachment must apply jointly, with one municipality identified as the lead applicant.",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "科技",
+    "原住民"
+   ],
    "audience_type": "police",
-   "zh_name": "保释合规与搜捕拨款（BCWA）",
-   "zh_summary": "面向安省市级与原住民警察服务机构，资助加强对高风险及累犯的保释合规与搜捕工作。未提及自付比例要求。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/community-sport-and-recreation-infrastructure-fund",
@@ -741,17 +876,22 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Community Sport and Recreation Infrastructure Fund (CSRIF) is a $500 million program that provides funding to:",
+   "summary": "The Community Sport and Recreation Infrastructure Fund (CSRIF) is a $500 million program that provides funding to:MunicipalitiesIndigenous communitiesNon-profit organizationsFor-profit organizations (new builds only)Funding is available through two program streams for projects that:repair or upgrade existing sport and recreation facilities (Stream 1)build new and transformative sport and recreation facilities (Stream 2)The CSRIF is a cost-shared program to:foster healthier and more active lifestyle for familiesmake sport more accessiblesupport local jobshelp more communities across the provinc",
+   "detail": "The Community Sport and Recreation Infrastructure Fund (CSRIF) is a $500 million program that provides funding to:MunicipalitiesIndigenous communitiesNon-profit organizationsFor-profit organizations (new builds only)Funding is available through two program streams for projects that:repair or upgrade existing sport and recreation facilities (Stream 1)build new and transformative sport and recreation facilities (Stream 2)The CSRIF is a cost-shared program to:foster healthier and more active lifestyle for familiesmake sport more accessiblesupport local jobshelp more communities across the province host local, national and international sporting events and competitions",
+   "how_to_apply": "",
    "eligibility": "Eligible applicants include:MunicipalitiesLocal services boardsNot-for-profit organizationsIndigenous communities and organizationsFor-profit organizations (Stream 2 only)",
    "url": "http://www.ontario.ca/communitysportfund",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "原住民",
+    "非营利",
+    "雇佣"
+   ],
    "audience_type": "municipal",
-   "zh_name": "社区体育与休闲基础设施基金（CSRIF）",
-   "zh_summary": "面向安省市镇、原住民社区及非营利组织等，资助体育与休闲基础设施建设。部分流向允许营利组织申请。未提及自付比例。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/connecting-links-program-2027-28",
@@ -766,17 +906,20 @@
    "amount_min": 0.0,
    "amount_max": 7000000.0,
    "cost_share": null,
-   "summary": "The Ministry of Transportation’s Connecting Links Program provides dedicated provincial funding for road and bridge projects on designated connecting link highways.",
+   "summary": "The Ministry of Transportation’s Connecting Links Program provides dedicated provincial funding for road and bridge projects on designated connecting link highways.Connecting links are municipal roads that connect two ends of a provincial highway through a community or to an international or interprovincial border crossing. These are critical roadways that serve provincial and municipal interests, as they carry long-distance provincial highway traffic moving through communities, as well as local traffic within the community.The Connecting Links Program provides funding for eligible capital imp",
+   "detail": "The Ministry of Transportation’s Connecting Links Program provides dedicated provincial funding for road and bridge projects on designated connecting link highways.Connecting links are municipal roads that connect two ends of a provincial highway through a community or to an international or interprovincial border crossing. These are critical roadways that serve provincial and municipal interests, as they carry long-distance provincial highway traffic moving through communities, as well as local traffic within the community.The Connecting Links Program provides funding for eligible capital improvement costs – NOT maintenance. The responsibility for maintenance of connecting links lies with the municipality.Note: Only municipalities with connecting links are eligible for this grant.",
+   "how_to_apply": "",
    "eligibility": "There are 352 kilometres of Connecting Links, with 70 bridges in 77 Ontario municipalities.All 77 Ontario municipalities with designated Connecting Links are eligible for funding, a municipality with one designated Connecting Link can submit one project per year, a municipality that has more than one designated Connecting Link may submit a maximum of two projects per year.The Ministry of Transportation (MTO) will provide funding for up to 90 percent of total eligible project costs. The maximum amount of funding for eligible costs is $5 million per road project and $7 million per bridge project",
    "url": "https://forms.mgcs.gov.on.ca/en/dataset/on00963",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "设备"
+   ],
    "audience_type": "municipal",
-   "zh_name": "连接公路计划（Connecting Links）",
-   "zh_summary": "面向拥有指定连接公路的安省市镇，提供道路和桥梁建设项目的专项省级资金。未提及是否需要自付一部分。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/emissions-performance-program",
@@ -791,17 +934,22 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Emissions Performance Program (EPP) is a non-competitive program funded by compliance payments collected through the Emissions Performance Standards (EPS) regulation. The program supports projects to reduce greenhouse gas (GHG) emissions at eligible industrial facilities.",
+   "summary": "The Emissions Performance Program (EPP) is a non-competitive program funded by compliance payments collected through the Emissions Performance Standards (EPS) regulation. The program supports projects to reduce greenhouse gas (GHG) emissions at eligible industrial facilities.The EPP will fund 2 types of projects:capital projectsstudy-based projects",
+   "detail": "The Emissions Performance Program (EPP) is a non-competitive program funded by compliance payments collected through the Emissions Performance Standards (EPS) regulation. The program supports projects to reduce greenhouse gas (GHG) emissions at eligible industrial facilities.The EPP will fund 2 types of projects:capital projectsstudy-based projects",
+   "how_to_apply": "",
    "eligibility": "Eligible facilities for the program:are registered in the Emissions Performance Standards Programhave purchased Excess Emissions Unitsdo not generate electricity as their primary industrial activityExamples of project activities that are eligible for funding include (but are not limited to):stationary equipment retrofits for energy efficiency and fuel switchingmobile equipment retrofits for energy efficiency and fuel switchingbuilding envelope upgrades (insulation, windows, doors)heat recoveryindustrial process changescarbon capture and storageclean electricity and low-carbon fuel production f",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "制造",
+    "设备",
+    "能效"
+   ],
    "audience_type": "unknown",
-   "zh_name": "排放绩效计划（EPP）",
-   "zh_summary": "面向注册了排放绩效标准计划且购买过超额排放单位的安省工业企业，资助温室气体减排项目。未提及自付比例。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/fire-protection-services-reimbursement-unincorporated-ontari",
@@ -817,16 +965,17 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "This program is designed to provide municipalities with reimbursement opportunities related to the provision of emergency services in unincorporated areas of Ontario that occurred between March 16, 2026 to March 14, 2027. Reimbursement rates will be based on service rates utilized by the Ministry of Transportation for fire departments responses on provincial highways.",
+   "detail": "This program is designed to provide municipalities with reimbursement opportunities related to the provision of emergency services in unincorporated areas of Ontario that occurred between March 16, 2026 to March 14, 2027. Reimbursement rates will be based on service rates utilized by the Ministry of Transportation for fire departments responses on provincial highways.",
+   "how_to_apply": "",
    "eligibility": "The following call types may be eligible for payment:on roads that are not considered provincial highways by the Ministry of Transportation:motor vehicle collisionshazmatvehicle firesfalse alarmspublic hazard assistance calls:carbon monoxide incidentspublic utility incidentselectrical utility incidentsnatural, Propane or other gas utility incidentsstructure firesrescue (defined as an emergency incident that primarily involves activities directed at locating and rescuing endangered persons and removing those persons to a safe location, this could also include but is not limited to the provision",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [],
    "audience_type": "municipal",
-   "zh_name": "消防服务报销：未设镇地区（Fire Protection Services Reimbursement）",
-   "zh_summary": "面向安省市镇，报销其在安省未设镇地区提供紧急消防与救援服务的相关费用。未提及是否需要自付。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/forest-sector-investment-and-innovation-program",
@@ -841,17 +990,22 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Forest Sector Investment and Innovation Program provides funding for strategic investments in the forest sector that:",
+   "summary": "The Forest Sector Investment and Innovation Program provides funding for strategic investments in the forest sector that:enhance competitivenesssupport new market accessprovide benefits to Ontario’s broader forest sectorstrengthen regional economiesSupport is available under two project categories:business projectscollaboration projectsLearn more about the funding amounts and selection process.",
+   "detail": "The Forest Sector Investment and Innovation Program provides funding for strategic investments in the forest sector that:enhance competitivenesssupport new market accessprovide benefits to Ontario’s broader forest sectorstrengthen regional economiesSupport is available under two project categories:business projectscollaboration projectsLearn more about the funding amounts and selection process.",
+   "how_to_apply": "",
    "eligibility": "Business projectsSupport is available for Ontario-based projects with at least $3 million in eligible costs undertaken by for-profit manufacturers and processors of wood and forest biomass across Ontario, including:saw millspulp and paper millssecondary wood manufacturersbio-economy projectsHarvesting and resource extraction projects are not eligible for funding.Collaboration projectsSupport is available for Ontario-based projects with at least $3 million in eligible costs undertaken through a collaboration of:forest sector for-profit businessesnot-for-profit research organizationsforest indus",
    "url": "http://www.grants.gov.on.ca/GrantsPortal/en/OntarioGrants/GrantOpportunities/PRDR020243",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "制造",
+    "研发",
+    "非营利"
+   ],
    "audience_type": "business",
-   "zh_name": "林业部门投资与创新计划",
-   "zh_summary": "面向安省境内的木材和森林生物质营利性制造及加工企业，支持至少达到一定成本规模的战略投资项目。未明确自付比例。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/great-lakes-local-action-fund",
@@ -866,17 +1020,23 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Great Lakes Local Action Fund provides project-based funding to enable community-based actions that increase climate change resiliency and protect or improve water quality in the Great Lakes ecosystem.",
+   "summary": "The Great Lakes Local Action Fund provides project-based funding to enable community-based actions that increase climate change resiliency and protect or improve water quality in the Great Lakes ecosystem.Funding is available for projects taking place between January 1, 2027, and December 31, 2027.The objectives of the fund are:Nature-based outcomes:Restore and protect wetlands, shorelines and habitat to strengthen resilience and support water quality and ecosystem function.Community innovation:Support scalable local solutions to basin challenges.Economic resilience:Support jobs and sustainabl",
+   "detail": "The Great Lakes Local Action Fund provides project-based funding to enable community-based actions that increase climate change resiliency and protect or improve water quality in the Great Lakes ecosystem.Funding is available for projects taking place between January 1, 2027, and December 31, 2027.The objectives of the fund are:Nature-based outcomes:Restore and protect wetlands, shorelines and habitat to strengthen resilience and support water quality and ecosystem function.Community innovation:Support scalable local solutions to basin challenges.Economic resilience:Support jobs and sustainable local economics as a co-benefit of the on-the-ground Great Lakes action, including through project delivery, partnerships and local capacity building.",
+   "how_to_apply": "",
    "eligibility": "To be eligible for funding, the applicant must be a legal incorporated entity, such as:community-based incorporated organizationsconservation organizations (such as non-governmental, not-for-profit, charitable corporations whose work focuses on environmental protection, conservation and restoration or both)Indigenous communitiesconservation authorities and their foundationsmunicipal governmentsacademic institutions including schools as represented by their school boards, universities and community collegesindustry and non-profit associations or organizations",
    "url": "https://forms.mgcs.gov.on.ca/en/dataset/on00969",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "研发",
+    "原住民",
+    "非营利",
+    "雇佣"
+   ],
    "audience_type": "institution",
-   "zh_name": "五大湖地方行动基金",
-   "zh_summary": "面向依法注册的社区组织和环保非营利机构，资助增强气候韧性及改善五大湖水质的项目。未提及自付比例。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/indigenous-transportation-initiatives-fund-for-indigenous-co",
@@ -891,17 +1051,20 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Indigenous Transportation Initiatives Fund (ITIF) is an application-based funding program open to Indigenous communities and organizations interested in pursuing transportation-related projects.",
+   "summary": "The Indigenous Transportation Initiatives Fund (ITIF) is an application-based funding program open to Indigenous communities and organizations interested in pursuing transportation-related projects.The proposed projects must be connected to the transportation sector and demonstrate an alignment with priority themes selected by the ministry. The priority themes are listed in the 2027 - 2028 program guidelines and application form.",
+   "detail": "The Indigenous Transportation Initiatives Fund (ITIF) is an application-based funding program open to Indigenous communities and organizations interested in pursuing transportation-related projects.The proposed projects must be connected to the transportation sector and demonstrate an alignment with priority themes selected by the ministry. The priority themes are listed in the 2027 - 2028 program guidelines and application form.",
+   "how_to_apply": "",
    "eligibility": "The following Indigenous communities and organizations in Ontario are eligible to apply for ITIF funding:First Nation communitiesMétis communitiesIndigenous organizations",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "原住民"
+   ],
    "audience_type": "indigenous",
-   "zh_name": "原住民交通倡议基金（ITIF）",
-   "zh_summary": "面向安省的原住民社区和组织，资助各类交通相关的项目开发。未提及是否需要自付一部分资金。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/investment-ready-certified-site-designation",
@@ -916,17 +1079,18 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "An Investment Ready: Certified Site designation is issued to properties that have successfully completed a set of program requirements to demonstrate that the property is primed for development and ready for investment.",
+   "summary": "An Investment Ready: Certified Site designation is issued to properties that have successfully completed a set of program requirements to demonstrate that the property is primed for development and ready for investment.Learn more about the Investment Ready: Certified Site Program.",
+   "detail": "An Investment Ready: Certified Site designation is issued to properties that have successfully completed a set of program requirements to demonstrate that the property is primed for development and ready for investment.Learn more about the Investment Ready: Certified Site Program.",
+   "how_to_apply": "Contact the Investment Ready team for your pre-application consultation.Submit your application package through Transfer Payment Ontario.We will notify you if your site has been approved and email you with your notification of acceptance.Complete the additional requirements within 2 years (the list is available in the Certification Instructions and Requirements Guide).Receive a certification designation after all your assessments and documents have been completed, submitted and approved.",
    "eligibility": "The eligibility requirements can be found in the Certification Instructions and Requirements Guide.You can also request the Certification Instructions and Requirements Guide by emailing: investmentready@ontario.ca",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [],
    "audience_type": "unknown",
-   "zh_name": "投资就绪认证场地项目 (IRCS)",
-   "zh_summary": "面向地产所有人，提供开发资质认证以吸引投资。该项目主要是场地资质背书，未直接提及资金资助或自付比例，需查阅指南了解详情。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/municipal-energy-plan-program",
@@ -941,17 +1105,21 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "Through the Municipal Energy Plan Program, you can get funding to develop a plan that will help your community:",
+   "summary": "Through the Municipal Energy Plan Program, you can get funding to develop a plan that will help your community:improve energy efficiencyreduce energy consumption and greenhouse gas emissionsstudy the impact of future growth on energy needsfoster renewable energy production and economic developmentLearn more about the Municipal Energy Plan Program",
+   "detail": "Through the Municipal Energy Plan Program, you can get funding to develop a plan that will help your community:improve energy efficiencyreduce energy consumption and greenhouse gas emissionsstudy the impact of future growth on energy needsfoster renewable energy production and economic developmentLearn more about the Municipal Energy Plan Program",
+   "how_to_apply": "",
    "eligibility": "All Ontario municipalities (including regional municipalities) can apply.",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "制造",
+    "能效"
+   ],
    "audience_type": "municipal",
-   "zh_name": "市政能源计划项目 (MEP)",
-   "zh_summary": "安省所有市政府可申请，资助制定社区能源发展规划。具体资助金额与是否需要自付未明确说明，建议直接咨询项目方。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/northern-ontario-resource-development-support-fund",
@@ -966,17 +1134,18 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Northern Ontario Resource Development Support (NORDS) Fund will make funding available to municipalities in Northern Ontario to:",
+   "summary": "The Northern Ontario Resource Development Support (NORDS) Fund will make funding available to municipalities in Northern Ontario to:share in the benefits from resource developmenthelp offset some of the impacts of resource development on municipal infrastructureStarting in 2026-2027, $15 million per year over five years will be allocated amongst the 144 municipalities in Northern Ontario. Each municipality will have an identified allocation funding amount they would be eligible for, which would take into consideration factors such as municipal size and capacity.",
+   "detail": "The Northern Ontario Resource Development Support (NORDS) Fund will make funding available to municipalities in Northern Ontario to:share in the benefits from resource developmenthelp offset some of the impacts of resource development on municipal infrastructureStarting in 2026-2027, $15 million per year over five years will be allocated amongst the 144 municipalities in Northern Ontario. Each municipality will have an identified allocation funding amount they would be eligible for, which would take into consideration factors such as municipal size and capacity.",
+   "how_to_apply": "",
    "eligibility": "All 144 municipalities in Northern Ontario are eligible.For the purposes of the NORDS Fund, Ontario considers Northern Ontario to be comprised of:the territorial districts of AlgomaCochraneKenoraManitoulinNipissingParry SoundRainy RiverSudburyThunder BayTimiskamingThis is consistent with the delineation of Northern Ontario as designated in the Places to Grow Act, O. Reg. 416/05.",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [],
    "audience_type": "municipal",
-   "zh_name": "安省北部资源开发支持基金 (NORDS)",
-   "zh_summary": "安省北部144个市政府可申请，资金用于支持资源开发相关项目。具体资助额度与自付比例未明确列出，适合当地市政关注。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/ontario-shipbuilding-grant-program",
@@ -991,17 +1160,24 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Ontario Shipbuilding Grant Program (OSGP) will help strengthen Ontario’s shipbuilding industry and its supply chain by providing funding for projects such as:",
+   "summary": "The Ontario Shipbuilding Grant Program (OSGP) will help strengthen Ontario’s shipbuilding industry and its supply chain by providing funding for projects such as:building infrastructurebuying machinery and equipmenttraining workersThe OSGP will reimburse up to 50% of the total eligible expenditures of a successful project for up to 3 fiscal years.",
+   "detail": "The Ontario Shipbuilding Grant Program (OSGP) will help strengthen Ontario’s shipbuilding industry and its supply chain by providing funding for projects such as:building infrastructurebuying machinery and equipmenttraining workersThe OSGP will reimburse up to 50% of the total eligible expenditures of a successful project for up to 3 fiscal years.",
+   "how_to_apply": "",
    "eligibility": "To qualify, businesses must:be an incorporated, for‑profit business legally established under the laws of Canada or the Province of Ontario, or an Indigenous businesshave at least one-third (1/3) of their annual business revenue stem from either:shipbuilding: construction, refitting, retrofitting, repairing and/or maintenance of marine vessels for commercial, research, passenger transportation or other special purpose uses (for example, search and rescue, national defence)shipbuilding supply chain: manufacturing or providing components, technologies, systems and specialized services that direc",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "制造",
+    "科技",
+    "培训",
+    "设备",
+    "研发"
+   ],
    "audience_type": "business",
-   "zh_name": "安省造船资助计划 (OSGP)",
-   "zh_summary": "安省营利性造船企业或原住民企业可申请，资金用于支持造船及供应链项目。未明确说明资助比例与自付要求，需符合营收资质。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/ontario-transit-investment-fund",
@@ -1017,16 +1193,20 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "The Ontario Transit Investment Fund (OTIF) provides time-limited, application-based funding for up to 5 years to support the start-up and growth of transit services across the province. Through OTIF, the province is providing eligible communities with the support they need to build safe and reliable transit services.",
+   "detail": "The Ontario Transit Investment Fund (OTIF) provides time-limited, application-based funding for up to 5 years to support the start-up and growth of transit services across the province. Through OTIF, the province is providing eligible communities with the support they need to build safe and reliable transit services.",
+   "how_to_apply": "",
    "eligibility": "Eligible applicants are municipalities, non-profit organizations and Indigenous communities.",
    "url": "https://forms.mgcs.gov.on.ca/dataset/on00758",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "新创",
+    "原住民"
+   ],
    "audience_type": "municipal",
-   "zh_name": "安省公共交通投资基金 (OTIF)",
-   "zh_summary": "市政府、非营利组织和原住民社区可申请，提供最长5年资助以启动和发展公共交通服务。未标明具体资助金额及自付比例。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/pothole-prevention-and-repair-program",
@@ -1041,17 +1221,18 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Pothole Prevention and Repair Program helps make Ontario’s roads safer by reducing accidents and damage caused by potholes.",
+   "summary": "The Pothole Prevention and Repair Program helps make Ontario’s roads safer by reducing accidents and damage caused by potholes.The program supports smaller municipalities with:road maintenanceset standards to help improve road conditionspromote high-quality roadwork across the provinceMunicipalities that receive funding must meet the requirements set out in the Guidelines.",
+   "detail": "The Pothole Prevention and Repair Program helps make Ontario’s roads safer by reducing accidents and damage caused by potholes.The program supports smaller municipalities with:road maintenanceset standards to help improve road conditionspromote high-quality roadwork across the provinceMunicipalities that receive funding must meet the requirements set out in the Guidelines.",
+   "how_to_apply": "",
    "eligibility": "The Pothole Prevention and Repair Program is open to municipalities with a population of 10,000 or less based on the 2021 Statistics Canada survey. To qualify, municipalities must be interested in carrying out eligible pothole prevention and repair projects.",
    "url": "https://forms.mgcs.gov.on.ca/en/dataset/on00908",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [],
    "audience_type": "municipal",
-   "zh_name": "路面坑洞预防与修补项目",
-   "zh_summary": "人口1万及以下的安省市政府可申请，资金用于道路坑洞预防与修补以提升安全。未提供具体资助金额及自付比例信息。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/provincial-heritage-organization-operating-grant-2026-27",
@@ -1066,17 +1247,20 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "This ministry provides annual operating support to 11 Ontario Provincial Heritage Organizations. These are umbrella organizations for the major types of heritage activities across the province, representing disciplines such as archaeology, genealogy, architecture, history and archives.",
+   "summary": "This ministry provides annual operating support to 11 Ontario Provincial Heritage Organizations. These are umbrella organizations for the major types of heritage activities across the province, representing disciplines such as archaeology, genealogy, architecture, history and archives.Provincial Heritage Organizations (PHO):Offer heritage programs and services to members and to the general public.Are registered non-profit organizations or charities.Operate on a year-round basis.Operate provincially in scope, with members, chapters, and/or branches in multiple locations and regions of Ontario.",
+   "detail": "This ministry provides annual operating support to 11 Ontario Provincial Heritage Organizations. These are umbrella organizations for the major types of heritage activities across the province, representing disciplines such as archaeology, genealogy, architecture, history and archives.Provincial Heritage Organizations (PHO):Offer heritage programs and services to members and to the general public.Are registered non-profit organizations or charities.Operate on a year-round basis.Operate provincially in scope, with members, chapters, and/or branches in multiple locations and regions of Ontario.",
+   "how_to_apply": "",
    "eligibility": "This program is restricted. Only the following organizations are eligible to apply:Architectural Conservancy of OntarioArchives Association of OntarioCentre franco-ontarien de folkloreCommunity Heritage OntarioMulticultural History Society of OntarioOntario Archaeological SocietyOntario Black History SocietyOntario Genealogical SocietyOntario Historical SocietyRéseau du patrimoine franco-ontarienSave Ontario Shipwrecks",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
-   "audience_type": "unknown",
-   "zh_name": "省级遗产组织运营拨款 (2026-27)",
-   "zh_summary": "仅限指定的11家安省特定遗产组织申请，提供年度运营支持。定向邀请制，非公开通用申请项目，无公开自付比例。",
+   "keywords": [
+    "非营利"
+   ],
+   "audience_type": "nonprofit",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/public-library-operating-grants-public-library-pay-equity-fi",
@@ -1091,17 +1275,22 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "There are four funding streams under this program:",
+   "summary": "There are four funding streams under this program:Public Library Operating (PLOG) GrantPublic Library Pay Equity (PE) GrantFirst Nation Salary Supplement (FNSS) GrantFund for Digital Expenses (FDE)You can apply for all funding through one single application form.Public Library Operating Grants (PLOG)Library operating grants are statutory under the Public Libraries Act. Library operating funding goes to:public library boards and First Nations public librariesmunicipalities, local service boards or First Nations that establish a contract for library service with a neighbouring public library boa",
+   "detail": "There are four funding streams under this program:Public Library Operating (PLOG) GrantPublic Library Pay Equity (PE) GrantFirst Nation Salary Supplement (FNSS) GrantFund for Digital Expenses (FDE)You can apply for all funding through one single application form.Public Library Operating Grants (PLOG)Library operating grants are statutory under the Public Libraries Act. Library operating funding goes to:public library boards and First Nations public librariesmunicipalities, local service boards or First Nations that establish a contract for library service with a neighbouring public library board.Public Library Pay Equity (PE), First Nation Salary Supplement (FNSS) and Fund for Digital Expenses (FDE)Applicants who receive a Public Library Operating Grant and have met all program terms and conditions may be eligible for Public Library Pay Equity,First Nation Salary Supplement and the Fund for Digital Expenses.",
+   "how_to_apply": "",
    "eligibility": "The Public Library Operating (PLOG), Pay Equity (PE) , First Nation Salary Supplement (FNSS) grants and the Fund for Digital Expenses (FDE) are restricted programs.Annual funding is distributed to recipients who meet both of these requirements:Operate a public library or contract for library services with a public library board in accordance with the Public Libraries Act.Meet all grant program terms and conditions.Public Libraries Act - Questions and Answers",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
-   "audience_type": "indigenous",
-   "zh_name": "公共图书馆运营、薪酬平等及数字费用基金 (PLOG/PE/FNSS/FDE) 2026-27",
-   "zh_summary": "仅限运营公共图书馆或提供图书馆服务的特定机构申请，用于运营、薪酬及数字开支补贴。定向资助项目，具体分摊比例未明。",
+   "keywords": [
+    "科技",
+    "数字化",
+    "原住民"
+   ],
+   "audience_type": "municipal",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/regional-development-program-advanced-manufacturing-and-inno",
@@ -1117,16 +1306,20 @@
    "amount_max": null,
    "cost_share": null,
    "summary": "",
+   "detail": "",
+   "how_to_apply": "",
    "eligibility": "",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "制造",
+    "研发"
+   ],
    "audience_type": "unknown",
-   "zh_name": "区域发展计划：先进制造与创新竞争力（AMIC）分支",
-   "zh_summary": "安大略省企业可申请资金用于制造升级与创新项目。该项目通常需要企业承担部分自付费用，具体比例根据项目要求确定。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/road-safety-initiatives-fund-rsif",
@@ -1141,17 +1334,18 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The legislative authority for municipalities to use Automated Speed Enforcement (ASE) systems in Ontario has been repealed. As of November 14, 2025, municipalities are no longer allowed to issue any Provincial Offences Act (POA) tickets or administrative penalty orders for speeding infractions captured by ASE cameras.",
+   "summary": "The legislative authority for municipalities to use Automated Speed Enforcement (ASE) systems in Ontario has been repealed. As of November 14, 2025, municipalities are no longer allowed to issue any Provincial Offences Act (POA) tickets or administrative penalty orders for speeding infractions captured by ASE cameras.To support continued road safety, the Ministry of Transportation (MTO) created the Road Safety Initiatives Fund (RSIF). The fund provides financial support for eligible municipalities as they transition from ASE to other safety measures in School Zones (SZs) and Community Safety Z",
+   "detail": "The legislative authority for municipalities to use Automated Speed Enforcement (ASE) systems in Ontario has been repealed. As of November 14, 2025, municipalities are no longer allowed to issue any Provincial Offences Act (POA) tickets or administrative penalty orders for speeding infractions captured by ASE cameras.To support continued road safety, the Ministry of Transportation (MTO) created the Road Safety Initiatives Fund (RSIF). The fund provides financial support for eligible municipalities as they transition from ASE to other safety measures in School Zones (SZs) and Community Safety Zones (CSZs).The RSIF supports initiatives in the following key areas:traffic calming and control measures, including infrastructure-based safety improvements that create safer and more predictable driving conditionssignage enhancements, including regulatory, warning and informational signage that promotes slower, safer driving behaviourtargeted roadside enforcement and operational safety measures that reinforce speed compliance and enhance pedestrian and local safety",
+   "how_to_apply": "",
    "eligibility": "To be eligible for funding under the RSIF, a municipality must have:entered into a signed ASE agreement with the Ministry of Transportation (MTO) before ASE was repealed on November 14, 2025installed, deployed or held a contract or arrangement for ASE systems at any time between December 1, 2019 and November 13, 2025",
    "url": "https://www.tpon.gov.on.ca/tpon/psLogin",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [],
    "audience_type": "municipal",
-   "zh_name": "道路安全倡议基金（RSIF）",
-   "zh_summary": "满足特定签约条件的安大略省市镇可申请资金，用于弥补自动超速执法取消后的相关支出。需参考具体政策确定自付比例。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/site-readiness-program",
@@ -1166,17 +1360,18 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Site Readiness Program supports investment attraction and business expansion opportunities in Ontario. The program provides funding assistance to successful Applicants to help prepare their eligible industrial properties for potential investment opportunities.",
+   "summary": "The Site Readiness Program supports investment attraction and business expansion opportunities in Ontario. The program provides funding assistance to successful Applicants to help prepare their eligible industrial properties for potential investment opportunities.Learn more about the Site Readiness Program.",
+   "detail": "The Site Readiness Program supports investment attraction and business expansion opportunities in Ontario. The program provides funding assistance to successful Applicants to help prepare their eligible industrial properties for potential investment opportunities.Learn more about the Site Readiness Program.",
+   "how_to_apply": "",
    "eligibility": "The eligibility requirements can be found in the Site Readiness Program Guide.",
    "url": "https://www.ontario.ca/page/get-funding-ontario-government",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [],
    "audience_type": "business",
-   "zh_name": "场地准备计划",
-   "zh_summary": "安大略省工业地产业主可申请资金准备投资项目。该资助用于协助提升场地条件，吸引商业扩张，通常需要申请人自付部分资金。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/skills-development-fund-capital-stream",
@@ -1191,17 +1386,24 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Skills Development Fund (SDF) Capital Stream offers funding to eligible organizations to:",
+   "summary": "The Skills Development Fund (SDF) Capital Stream offers funding to eligible organizations to:build new training centresupgrade existing training centresconvert an existing building into a training centreLearn about our SEED and GROW funding pathways under this stream.",
+   "detail": "The Skills Development Fund (SDF) Capital Stream offers funding to eligible organizations to:build new training centresupgrade existing training centresconvert an existing building into a training centreLearn about our SEED and GROW funding pathways under this stream.",
+   "how_to_apply": "",
    "eligibility": "The following organizations are eligible to apply to the SDF Capital Stream as a primary applicant:employers in Ontario (other than the educational organizations listed as being eligible to apply as partners)minister-approved, non-college apprenticeship program training delivery agentsnon-profit organizations including Indigenous band offices and Indigenous Skills and Employment Training agreement holdersprofessional, industry or employer associationstrade unions or union-affiliated organizationsmunicipalitieshospitalsDistrict Social Services Administration BoardsConsolidated Municipal Service",
    "url": "https://forms.mgcs.gov.on.ca/en/dataset/on00540",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "培训",
+    "设备",
+    "出口",
+    "租金",
+    "原住民"
+   ],
    "audience_type": "institution",
-   "zh_name": "技能发展基金：资本分支（SDF Capital Stream）",
-   "zh_summary": "安大略省雇主、培训机构及非营利组织可申请资金用于基础设施和培训项目建设。该项目旨在促进技能提升，需按规定自付部分费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/species-conservation-program",
@@ -1216,17 +1418,22 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Species Conservation Program was created to encourage people and organizations to get involved in conserving species at risk and their habitats through stewardship activities.",
+   "summary": "The Species Conservation Program was created to encourage people and organizations to get involved in conserving species at risk and their habitats through stewardship activities.The program is part of Ontario’s track record of strong environmental stewardship, preserving the rich biodiversity of our province for future generations.The program objectives include:preserving and rehabilitating habitat and enhancing other areas so that they can become habitatsupporting public education and outreach programs relating to conservationsupporting other activities to assist in the protection and conser",
+   "detail": "The Species Conservation Program was created to encourage people and organizations to get involved in conserving species at risk and their habitats through stewardship activities.The program is part of Ontario’s track record of strong environmental stewardship, preserving the rich biodiversity of our province for future generations.The program objectives include:preserving and rehabilitating habitat and enhancing other areas so that they can become habitatsupporting public education and outreach programs relating to conservationsupporting other activities to assist in the protection and conservation of species such as:direct threat mitigationfield-based surveys and monitoringresearch and local and Indigenous knowledge collection",
+   "how_to_apply": "",
    "eligibility": "The fund is open to individuals and groups across Ontario, including:Academic institutionsConservation authoritiesCorporationsIndigenous communities and organizationsIndividualsMunicipal and local governmentsNon-government organizationsApplicants for land securement projects that involve the purchasing of land are further limited to the following types of entities:Conservation organizations (for example, non-governmental, not-for-profit, charitable corporations whose work focuses on environmental protection, conservation and restoration or both) that have acquired a property for conservation p",
    "url": "https://forms.mgcs.gov.on.ca/en/dataset/on00903",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "研发",
+    "原住民",
+    "非营利"
+   ],
    "audience_type": "mixed",
-   "zh_name": "物种保护计划",
-   "zh_summary": "安大略省个人、企业、原住民及各类组织可申请资金参与濒危物种及其栖息地的保护活动。项目支持实地管护，通常需自付部分成本。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   },
   {
    "id": "on-available-funding/winter-roads-program-bridges-and-culverts-stream",
@@ -1241,17 +1448,20 @@
    "amount_min": null,
    "amount_max": null,
    "cost_share": null,
-   "summary": "The Winter Roads Program – Bridges and Culverts Stream provides funding to Northern Ontario remote communities for new water crossing infrastructure (pre-engineered bridges and culverts) and repairs to existing water crossing structures.",
+   "summary": "The Winter Roads Program – Bridges and Culverts Stream provides funding to Northern Ontario remote communities for new water crossing infrastructure (pre-engineered bridges and culverts) and repairs to existing water crossing structures.Projects are located on the Ontario winter roads network, which provides vital seasonal connections between the Far North and the provincial highway network.",
+   "detail": "The Winter Roads Program – Bridges and Culverts Stream provides funding to Northern Ontario remote communities for new water crossing infrastructure (pre-engineered bridges and culverts) and repairs to existing water crossing structures.Projects are located on the Ontario winter roads network, which provides vital seasonal connections between the Far North and the provincial highway network.",
+   "how_to_apply": "",
    "eligibility": "Project funding is open to remote communities in Northern Ontario that are not connected to a provincial highway network by an all-season road. Eligible applicants include Indigenous communities, Indigenous organizations such as Tribal Councils, corporations or partnerships formed by eligible applicants to build or maintain winter roads, and the Town of Moosonee.Applications may be submitted by:Single applicants – one eligible applicant.Joint applicants – two or more eligible applicants.Applicants are encouraged, wherever possible, to submit applications with multiple projects that cover the s",
    "url": "https://forms.mgcs.gov.on.ca/en/dataset/on00548",
    "source": "on-available-funding",
    "source_url": "https://www.ontario.ca/page/available-funding-opportunities-ontario-government",
    "audience": "",
+   "keywords": [
+    "原住民"
+   ],
    "audience_type": "mixed",
-   "zh_name": "冬季道路计划：桥梁与涵洞分支",
-   "zh_summary": "安大略省北部无四季公路连接偏远社区的原住民与相关组织可申请资金，用于新建或维修水路交叉桥梁与涵洞。项目需按规定自付部分费用。",
    "first_seen": "2026-10-25",
-   "last_verified": "2026-10-25"
+   "last_verified": "2026-10-26"
   }
  ]
 }
