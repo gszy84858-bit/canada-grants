@@ -153,7 +153,7 @@ def card(p, idx=0):
         amt=("hi" if (p.get("amount_max") or 0) >= 250000 else (
             "mid" if (p.get("amount_max") or 0) >= 50000 else (
                 "lo" if p.get("amount_max") else "none"))),
-        biz=("biz" if aud in ("business", "mixed", "unknown") else "other"),
+        biz=esc(aud),
         dlv=("" if dl is None else dl),
         search=esc(" ".join([
             p.get("name", ""), p.get("zh_name", ""), p.get("org", ""),
@@ -390,8 +390,11 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
     <button class="btn on" data-v="">全部</button>
     <button class="btn" data-v="open">仅看开放</button></div>
   <div class="fg" data-g="aud"><span class="lb">对象</span>
-    <button class="btn on" data-v="biz">小企业可申请</button>
-    <button class="btn" data-v="">全部项目</button></div>
+    <button class="btn" data-v="">全部</button>
+    <button class="btn on" data-v="biz">小企业</button>
+    <button class="btn" data-v="nonprofit">非营利</button>
+    <button class="btn" data-v="gov">机构</button>
+    <button class="btn" data-v="indigenous">原住民</button></div>
   <div class="fg" data-g="amt"><span class="lb">金额</span>
     <button class="btn on" data-v="">不限</button>
     <button class="btn" data-v="lo">≤5万</button>
@@ -407,6 +410,12 @@ __CARDS__
 </div>
 <script>
 var F={level:"",status:"",amt:"",aud:"biz"}, Q="", TOTAL=__TOTAL__;
+var AUD_SET = {
+  biz: ["business","mixed","unknown"],
+  nonprofit: ["nonprofit"],
+  gov: ["municipal","police","institution"],
+  indigenous: ["indigenous"]
+};
 var VIEW_HIDDEN=false;
 var hotPanel=document.getElementById("hotPanel"),
     tocPanel=document.getElementById("tocPanel"),
@@ -425,7 +434,7 @@ function render(){
     if(F.level && c.dataset.level!==F.level) ok=false;
     if(F.status && c.dataset.status!==F.status) ok=false;
     if(F.amt && c.dataset.amt!==F.amt) ok=false;
-    if(F.aud && c.dataset.aud!==F.aud) ok=false;
+    if(F.aud && AUD_SET[F.aud] && AUD_SET[F.aud].indexOf(c.dataset.aud)<0) ok=false;
     if(ok && q && c.dataset.text.indexOf(q)<0) ok=false;
     c.classList.toggle("hide", !ok || VIEW_HIDDEN);
     if(ok) n++;
