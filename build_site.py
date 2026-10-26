@@ -393,8 +393,7 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
     <button class="btn" data-v="">全部</button>
     <button class="btn on" data-v="biz">小企业</button>
     <button class="btn" data-v="nonprofit">非营利</button>
-    <button class="btn" data-v="gov">机构</button>
-    <button class="btn" data-v="indigenous">原住民</button></div>
+    <button class="btn" data-v="gov">机构</button></div>
   <div class="fg" data-g="amt"><span class="lb">金额</span>
     <button class="btn on" data-v="">不限</button>
     <button class="btn" data-v="lo">≤5万</button>
@@ -413,8 +412,7 @@ var F={level:"",status:"",amt:"",aud:"biz"}, Q="", TOTAL=__TOTAL__;
 var AUD_SET = {
   biz: ["business","mixed","unknown"],
   nonprofit: ["nonprofit"],
-  gov: ["municipal","police","institution"],
-  indigenous: ["indigenous"]
+  gov: ["municipal","police","institution"]
 };
 var VIEW_HIDDEN=false;
 var hotPanel=document.getElementById("hotPanel"),
