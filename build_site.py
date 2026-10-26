@@ -196,22 +196,17 @@ def card(p, idx=0):
 
 
 def toc_block(progs, progs_index):
-    """目录：按层级分组，每项一个锚点。"""
-    groups = [("省级（安大略）", "provincial"), ("市级（多伦多）", "municipal")]
-    out = []
-    for label, key in groups:
-        items = [p for p in progs if p["level"] == key]
-        if not items:
-            continue
-        lis = "".join(
-            '<li><a href="#%s"><span class="tnum">%d</span>%s</a>%s</li>' % (
-                anchor(p), progs_index[p["id"]] + 1,
+    """目录：一条连续编号，和正文编号完全对应；层级用小标签表示。"""
+    lis = []
+    for p in progs:
+        lv = {"provincial": "省", "municipal": "市"}.get(p["level"], "联")
+        lis.append(
+            '<li><a href="#%s"><span class="tnum">%d</span>'
+            '<span class="tlv">%s</span>%s</a>%s</li>' % (
+                anchor(p), progs_index[p["id"]] + 1, lv,
                 esc(p.get("zh_name") or p["name"]),
-                '<span class="mini">%s</span>' % money(p["amount_max"]) if p.get("amount_max") else "")
-            for p in items)
-        out.append('<div class="tocg"><div class="toch">%s · %d 个</div><ul>%s</ul></div>'
-                   % (esc(label), len(items), lis))
-    return "".join(out)
+                '<span class="mini">%s</span>' % money(p["amount_max"]) if p.get("amount_max") else ""))
+    return '<div class="tocg"><ul>%s</ul></div>' % "".join(lis)
 
 
 def main():
@@ -229,7 +224,11 @@ def main():
     n_ddl = sum(1 for p in progs if p.get("deadline"))
 
     LV = {"provincial": 0, "municipal": 1, "federal": 2}
+    # 小企业能申请的排最前 → 默认视图编号从 1 连续
+    def aud_rank(p):
+        return 0 if (p.get("audience_type") or "unknown") in ("business", "mixed", "unknown") else 1
     progs = sorted(progs, key=lambda p: (
+        aud_rank(p),
         LV.get(p["level"], 3),
         0 if p.get("status") == "open" else 1,
         days_left(p) if days_left(p) is not None and days_left(p) >= 0 else 9999,
@@ -350,6 +349,8 @@ padding:15px 16px;margin-bottom:11px;scroll-margin-top:60px}
 .card h3{margin:6px 0 4px;font-size:17px;line-height:1.45}
 h3 .num{color:var(--acc);font-weight:500}
 .tnum{display:inline-block;min-width:22px;color:var(--acc);font-size:12px}
+.tlv{display:inline-block;font-size:10.5px;color:var(--mut);border:1px solid var(--line);
+border-radius:4px;padding:0 3px;margin-right:5px;vertical-align:1px}
 .detail p{margin:0 0 8px;font-size:14px;opacity:.94;line-height:1.75}
 .en{color:var(--mut);font-size:12.5px;margin-bottom:6px;line-height:1.5}
 .org{color:var(--mut);font-size:12.5px;margin-bottom:8px}
