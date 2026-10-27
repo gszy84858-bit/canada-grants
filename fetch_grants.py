@@ -107,6 +107,153 @@ def fetch_detail_text(url, name="", limit=1600):
     return txt[:limit]
 
 
+# ---------------------------------------------------------------------------
+# 指向「这个项目自己的官方页面」
+# ---------------------------------------------------------------------------
+# 旧做法：拿不到详情页就把用户丢给 Google 搜索——等于随便给一个页面。
+# 现在按优先级：
+#   ① 项目块里自己的官方链接（ontario.ca/page、ontario.ca/document、
+#      forms.mgcs.gov.on.ca 的 Program Guidelines 数据集、tpon 申请系统）
+#   ② 猜 ontario.ca/page/<slug> 并校验页面标题（命中率低，但中的就是对的）
+#   ③ 都没有：官方资金列表页 + 文本片段（#:~:text=项目名前几个词），
+#      浏览器会自动滚到那一条，落地就是该项目的原文
+# 每个链接都做一次可达性检查，死链（如已停用的 grants.gov.on.ca）不会上线。
+
+OK_HOSTS = ("ontario.ca", "gov.on.ca")   # 含 forms.mgcs.gov.on.ca、tpon.gov.on.ca
+
+NOISE_TOKENS = {"program", "programs", "fund", "funds", "grant", "grants",
+                "initiative", "initiatives", "stream", "the", "of", "for", "and",
+                "in", "to", "on", "ontario", "provincial", "ministry", "support",
+                "designation", "2026", "2027"}
+
+
+def _host_ok(url):
+    host = urllib.parse.urlparse(url).netloc.lower()
+    return any(host == h or host.endswith("." + h) for h in OK_HOSTS)
+
+
+def _tokens(text):
+    return {t for t in re.findall(r"[a-z]{4,}", (text or "").lower())
+            if t not in NOISE_TOKENS}
+
+
+def verify_url(url, timeout=10):
+    """链接必须真能打开。踩过的坑：Ontario Grants Portal 已停用，
+    官方页面里还留着旧链接，直接给用户就是 502 死链。"""
+    if not url:
+        return False
+    for method in ("HEAD", "GET"):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": UA}, method=method)
+            with urllib.request.urlopen(req, timeout=timeout) as r:
+                return 200 <= r.status < 400
+        except Exception:
+            continue
+    return False
+
+
+def pick_program_link(body, title, base_url=""):
+    """从项目块里挑出该项目自己的官方页面。
+
+    踩过的坑：Apply 按钮所有项目都指向同一个 TPON 登录页（信息量为零）；
+    真正的项目页常常是 forms.mgcs.gov.on.ca 上的 Program Guidelines 数据集——
+    旧代码只认 ontario.ca，把这些全漏了，于是退化成「搜索官方页面」。
+    """
+    cands = []
+    nt = _tokens(title)
+    for m in re.finditer(r'<a[^>]*href="([^"]+)"[^>]*>([\s\S]{0,90}?)</a>', body):
+        href = unescape(m.group(1)).strip()
+        if href.startswith(("mailto:", "tel:", "#", "javascript:")):
+            continue
+        # 相对链接（/page/xxx）先补全域名，否则会被当成外站丢掉
+        if base_url:
+            href = urllib.parse.urljoin(base_url, href)
+        if "get-funding-ontario-government" in href or "/search/" in href:
+            continue
+        if not _host_ok(href):
+            continue
+        txt = strip_tags(m.group(2))
+        low = txt.lower()
+        score = 0
+        if "guidelin" in low:
+            score += 5
+        if "/dataset/" in href:
+            score += 4
+        if re.search(r"(program guide|guide|criteria|how to apply|application form)", low):
+            score += 3
+        if re.search(r"(learn more|more information|program|funding)", low):
+            score += 2
+        if "/document/" in href:
+            score += 2
+        if "/page/" in href:
+            score += 1
+        score += min(3, len(nt & _tokens(txt + " " + href.replace("-", " "))))
+        if score >= 4:
+            cands.append((score, href, "项目指南" if "/dataset/" in href else "官方详情"))
+    # 分数由高到低逐个试，第一个能打开的就是它
+    for score, href, label in sorted(cands, key=lambda x: -x[0])[:5]:
+        if verify_url(href):
+            return href, label
+    return "", ""
+
+
+def guess_official_page(title):
+    """没有链接时，按标题猜 ontario.ca/page/<slug>，并用页面标题验证。
+
+    实测命中率很低（8 个里只中 1 个），所以**必须验证**：
+    猜中的页面标题要覆盖项目名 60% 以上的实词，否则宁可不用。
+    """
+    words = re.findall(r"[a-z0-9]+", re.sub(r"\([^)]*\)", " ",
+                     re.sub(r"\b(19|20)\d\d([-/]\d\d)?\b", " ", (title or "").lower())))
+    if not words:
+        return "", ""
+    cands = []
+    for drop in (set(), {"program", "fund", "grant", "initiative", "stream",
+                         "the", "of", "for", "and", "ontario"}):
+        slug = "-".join(w for w in words if w not in drop)
+        if slug and slug not in cands:
+            cands.append(slug)
+    nt = _tokens(title)
+    for slug in cands[:3]:
+        url = "https://www.ontario.ca/page/" + slug
+        try:
+            html = http_get(url, timeout=10)
+        except Exception:
+            continue
+        m = re.search(r"<title>(.*?)</title>", html, re.S)
+        t = strip_tags(m.group(1)) if m else ""
+        if not t or "not found" in t.lower():
+            continue
+        if nt and len(nt & _tokens(t)) / len(nt) < 0.6:
+            continue
+        return url, "官方详情"
+    return "", ""
+
+
+def listing_anchor(base_url, title, page_text=""):
+    """官方列表页没有每条项目的锚点，只能用文本片段（#:~:text=）定位。
+
+    片段必须是页面上**连续出现**的原文：项目名带括号（BCWA）或冒号时整段匹配不上，
+    所以先截到括号/冒号之前，再从 6 个词逐级缩到 3 个词，直到页面上确实有这段。
+    """
+    base = re.split(r"[(（:]", title or "", 1)[0].strip()
+    words = base.split()
+    for n in (6, 5, 4, 3):
+        if len(words) < n:
+            continue
+        phrase = " ".join(words[:n])
+        if not page_text or phrase.lower() in page_text:
+            return base_url + "#:~:text=" + urllib.parse.quote(phrase)
+    return base_url
+
+
+def first_email(html):
+    m = re.search(r"mailto:([A-Za-z0-9._%+@-]+\.[A-Za-z]{2,})", html or "")
+    if not m:
+        return ""
+    return urllib.parse.unquote(m.group(1)).strip().strip("<>,;")
+
+
 def parse_amount(text):
     """从描述里抽「单个申请人能拿多少」，不是基金总规模。
 
@@ -213,6 +360,7 @@ def norm_url(base, href):
 def parse_ontario(html, src):
     """安省页面：每个项目是一个 h2 分块，块内含 Status / Ministry / h3 小节。"""
     out = []
+    page_text = strip_tags(html).lower()
     chunks = html.split("<h2>")
     for ch in chunks[1:]:
         title = strip_tags(ch.split("</h2>", 1)[0])
@@ -231,30 +379,12 @@ def parse_ontario(html, src):
         how = strip_tags(how_m.group(1), 500) if how_m else ""
         elig_m = re.search(r"<h3>Eligibility</h3>([\s\S]*?)(?=<h3>|$)", body)
         elig = strip_tags(elig_m.group(1), 600) if elig_m else ""
-        # 找「这个项目自己的页面」。
-        # 注意：Apply 按钮所有项目都指向同一个 TPON 登录页，信息量为零，必须排除。
-        url = ""
-        cands = re.findall(r'href="(https?://[^"]+)"[^>]*>([^<]{0,80})', body)
-        best, best_score = "", -1
-        for u, txt in cands:
-            if "ontario.ca" not in u:
-                continue
-            if "get-funding-ontario-government" in u or "/search/" in u:
-                continue
-            score = 0
-            if re.search(r"(guideline|program|document|fund|initiative)", txt, re.I):
-                score += 2
-            if "/document/" in u:
-                score += 2
-            elif "/page/" in u:
-                score += 1
-            if score > best_score:
-                best, best_score = u, score
-        if best_score >= 1:
-            url = best
-        # 找不到专属页时，给一个「站内搜官方页」的入口，而不是假装有详情页
-        search_url = ("https://www.google.com/search?q=" +
-                      urllib.parse.quote("site:ontario.ca " + title))
+        # 这个项目自己的官方页面；实在没有，就定位到官方资金页里的那一条
+        url, link_label = pick_program_link(body, title, src["url"])
+        if not url:
+            url, link_label = guess_official_page(title)
+        anchor_url = listing_anchor(src["url"], title, page_text)
+        contact = first_email(body)
         d_iso, d_kind = parse_deadline(dl_text)
         mn, mx, share, _ = parse_amount(desc + " " + elig)
         out.append({
@@ -275,7 +405,9 @@ def parse_ontario(html, src):
             "how_to_apply": how,
             "eligibility": elig,
             "url": url,
-            "search_url": search_url,
+            "link_label": link_label,
+            "anchor_url": anchor_url,
+            "contact": contact,
             "source": src["id"],
             "source_url": src["url"],
             "audience": "",

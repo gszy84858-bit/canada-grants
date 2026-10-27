@@ -147,23 +147,29 @@ def card(p, idx=0):
         rows.append(("资格", p["eligibility"][:220]))
     if how:
         rows.append(("怎么申请", how[:220]))
-    if not p.get("url"):
-        rows.append(("链接说明", "该项目在安省资金页上没有独立详情页；"
-                               "点下方「搜索官方页面」可在 ontario.ca 内找到相关页面。"))
+    if p.get("contact"):
+        rows.append(("咨询邮箱", p["contact"]))
+    if not p.get("url") and p.get("anchor_url"):
+        rows.append(("链接说明", "该项目在安省官网没有独立页面；下方链接会打开官方资金页，"
+                               "并自动定位到这一条（Chrome / Safari 支持滚动定位）。"))
     rows.append(("核对日期", p.get("last_verified", "")))
 
     rows_html = "".join("<tr><th>%s</th><td>%s</td></tr>" % (esc(k), esc(v))
                         for k, v in rows)
 
+    # 官方链接：有专属页就用它；没有就定位到官方资金页的那一条（不再外链搜索引擎）
     if p.get("url"):
-        links = ('<a href="%s" target="_blank" rel="noopener">官方详情 ↗</a>'
-                 % esc(p["url"]))
+        links = ('<a href="%s" target="_blank" rel="noopener">%s ↗</a>'
+                 % (esc(p["url"]), esc(p.get("link_label") or "官方详情")))
+    elif p.get("anchor_url"):
+        links = ('<a href="%s" target="_blank" rel="noopener">官方原文 · 定位到该条 ↗</a>'
+                 % esc(p["anchor_url"]))
     else:
-        links = ('<a href="%s" target="_blank" rel="noopener">搜索官方页面 ↗</a>'
-                 % esc(p.get("search_url") or p.get("source_url") or "#"))
-        if p.get("source_url"):
-            links += (' <a class="sec" href="%s" target="_blank" rel="noopener">'
-                      '资金列表页 ↗</a>' % esc(p["source_url"]))
+        links = ('<a href="%s" target="_blank" rel="noopener">官方资金列表 ↗</a>'
+                 % esc(p.get("source_url") or "#"))
+    if p.get("contact"):
+        links += (' <a class="sec" href="mailto:%s">✉ %s</a>'
+                  % (esc(p["contact"]), esc(p["contact"])))
 
     return """
 <article class="card" id="{aid}" data-level="{level}" data-status="{status}"
@@ -375,10 +381,11 @@ table.meta{width:100%;border-collapse:collapse;font-size:13px}
 table.meta th{text-align:left;color:var(--mut);font-weight:400;width:74px;
 padding:5px 8px 5px 0;vertical-align:top;border-top:1px solid var(--line)}
 table.meta td{padding:5px 0;border-top:1px solid var(--line)}
-.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;
+.foot{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:8px 12px;
 border-top:1px solid var(--line);padding-top:10px;font-size:12.5px}
 .foot a{color:var(--acc);text-decoration:none}
-.foot a.sec{color:var(--mut);font-size:12px}
+.foot a.sec{color:var(--mut);font-size:12px;overflow-wrap:anywhere;max-width:100%}
+.foot a.top{margin-left:auto;color:var(--mut);font-size:12px}
 .b{font-size:11.5px;padding:2px 8px;border-radius:6px;border:1px solid var(--line);color:var(--mut)}
 .b.open{color:var(--ok);border-color:var(--ok)}
 .b.rest,.b.share{color:var(--warn);border-color:var(--warn)}
