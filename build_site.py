@@ -94,15 +94,23 @@ def card(p, idx=0):
         tags.append('<span class="b amt">上限 %s</span>' % money(p["amount_max"]))
     if p.get("cost_share"):
         tags.append('<span class="b share">需自付 %d%%</span>' % (100 - int(p["cost_share"])))
+    # 每条都必须显示「截止日 / 受理方式」，不允许空白
+    kind = p.get("deadline_kind") or "unknown"
     if dl is not None:
         if dl < 0:
-            tags.append('<span class="b over">已过期</span>')
+            tags.append('<span class="b over">已过期 %s</span>' % p["deadline"])
         elif dl <= 14:
             tags.append('<span class="b soon">还剩 %d 天</span>' % dl)
         else:
             tags.append('<span class="b ddl">截止 %s</span>' % p["deadline"])
-    elif p.get("deadline_kind") == "rolling":
+    elif kind == "rolling":
         tags.append('<span class="b ddl">滚动受理</span>')
+    elif kind == "ongoing":
+        tags.append('<span class="b ddl">常年受理</span>')
+    elif kind == "periodic":
+        tags.append('<span class="b ddl">分轮次受理</span>')
+    else:
+        tags.append('<span class="b ddl">截止日见官方页</span>')
 
     aud = p.get("audience_type") or "unknown"
     aud_label = AUD_LABEL.get(aud, "")
@@ -139,10 +147,17 @@ def card(p, idx=0):
     if p.get("cost_share"):
         rows.append(("自付比例", "至少 %d%%（政府承担 %d%%）" % (
             100 - int(p["cost_share"]), int(p["cost_share"]))))
+    kind = p.get("deadline_kind") or "unknown"
     if p.get("deadline"):
-        rows.append(("截止", "%s（%s）" % (p["deadline"], p.get("deadline_text", "")[:60])))
-    elif p.get("deadline_kind") == "rolling":
+        rows.append(("截止", "%s（%s）" % (p["deadline"], p.get("deadline_text", "")[:70])))
+    elif kind == "rolling":
         rows.append(("截止", "滚动受理，随时可申请"))
+    elif kind == "ongoing":
+        rows.append(("截止", p.get("deadline_note") or "常年受理，具体以官网为准"))
+    elif kind == "periodic":
+        rows.append(("截止", "分轮次受理（每年定时开放），具体日期见官方页"))
+    else:
+        rows.append(("截止", "官方未公布截止日，以官方页为准"))
     if p.get("eligibility"):
         rows.append(("资格", p["eligibility"][:220]))
     if how:
@@ -598,6 +613,14 @@ tocPanel.querySelectorAll('a[href^="#p-"]').forEach(function(a){
       el.classList.add("flash");
       setTimeout(function(){ el.classList.remove("flash"); }, 1600);
     }
+  });
+});
+// 展开「详情」后，把内容滚到可视区顶部（顶栏下沿），不用用户自己往上滑
+document.querySelectorAll("details.more").forEach(function(d){
+  d.addEventListener("toggle", function(){
+    if(!d.open) return;
+    var y = d.getBoundingClientRect().top + window.scrollY - 58;
+    window.scrollTo(0, Math.max(0, y));
   });
 });
 render();

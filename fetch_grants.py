@@ -168,6 +168,8 @@ def pick_program_link(body, title, base_url=""):
         # 相对链接（/page/xxx）先补全域名，否则会被当成外站丢掉
         if base_url:
             href = urllib.parse.urljoin(base_url, href)
+        # 去掉 #section-5 这类中段锚点：链接应从标题开始展示
+        href = href.split("#")[0]
         if "get-funding-ontario-government" in href or "/search/" in href:
             continue
         if not _host_ok(href):
@@ -331,18 +333,41 @@ def fmt_money(v):
 
 
 def parse_deadline(text):
-    """把 'Monday, November 2, 2026, at 4:00 p.m.' 变成 2026-11-02。"""
+    """把 'Monday, November 2, 2026, at 4:00 p.m.' 变成 2026-11-02。
+
+    返回 (iso 日期, 类型)，类型只有四种：
+      fixed     有明确截止日
+      rolling   官方明说没有截止日 / 常年受理
+      periodic  分轮次受理（如「每年两轮」），日期见官方页
+      unknown   原文没写
+
+    踩过的坑：
+      · 序数词被 <sup> 拆成「November 12 th , 2026」→ 先把空格补回去再匹配
+      · 明写「There are no funding deadlines」要判 rolling，不能留空
+      · 「There are two application intake periods each year」是分轮次，不是无期限
+    """
     t = strip_tags(text)
-    low = t.lower()
-    if any(k in low for k in ("ongoing", "any time", "continuous", "rolling")):
-        return "", "rolling"
-    m = re.search(r"([A-Z][a-z]+)\s+(\d{1,2}),?\s*(\d{4})", t)
+    t = re.sub(r"(\d)\s+(st|nd|rd|th)\b", r"\1\2", t, flags=re.I)
+
+    # ① 先找明确日期——有日期就以日期为准，别被后面的 intake 说明盖掉
+    m = re.search(r"([A-Z][a-z]+)\s+(\d{1,2})(?:st|nd|rd|th)?\s*,?\s*(\d{4})", t)
     if m and m.group(1).lower() in MONTHS:
         try:
             d = date(int(m.group(3)), MONTHS[m.group(1).lower()], int(m.group(2)))
             return d.isoformat(), "fixed"
         except ValueError:
             pass
+
+    low = t.lower()
+    # ② 官方说没有截止日
+    if any(k in low for k in ("no funding deadline", "no deadline", "no closing",
+                              "no application deadline", "ongoing", "continuous intake",
+                              "continuous", "rolling", "year-round", "any time",
+                              "first come")):
+        return "", "rolling"
+    # ③ 分轮次受理
+    if "intake period" in low or "intake periods" in low or "intakes" in low:
+        return "", "periodic"
     return "", "unknown"
 
 
@@ -375,6 +400,12 @@ def parse_ontario(html, src):
         dl_text = strip_tags(dl_m.group(1)) if dl_m else ""
         desc_m = re.search(r"<h3>Description</h3>([\s\S]*?)(?=<h3>|$)", body)
         desc = strip_tags(desc_m.group(1), 1200) if desc_m else ""
+        if not desc:
+            # 少数项目没有 <h3>Description</h3>，正文就是 Ministry 那段之后的 <p>
+            paras = [strip_tags(x) for x in re.findall(r"<p>(.*?)</p>", body, re.S)]
+            paras = [x for x in paras if x.strip()
+                     and not x.lower().startswith(("status:", "ministry"))]
+            desc = " ".join(paras)[:1200]
         how_m = re.search(r"<h3>How to apply</h3>([\s\S]*?)(?=<h3>|$)", body)
         how = strip_tags(how_m.group(1), 500) if how_m else ""
         elig_m = re.search(r"<h3>Eligibility</h3>([\s\S]*?)(?=<h3>|$)", body)
@@ -437,7 +468,8 @@ def parse_toronto(html, src):
             "status": "open",
             "status_note": "市级项目按官网在列视为受理中",
             "deadline": "",
-            "deadline_kind": "unknown",
+            "deadline_note": "市府项目多数全年受理，具体以官网为准",
+            "deadline_kind": "ongoing",   # 官网没给截止日：按常年受理展示
             "deadline_text": "",
             "amount_min": mn,
             "amount_max": mx,
