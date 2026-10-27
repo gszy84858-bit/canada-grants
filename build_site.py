@@ -27,6 +27,15 @@ BUILD = str(int(datetime.now().timestamp()))
 
 BRAND = "加拿大补助库"
 NAV_BG = "#1f3a5f"
+# 受众标签（与 fetch_grants.py 的桶一致；business 是默认视图，不加标签）
+AUD_LABEL = {
+    "nonprofit": "限非营利",
+    "gov": "限机构 / 协会",
+    "indigenous": "限原住民",
+    "mixed": "多方均可",
+    "unknown": "受众未标注",
+}
+
 DISCLAIMER = ("本页是索引与摘要，不是官方文件。金额、资格与截止日以政府原文为准；"
               "申请前请点开「官方详情」核对。")
 
@@ -78,7 +87,9 @@ def card(p, idx=0):
     if status == "open":
         tags.append('<span class="b open">开放申请</span>')
     elif status == "restricted":
-        tags.append('<span class="b rest">限特定对象</span>')
+        tags.append('<span class="b rest">仅限指定机构</span>')
+    elif status == "closed":
+        tags.append('<span class="b over">已截止</span>')
     if p.get("amount_max"):
         tags.append('<span class="b amt">上限 %s</span>' % money(p["amount_max"]))
     if p.get("cost_share"):
@@ -94,10 +105,9 @@ def card(p, idx=0):
         tags.append('<span class="b ddl">滚动受理</span>')
 
     aud = p.get("audience_type") or "unknown"
-    if aud in ("municipal", "police", "institution", "indigenous"):
-        tags.append('<span class="b other">限机构/团体</span>')
-    elif aud == "nonprofit":
-        tags.append('<span class="b other">限非营利</span>')
+    aud_label = AUD_LABEL.get(aud, "")
+    if aud_label:
+        tags.append('<span class="b other">%s</span>' % aud_label)
 
     level_cn = {"provincial": "省级", "municipal": "市级"}.get(p["level"], "联邦")
 
@@ -226,7 +236,8 @@ def main():
     LV = {"provincial": 0, "municipal": 1, "federal": 2}
     # 小企业能申请的排最前 → 默认视图编号从 1 连续
     def aud_rank(p):
-        return 0 if (p.get("audience_type") or "unknown") in ("business", "mixed", "unknown") else 1
+        # 小企业能申请的（含「多方均可」）排前面
+        return 0 if (p.get("audience_type") or "unknown") in ("business", "mixed") else 1
     progs = sorted(progs, key=lambda p: (
         aud_rank(p),
         LV.get(p["level"], 3),
@@ -317,7 +328,11 @@ border-radius:12px;padding:12px 14px}
 margin-top:8px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
 .fg::-webkit-scrollbar{display:none}
 .fg .lb{font-size:11.5px;color:var(--mut);flex:0 0 auto;width:40px;margin:0}
-.fg .btn{flex:0 0 auto;white-space:nowrap;padding:3px 7px;font-size:11.5px}
+.fg .btn{flex:0 0 auto;white-space:nowrap;padding:3px 7px;font-size:11.5px;
+display:inline-flex;align-items:center;gap:3px}
+.fg .btn .cnum{font-size:10.5px;opacity:.72;font-variant-numeric:tabular-nums}
+.fg .btn.on .cnum{opacity:.85}
+.fg .btn.empty{opacity:.42}
 .btn{font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);
 background:transparent;color:var(--mut);cursor:pointer;font-family:inherit}
 .btn.on{background:var(--acc);border-color:var(--acc);color:#fff}
@@ -399,7 +414,6 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 
 <div class="tocbar" id="tocbar" hidden>
   <span class="txt">点任一项目跳到该条</span>
-  <button class="btn" id="showall" type="button">显示全部项目</button>
   <button class="btn" id="hideall" type="button">收起目录</button>
 </div>
 
@@ -414,7 +428,9 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
     <button class="btn" data-v="municipal">市级</button></div>
   <div class="fg" data-g="status"><span class="lb">状态</span>
     <button class="btn on" data-v="">全部</button>
-    <button class="btn" data-v="open">仅看开放</button></div>
+    <button class="btn" data-v="open">开放</button>
+    <button class="btn" data-v="restricted">受限</button>
+    <button class="btn" data-v="closed">已截止</button></div>
   <div class="fg" data-g="aud"><span class="lb">对象</span>
     <button class="btn" data-v="">全部</button>
     <button class="btn on" data-v="biz">小企业</button>
@@ -431,15 +447,17 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 __NEWBOX__
 __CARDS__
 <footer>__DISC__
-<br><br>只收录「小企业可申请」的项目；每条标注核对日期，数据源均为官方页面。</footer>
+<br><br>默认只显示「小企业可申请」的项目（含多方均可）；每条标注核对日期，数据源均为官方页面。</footer>
 </div>
 <script>
 var F={level:"",status:"",amt:"",aud:"biz"}, Q="", TOTAL=__TOTAL__;
 var AUD_SET = {
-  biz: ["business","mixed","unknown"],
+  biz: ["business","mixed"],     // 小企业：直接可申请 + 多方均可
   nonprofit: ["nonprofit"],
-  gov: ["municipal","police","institution"]
+  gov: ["gov","indigenous"]      // 机构：市镇/警察/院校/BIA + 原住民组织
 };
+var AUD_NAME = {business:"小企业", mixed:"多方", nonprofit:"非营利",
+                gov:"机构", indigenous:"原住民", unknown:"未标注"};
 var VIEW_HIDDEN=false;
 var hotPanel=document.getElementById("hotPanel"),
     tocPanel=document.getElementById("tocPanel"),
@@ -451,21 +469,57 @@ var tocBar=document.getElementById("tocbar");
 function showBar(v){ tocBar.hidden = !v; }
 showBar(false);
 
+var GROUPS = Array.prototype.slice.call(document.querySelectorAll(".fg")).map(function(g){
+  var btns = Array.prototype.slice.call(g.querySelectorAll(".btn"));
+  btns.forEach(function(b){ b.dataset.base = b.textContent.trim(); });
+  return {name: g.dataset.g, btns: btns};
+});
+
+function matchVal(c, g, v){
+  if(!v) return true;
+  if(g === "aud"){ var set = AUD_SET[v]; return !set || set.indexOf(c.dataset.aud) >= 0; }
+  return c.dataset[g] === v;
+}
+
+function pass(c, skip, q){
+  for(var i=0;i<GROUPS.length;i++){
+    var g = GROUPS[i].name;
+    if(g === skip) continue;
+    if(!matchVal(c, g, F[g])) return false;
+  }
+  if(q && c.dataset.text.indexOf(q) < 0) return false;
+  return true;
+}
+
 function render(){
-  var q=Q.trim().toLowerCase(), n=0;
-  document.querySelectorAll(".card").forEach(function(c){
-    var ok=true;
-    if(F.level && c.dataset.level!==F.level) ok=false;
-    if(F.status && c.dataset.status!==F.status) ok=false;
-    if(F.amt && c.dataset.amt!==F.amt) ok=false;
-    if(F.aud && AUD_SET[F.aud] && AUD_SET[F.aud].indexOf(c.dataset.aud)<0) ok=false;
-    if(ok && q && c.dataset.text.indexOf(q)<0) ok=false;
+  var q = Q.trim().toLowerCase(), n = 0;
+  var cards = Array.prototype.slice.call(document.querySelectorAll(".card"));
+
+  cards.forEach(function(c){
+    var ok = pass(c, null, q);
     c.classList.toggle("hide", !ok || VIEW_HIDDEN);
     if(ok) n++;
   });
+
+  // 每个选项标出「其它条件筛完还剩几条」——避免出现「按钮说 20 条、点进去 3 条」
+  GROUPS.forEach(function(o){
+    var cnt = {};
+    o.btns.forEach(function(b){ cnt[b.dataset.v] = 0; });
+    cards.forEach(function(c){
+      if(!pass(c, o.name, q)) return;
+      o.btns.forEach(function(b){ if(matchVal(c, o.name, b.dataset.v)) cnt[b.dataset.v]++; });
+    });
+    o.btns.forEach(function(b){
+      var num = cnt[b.dataset.v] || 0;
+      b.innerHTML = b.dataset.base + '<span class="cnum">' + num + '</span>';
+      b.classList.toggle("empty", num === 0);
+      b.title = b.dataset.base + "：" + num + " 个项目";
+    });
+  });
+
   document.getElementById("count").textContent = VIEW_HIDDEN
-    ? "目录模式 · 共 "+TOTAL+" 个项目，点目录项查看"
-    : (n<TOTAL ? "显示 "+n+" / "+TOTAL+" 个项目" : TOTAL+" 个项目");
+    ? "目录模式 · 共 " + TOTAL + " 个项目，点目录项查看"
+    : (n < TOTAL ? "显示 " + n + " / " + TOTAL + " 个项目" : TOTAL + " 个项目");
 }
 
 function togglePanel(btn, panel){
@@ -520,11 +574,6 @@ document.getElementById("hideall").addEventListener("click", function(e){
   tocPanel.classList.remove("open"); ttog.classList.remove("on");
   VIEW_HIDDEN = false; showBar(false); render();
   window.scrollTo(0, 0);
-});
-document.getElementById("showall").addEventListener("click", function(e){
-  e.preventDefault(); e.stopPropagation();
-  tocPanel.classList.remove("open"); ttog.classList.remove("on");
-  VIEW_HIDDEN=false; showBar(false); render();
 });
 // 点目录项：先清空筛选与搜索（否则目标被筛掉、页面无落点），再滚动过去
 tocPanel.querySelectorAll('a[href^="#p-"]').forEach(function(a){

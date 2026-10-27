@@ -1,0 +1,35 @@
+{
+  "_说明": "受众（谁能申请）判定配置。代码先按 sources 给的 Recipient type 判，再用 overrides 里的按项目名覆盖。想改某个项目的归属，直接在这里改，不用碰代码。",
+  "_取值": {
+    "business": "小企业/业主可直接申请",
+    "nonprofit": "只给非营利、慈善",
+    "gov": "只给市镇、警察、院校、图书馆、BIA 等机构",
+    "indigenous": "只给原住民社区与组织",
+    "mixed": "多方均可（含企业，也含机构/非营利）",
+    "unknown": "原文没写清"
+  },
+  "overrides": {
+    "Bail Compliance and Warrant Apprehension": "gov",
+    "Community Sport and Recreation Infrastructure Fund": "mixed",
+    "Connecting Links Program": "gov",
+    "Emissions Performance Program": "business",
+    "Fire Protection Services Reimbursement": "gov",
+    "Forest Sector Investment and Innovation": "business",
+    "Great Lakes Local Action Fund": "nonprofit",
+    "Indigenous Transportation Initiatives Fund": "indigenous",
+    "Investment Ready: Certified Site": "mixed",
+    "Municipal Energy Plan Program": "gov",
+    "Northern Ontario Resource Development Support": "gov",
+    "Ontario Shipbuilding Grant Program": "business",
+    "Ontario Transit Investment Fund": "mixed",
+    "Pothole Prevention and Repair": "gov",
+    "Provincial Heritage Organization Operating": "nonprofit",
+    "Public Library Operating Grants": "gov",
+    "Regional Development Program": "business",
+    "Road Safety Initiatives Fund": "gov",
+    "Site Readiness Program": "business",
+    "Skills Development Fund": "mixed",
+    "Species Conservation Program": "mixed",
+    "Winter Roads Program": "gov"
+  }
+}

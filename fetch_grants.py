@@ -24,6 +24,7 @@ from datetime import datetime, date
 from html import unescape
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+CFG = os.path.join(HERE, "config")
 DATA = os.path.join(HERE, "data")
 RAW = os.path.join(HERE, "raw")
 UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
@@ -68,7 +69,8 @@ def http_get(url, timeout=30):
 def strip_tags(s, limit=None):
     s = re.sub(r"<(script|style)[\s\S]*?</\1>", " ", s or "")
     s = re.sub(r"<br\s*/?>", " ", s)
-    s = re.sub(r"<[^>]+>", "", s)
+    # 用空格代替标签，避免 "<li>a</li><li>b</li>" 拼成 "ab"
+    s = re.sub(r"<[^>]+>", " ", s)
     s = unescape(s)
     s = re.sub(r"\s+", " ", s).strip()
     return s[:limit] if limit else s
@@ -298,7 +300,10 @@ def parse_toronto(html, src):
             "level": src["level"],
             "region": src["region"],
             "org": src["org_default"],
-            "status": "unknown",
+            # 多伦多表格只有 Incentive / Description / Recipient type，没有状态列。
+            # 这些项目出现在「现行激励」页上，按受理中处理，并在页面注明以官网为准。
+            "status": "open",
+            "status_note": "市级项目按官网在列视为受理中",
             "deadline": "",
             "deadline_kind": "unknown",
             "deadline_text": "",
@@ -368,6 +373,12 @@ def main():
         p.setdefault("how_to_apply", "")
         p.setdefault("keywords", [])
 
+    today_iso = datetime.now().strftime("%Y-%m-%d")
+    for p in uniq:
+        if p.get("deadline") and p["deadline"] < today_iso and p.get("status") != "closed":
+            p["prev_status"] = p.get("status")
+            p["status"] = "closed"
+
     # 受众判定 + 可选中文
     for p in uniq:
         p["audience_type"] = classify_audience(p)
@@ -425,49 +436,105 @@ def main():
 # 受众判定：只保留「小企业能申请」的，其余打标签但不默认展示
 # ---------------------------------------------------------------------------
 
-AUDIENCE_RULES = [
-    ("municipal", ["municipalit", "city of", "town of", "region of", "local services board"]),
-    ("police", ["police service", "police services", "solicitor general"]),
-    ("nonprofit", ["not-for-profit", "non-profit", "charit", "nonprofit"]),
-    ("indigenous", ["indigenous communit", "first nation", "métis", "metis"]),
-    ("institution", ["university", "college", "hospital", "school board"]),
-]
+AUD_KEYS = ("business", "nonprofit", "gov", "indigenous", "mixed", "unknown")
 
-BUSINESS_HINTS = ["business", "sme", "enterprise", "employer", "company",
-                  "corporation", "entrepreneur", "retail", "manufactur"]
+# 卡片上的受众标签（business 是默认视图，不加标签）
+AUD_LABEL = {
+    "business": "",
+    "nonprofit": "限非营利",
+    "gov": "限机构 / 协会",
+    "indigenous": "限原住民",
+    "mixed": "多方均可",
+    "unknown": "受众未标注",
+}
+
+
+def load_aud_overrides():
+    """读 config/audience.json 的人工覆盖表（按项目名子串匹配）。"""
+    path = os.path.join(CFG, "audience.json")
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        out = {}
+        for k, v in (data.get("overrides") or {}).items():
+            if not k.startswith("_") and v in AUD_KEYS:
+                out[k.strip().lower()] = v
+        return out
+    except Exception as e:
+        print("  ! 读取 config/audience.json 失败:", type(e).__name__)
+        return {}
+
+
+AUD_OVERRIDES = load_aud_overrides()
+
+
+def audience_from_recipient(recipient):
+    """多伦多表格的 Recipient type 列 → 受众桶。
+
+    先算「允许谁申请」的四个标记，再决定归属：
+      · 同时允许企业与其它主体 → mixed（多方均可）
+      · 只给 BIA / 协会 → gov；只给非营利/慈善 → nonprofit；只给原住民 → indigenous
+    注意 "business association" / "business improvement" 是协会不是企业，
+    判 has_biz 前先剔除，否则 "BIA, business association" 会被当成小企业。
+    """
+    a = (recipient or "").lower().strip()
+    if not a:
+        return "unknown"
+    a2 = (a.replace("business association", "")
+            .replace("business improvement area", "")
+            .replace("business improvement", ""))
+    has_bia = ("bia" in a2) or ("business association" in a)
+    has_bia = has_bia or ("business improvement" in a) or ("chamber of commerce" in a)
+    has_npo = any(k in a for k in ("not-for-profit", "non-profit", "nonprofit", "charit"))
+    has_ind = "indigenous" in a
+    has_biz = any(k in a2 for k in ("business owner", "business operator", "business",
+                                    "developer", "property owner", "land owner",
+                                    "enterprise", "commercial"))
+    if has_biz and (has_npo or has_bia or has_ind):
+        return "mixed"
+    if has_bia:
+        return "gov"
+    if has_npo:
+        return "nonprofit"
+    if has_ind:
+        return "indigenous"
+    if has_biz:
+        return "business"
+    return "unknown"
+
+
+def audience_from_text(p):
+    """安省项目没有 Recipient type 列，只能从资格原文粗判；精确的靠 overrides 兜底。"""
+    blob = ((p.get("eligibility") or "") + " " + (p.get("summary") or "")).lower()
+    if not blob.strip():
+        return "unknown"
+    biz = any(k in blob for k in ("for-profit", "for profit", "business", "employer",
+                                  "corporation", "manufactur"))
+    gov = any(k in blob for k in ("municipalit", "city of", "town of", "region of",
+                                  "police", "public library", "school board"))
+    npo = any(k in blob for k in ("not-for-profit", "non-profit", "charit", "ngo",
+                                  "non-government"))
+    ind = any(k in blob for k in ("indigenous", "first nation", "métis", "metis"))
+    if biz and (gov or npo or ind):
+        return "mixed"
+    if gov:
+        return "gov"
+    if npo:
+        return "nonprofit"
+    if ind:
+        return "indigenous"
+    return "business" if biz else "unknown"
 
 
 def classify_audience(p):
-    """返回 business / mixed / nonprofit / municipal / police / indigenous / institution。
-
-    判定顺序：先看「明确排除小企业」的信号，再看有没有企业向表述。
-    宁可标成 mixed（让人自己看详情），也不要漏掉真能申请的项目。
-    """
-    blob = ((p.get("eligibility") or "") + " " + (p.get("summary") or "") + " "
-            + (p.get("audience") or "")).lower()
-    if not blob.strip():
-        return "unknown"
-    hits = [tag for tag, kws in AUDIENCE_RULES if any(k in blob for k in kws)]
-    biz = any(k in blob for k in BUSINESS_HINTS)
-
-    # 多伦多表格自带「适用对象」列，最权威
-    aud = (p.get("audience") or "").lower()
-    if "business owner" in aud or "business" in aud:
-        return "business"
-    if "bia" in aud or "not-for-profit" in aud or "charity" in aud:
-        return "nonprofit"
-
-    if "police" in hits or "institution" in hits:
-        return "police" if "police" in hits else "institution"
-    if "municipal" in hits and not biz:
-        return "municipal"
-    if "indigenous" in hits and not biz:
-        return "indigenous"
-    if biz and len(hits) <= 1:
-        return "business"
-    if biz:
-        return "mixed"
-    return "nonprofit" if "nonprofit" in hits else "unknown"
+    """谁能申请：人工覆盖 → Recipient type → 资格原文 → 未知。"""
+    name = (p.get("name") or "").lower()
+    for key, bucket in AUD_OVERRIDES.items():
+        if key and key in name:
+            return bucket
+    if (p.get("audience") or "").strip():
+        return audience_from_recipient(p["audience"])
+    return audience_from_text(p)
 
 
 # ---------------------------------------------------------------------------
