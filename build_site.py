@@ -432,8 +432,8 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
     <button class="btn" data-v="restricted">受限</button>
     <button class="btn" data-v="closed">已截止</button></div>
   <div class="fg" data-g="aud"><span class="lb">对象</span>
-    <button class="btn" data-v="">全部</button>
-    <button class="btn on" data-v="biz">小企业</button>
+    <button class="btn on" data-v="">全部</button>
+    <button class="btn" data-v="biz">小企业</button>
     <button class="btn" data-v="nonprofit">非营利</button>
     <button class="btn" data-v="gov">机构</button></div>
   <div class="fg" data-g="amt"><span class="lb">金额</span>
@@ -447,10 +447,10 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 __NEWBOX__
 __CARDS__
 <footer>__DISC__
-<br><br>默认只显示「小企业可申请」的项目（含多方均可）；每条标注核对日期，数据源均为官方页面。</footer>
+<br><br>点「筛选 → 对象 → 小企业」只看你能申请的（含多方均可）；每条标注核对日期，数据源均为官方页面。</footer>
 </div>
 <script>
-var F={level:"",status:"",amt:"",aud:"biz"}, Q="", TOTAL=__TOTAL__;
+var F={level:"",status:"",amt:"",aud:""}, Q="", TOTAL=__TOTAL__;
 var AUD_SET = {
   biz: ["business","mixed"],     // 小企业：直接可申请 + 多方均可
   nonprofit: ["nonprofit"],
