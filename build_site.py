@@ -24,6 +24,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 OUT = os.path.join(HERE, "docs")
 BUILD = str(int(datetime.now().timestamp()))
+BUILT_AT = ""          # 数据生成时间（多伦多），main 里赋值，页面显示用
+GEN_AT = ""            # 本次构建时间（多伦多）
 
 BRAND = "加拿大补助库"
 NAV_BG = "#1f3a5f"
@@ -240,49 +242,7 @@ def toc_block(progs, progs_index):
     return '<div class="tocg"><ul>%s</ul></div>' % "".join(lis)
 
 
-def main():
-    with open(os.path.join(DATA, "programs.json"), encoding="utf-8") as f:
-        d = json.load(f)
-    progs = d["programs"]
-    try:
-        with open(os.path.join(DATA, "changes.json"), encoding="utf-8") as f:
-            ch = json.load(f)
-    except Exception:
-        ch = {}
-
-    n_open = sum(1 for p in progs if p.get("status") == "open")
-    n_amt = sum(1 for p in progs if p.get("amount_max"))
-    n_ddl = sum(1 for p in progs if p.get("deadline"))
-
-    LV = {"provincial": 0, "municipal": 1, "federal": 2}
-    # 小企业能申请的排最前 → 默认视图编号从 1 连续
-    def aud_rank(p):
-        # 小企业能申请的（含「多方均可」）排前面
-        return 0 if (p.get("audience_type") or "unknown") in ("business", "mixed") else 1
-    progs = sorted(progs, key=lambda p: (
-        aud_rank(p),
-        LV.get(p["level"], 3),
-        0 if p.get("status") == "open" else 1,
-        days_left(p) if days_left(p) is not None and days_left(p) >= 0 else 9999,
-        -(p.get("amount_max") or 0)))
-
-    # 热门关键词：出现频次最高的 8 个
-    freq = Counter(k for p in progs for k in (p.get("keywords") or []))
-    hot = "".join(
-        '<span class="hk" data-k="%s">%s<span class="cnt">%d</span></span>'
-        % (esc(k), esc(k), n) for k, n in freq.most_common(12))
-
-    cards = "\n".join(card(p, i + 1) for i, p in enumerate(progs))
-    progs_index = {p["id"]: i for i, p in enumerate(progs)}
-    toc = toc_block(progs, progs_index)
-
-    new_names = (ch.get("new") or [])[:5]
-    new_html = ""
-    if new_names:
-        new_html = ('<div class="newbox"><b>最近新增 %d 项</b>　%s</div>'
-                    % (len(ch.get("new") or []), "、".join(esc(x) for x in new_names)))
-
-    html = """<!DOCTYPE html>
+HTML_TPL = """<!DOCTYPE html>
 <html lang="zh-CN"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -290,7 +250,7 @@ def main():
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="加拿大补助库">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>加拿大补助库 · 大多伦多小企业</title>
+<title>__TITLE__</title>
 <style>
 :root{--bg:#f7f6f3;--card:#fff;--fg:#1c1c1a;--mut:#6b6a66;--line:#e4e2dc;
 --barfg:#1f3a5f;--acc:#1f3a5f;--ok:#1f6f4a;--warn:#a8551a;--bad:#a32d2d;--soft:#eef2f7}
@@ -310,7 +270,7 @@ display:flex;align-items:center;gap:6px;flex-wrap:nowrap}
   .bshort{display:inline}
   .bar .btn{padding:5px 6px;font-size:11.5px}
   .bar input[type=search]{font-size:14px;padding:6px 8px}
-  .upd,.subsrc{display:none}
+  .subsrc{display:none}
   .sub{font-size:12.5px;margin-bottom:10px}
 }
 .bar input[type=search]{flex:1 1 90px;min-width:0;padding:6px 9px;font-size:15px;
@@ -421,7 +381,8 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
   <button class="btn" id="ftog" type="button">筛选</button>
 </div>
 <div class="wrap">
-<div class="sub">共 <b>__N__</b> 个项目 · 开放 <b>__NOPEN__</b> · 有金额 <b>__NAMT__</b> · 有截止日 <b>__NDDL__</b><span class="upd">　更新于 __BUILT__</span><span class="subsrc"><br>数据源：安省资金门户 · 多伦多商务激励</span></div>
+<div class="sub">__SUB__</div>
+__BANNER__
 
 <div class="panel" id="hotPanel"><div class="hot" id="hot">__HOT__</div></div>
 
@@ -454,8 +415,8 @@ footer{color:var(--mut);font-size:12px;margin-top:26px;line-height:1.7}
 <div class="count" id="count"></div>
 __NEWBOX__
 __CARDS__
-<footer>__DISC__
-<br><br>点「筛选 → 对象 → 小企业」只看你能申请的（含多方均可）；每条标注核对日期，数据源均为官方页面。</footer>
+<footer><span class="stamp">数据更新于 __BUILT__ · 本页生成于 __GEN__（多伦多时间）</span>
+<br><br>__DISC__<br><br>点「筛选 → 对象 → 小企业」只看你能申请的（含多方均可）；每条标注核对日期，数据源均为官方页面。</footer>
 </div>
 <script>
 var F={level:"",status:"",amt:"",aud:""}, Q="", TOTAL=__TOTAL__;
@@ -627,24 +588,113 @@ render();
 </script>
 </body></html>"""
 
-    html = (html.replace("__NAV_BG__", NAV_BG).replace("__BRAND__", BRAND)
-                .replace("__N__", str(len(progs))).replace("__NOPEN__", str(n_open))
-                .replace("__NAMT__", str(n_amt)).replace("__NDDL__", str(n_ddl))
-                .replace("__TOTAL__", str(len(progs)))
-                .replace("__BUILT__", d.get("built_at", "")[:16])
-                .replace("__HOT__", hot).replace("__TOC__", toc)
-                .replace("__NEWBOX__", new_html).replace("__CARDS__", cards)
-                .replace("__DISC__", DISCLAIMER))
+
+
+def is_expired(p):
+    """已过期：官方标 closed，或截止日已经过去。"""
+    if p.get("status") == "closed":
+        return True
+    dl = p.get("deadline")
+    return bool(dl) and dl < date.today().isoformat()
+
+
+def render_page(progs, *, title, sub, banner="", new_html="", empty_msg="暂无项目"):
+    """把一组项目渲染成整页 HTML（首页与「已过期」页共用同一套模板）。"""
+    freq = Counter(k for p in progs for k in (p.get("keywords") or []))
+    hot = "".join(
+        '<span class="hk" data-k="%s">%s<span class="cnt">%d</span></span>'
+        % (esc(k), esc(k), n) for k, n in freq.most_common(12))
+
+    cards = "\n".join(card(p, i + 1) for i, p in enumerate(progs))
+    if not progs:
+        cards = '<div class="empty">%s</div>' % esc(empty_msg)
+    progs_index = {p["id"]: i for i, p in enumerate(progs)}
+    toc = toc_block(progs, progs_index) if progs else '<div class="tocg"><ul></ul></div>'
+
+    return (HTML_TPL.replace("__NAV_BG__", NAV_BG).replace("__BRAND__", BRAND)
+            .replace("__TITLE__", title)
+            .replace("__SUB__", sub).replace("__BANNER__", banner)
+            .replace("__TOTAL__", str(len(progs)))
+            .replace("__BUILT__", BUILT_AT)
+            .replace("__GEN__", GEN_AT)
+            .replace("__HOT__", hot).replace("__TOC__", toc)
+            .replace("__NEWBOX__", new_html).replace("__CARDS__", cards)
+            .replace("__DISC__", DISCLAIMER))
+
+
+def main():
+    with open(os.path.join(DATA, "programs.json"), encoding="utf-8") as f:
+        d = json.load(f)
+    try:
+        with open(os.path.join(DATA, "changes.json"), encoding="utf-8") as f:
+            ch = json.load(f)
+    except Exception:
+        ch = {}
+
+    global BUILT_AT, GEN_AT
+    BUILT_AT = (d.get("built_at") or datetime.now().strftime("%Y-%m-%d %H:%M"))[:16]
+    GEN_AT = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+    allp = d["programs"]
+    active = [p for p in allp if not is_expired(p)]
+    expired = [p for p in allp if is_expired(p)]
+
+    LV = {"provincial": 0, "municipal": 1, "federal": 2}
+
+    def aud_rank(p):
+        # 小企业能申请的（含多方均可）排前面
+        return 0 if (p.get("audience_type") or "unknown") in ("business", "mixed") else 1
+
+    active = sorted(active, key=lambda p: (
+        aud_rank(p),
+        LV.get(p["level"], 3),
+        0 if p.get("status") == "open" else 1,
+        days_left(p) if days_left(p) is not None and days_left(p) >= 0 else 9999,
+        -(p.get("amount_max") or 0)))
+    # 过期页：最近过期的排前面
+    expired = sorted(expired, key=lambda p: (p.get("deadline") or "0000", p["name"]), reverse=True)
+
+    n_open = sum(1 for p in active if p.get("status") == "open")
+    n_amt = sum(1 for p in active if p.get("amount_max"))
+    n_ddl = sum(1 for p in active if p.get("deadline"))
+
+    stamp = '<span class="upd">　数据更新于 %s（多伦多时间）</span>' % BUILT_AT
+    sub = ('共 <b>%d</b> 个项目 · 开放 <b>%d</b> · 有金额 <b>%d</b> · 有截止日 <b>%d</b>'
+           % (len(active), n_open, n_amt, n_ddl))
+    if expired:
+        sub += ' · <a href="expired.html">已过期 <b>%d</b> 项</a>' % len(expired)
+    sub += stamp + '<span class="subsrc"><br>数据源：安省资金门户 · 多伦多商务激励</span>'
+
+    new_names = (ch.get("new") or [])[:5]
+    new_html = ""
+    if new_names:
+        new_html = ('<div class="newbox"><b>最近新增 %d 项</b>　%s</div>'
+                    % (len(ch.get("new") or []), "、".join(esc(x) for x in new_names)))
 
     os.makedirs(OUT, exist_ok=True)
+    index_html = render_page(active, title="加拿大补助库 · 大多伦多小企业",
+                             sub=sub, new_html=new_html)
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
-        f.write(html)
+        f.write(index_html)
+
+    # 已过期项目单独一页，首页不再展示
+    exp_sub = ('已过期 <b>%d</b> 个项目 · 按截止日从近到远排列' % len(expired)) + stamp
+    exp_banner = ('<div class="banner">这些项目已经截止或过期，<b>不能再申请</b>，'
+                  '列在这里仅供查阅参考。<a href="index.html">← 回到正在受理的 %d 项</a></div>'
+                  % len(active))
+    expired_html = render_page(expired, title="已过期项目 · 加拿大补助库",
+                               sub=exp_sub, banner=exp_banner,
+                               empty_msg="目前没有已过期的项目：所有收录项目都还在受理期内。")
+    with open(os.path.join(OUT, "expired.html"), "w", encoding="utf-8") as f:
+        f.write(expired_html)
+
     with open(os.path.join(OUT, "meta.json"), "w", encoding="utf-8") as f:
-        json.dump({"build": BUILD, "count": len(progs),
-                   "built_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S")},
+        json.dump({"build": BUILD, "count": len(active), "expired": len(expired),
+                   "built_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                   "data_at": BUILT_AT},
                   f, ensure_ascii=False)
     open(os.path.join(OUT, ".nojekyll"), "w").close()
-    print("站点已构建：%s（%d 个项目）" % (OUT, len(progs)))
+    print("站点已构建：%s（在架 %d 个项目，已过期 %d 个）" % (OUT, len(active), len(expired)))
     return 0
 
 
