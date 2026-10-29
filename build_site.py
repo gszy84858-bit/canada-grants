@@ -234,7 +234,7 @@ def toc_block(progs, progs_index):
     for p in progs:
         lv = {"provincial": "省", "municipal": "市"}.get(p["level"], "联")
         lis.append(
-            '<li><a href="#%s"><span class="tnum">%d</span>'
+            '<li><a class="jump" href="#%s"><span class="tnum">%d</span>'
             '<span class="tlv">%s</span>%s</a>%s</li>' % (
                 anchor(p), progs_index[p["id"]] + 1, lv,
                 esc(p.get("zh_name") or p["name"]),
@@ -329,6 +329,9 @@ background:transparent;color:var(--mut);cursor:pointer;font-family:inherit}
 .count{color:var(--mut);font-size:13px;margin:14px 0 10px}
 .newbox{background:rgba(31,111,74,.08);border-left:3px solid var(--ok);
 border-radius:0 8px 8px 0;padding:10px 14px;font-size:13px;margin:12px 0}
+.newbox a{color:var(--ok);font-weight:600;text-decoration:none;
+border-bottom:1px solid rgba(31,111,74,.35)}
+.newbox a:hover{border-bottom-color:var(--ok)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;
 padding:15px 16px;margin-bottom:11px;scroll-margin-top:60px}
 .card:target{border-color:var(--acc);box-shadow:0 0 0 2px rgba(31,58,95,.15)}
@@ -542,8 +545,8 @@ document.getElementById("hot").addEventListener("click",function(e){
 document.body.addEventListener("click",function(e){
   if(e.target.classList.contains("k")) { setQ(e.target.dataset.k); }
 });
-// 点目录项：先清空筛选与搜索（否则目标被筛掉、页面无落点），再滚动过去
-tocPanel.querySelectorAll('a[href^="#p-"]').forEach(function(a){
+// 点目录项 / 「最近新增」里的链接：先清空筛选与搜索（否则目标被筛掉、页面无落点），再滚动过去
+document.querySelectorAll('a.jump[href^="#p-"]').forEach(function(a){
   a.addEventListener("click", function(ev){
     ev.preventDefault();
     var id = a.getAttribute("href").slice(1);
@@ -664,8 +667,19 @@ def main():
     new_names = (ch.get("new") or [])[:5]
     new_html = ""
     if new_names:
+        # 新增项做成锚点链接，点了直接落到那张卡片（和目录同一套跳转逻辑）。
+        # 找不到的（已被过滤掉/已下架）只显示名字，不给死链接。
+        by_name = {p["name"]: p for p in active}
+        items = []
+        for nm in new_names:
+            p = by_name.get(nm)
+            if p:
+                items.append('<a class="jump" href="#%s">%s</a>'
+                             % (anchor(p), esc(p.get("zh_name") or p["name"])))
+            else:
+                items.append(esc(nm))
         new_html = ('<div class="newbox"><b>最近新增 %d 项</b>　%s</div>'
-                    % (len(ch.get("new") or []), "、".join(esc(x) for x in new_names)))
+                    % (len(ch.get("new") or []), "、".join(items)))
 
     os.makedirs(OUT, exist_ok=True)
     index_html = render_page(active, title="加拿大补助库 · 大多伦多小企业",
