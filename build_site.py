@@ -651,8 +651,6 @@ def main():
         0 if p.get("status") == "open" else 1,
         days_left(p) if days_left(p) is not None and days_left(p) >= 0 else 9999,
         -(p.get("amount_max") or 0)))
-    # 过期页：最近过期的排前面
-    expired = sorted(expired, key=lambda p: (p.get("deadline") or "0000", p["name"]), reverse=True)
 
     n_open = sum(1 for p in active if p.get("status") == "open")
     n_amt = sum(1 for p in active if p.get("amount_max"))
@@ -661,8 +659,6 @@ def main():
     stamp = '<span class="upd">　数据更新于 %s（多伦多时间）</span>' % BUILT_AT
     sub = ('共 <b>%d</b> 个项目 · 开放 <b>%d</b> · 有金额 <b>%d</b> · 有截止日 <b>%d</b>'
            % (len(active), n_open, n_amt, n_ddl))
-    if expired:
-        sub += ' · <a href="expired.html">已过期 <b>%d</b> 项</a>' % len(expired)
     sub += stamp + '<span class="subsrc"><br>数据源：安省资金门户 · 多伦多商务激励</span>'
 
     new_names = (ch.get("new") or [])[:5]
@@ -676,17 +672,6 @@ def main():
                              sub=sub, new_html=new_html)
     with open(os.path.join(OUT, "index.html"), "w", encoding="utf-8") as f:
         f.write(index_html)
-
-    # 已过期项目单独一页，首页不再展示
-    exp_sub = ('已过期 <b>%d</b> 个项目 · 按截止日从近到远排列' % len(expired)) + stamp
-    exp_banner = ('<div class="banner">这些项目已经截止或过期，<b>不能再申请</b>，'
-                  '列在这里仅供查阅参考。<a href="index.html">← 回到正在受理的 %d 项</a></div>'
-                  % len(active))
-    expired_html = render_page(expired, title="已过期项目 · 加拿大补助库",
-                               sub=exp_sub, banner=exp_banner,
-                               empty_msg="目前没有已过期的项目：所有收录项目都还在受理期内。")
-    with open(os.path.join(OUT, "expired.html"), "w", encoding="utf-8") as f:
-        f.write(expired_html)
 
     with open(os.path.join(OUT, "meta.json"), "w", encoding="utf-8") as f:
         json.dump({"build": BUILD, "count": len(active), "expired": len(expired),
