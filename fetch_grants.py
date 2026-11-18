@@ -47,6 +47,66 @@ SOURCES = [
         "url": "https://www.toronto.ca/business-incentives",
         "file": "to.html",
     },
+    # 区级精选项目（2026-11 扩信源）：这几个区没有像省/市那样的「补助总表」，
+    # 官方网站是零散的项目详情页。按「宁缺勿错」人工挑选真实补助/支持项目，
+    # 写死各自独立的官方 URL，每天只刷新正文/金额/截止；服务类、收费类、已收录项目不收。
+    {
+        "id": "york-tourism-fund",
+        "level": "municipal",
+        "region": "York Region",
+        "org_default": "York Region Economic Development",
+        "url": "https://yorklink.ca/york-region-tourism-fund/",
+        "file": "york_tourism.html",
+        "name": "York Region Tourism Fund",
+        "body_selector": "elementor",
+        "audience": "Registered charities, non-profits, BIA, chambers of commerce",
+        "audience_type": "nonprofit",
+        # 原文 parse_deadline 抓到 "2026-12-31"（是 Funding Term 结束，不是申请截止）。
+        # 真实规则是「活动前至少两个月提交」= 滚动，故人工覆盖。
+        "deadline": "",
+        "deadline_kind": "rolling",
+        "deadline_note": "活动开始前至少两个月提交初步申请，全年可申请（以官方指南为准）",
+        "status": "open",
+        "keywords": ["旅游", "非营利"],
+    },
+    {
+        "id": "york-psap",
+        "level": "municipal",
+        "region": "York Region",
+        "org_default": "York Small Business Enterprise Centre",
+        "url": "https://yorklink.ca/smallbusiness/professional-services-access-program/",
+        "file": "york_psap.html",
+        "name": "Northern York Region Professional Services Access Program (PSAP)",
+        "body_selector": "elementor",
+        "audience": "Small businesses in Aurora, East Gwillimbury, Georgina, King, Newmarket, Stouffville",
+        "audience_type": "business",
+        "deadline": "",
+        "deadline_kind": "rolling",
+        "deadline_note": "全年接受咨询申请，以官网为准",
+        "status": "open",
+        "keywords": ["初创企业", "社区发展"],
+    },
+    {
+        "id": "halton-hrcif",
+        "level": "municipal",
+        "region": "Halton Region",
+        "org_default": "Halton Region",
+        "url": "https://www.halton.ca/for-business/halton-region-community-investment-fund-hrcif",
+        "file": "halton_hrcif.html",
+        "name": "Halton Region Community Investment Fund (HRCIF)",
+        "body_selector": "main",
+        "audience": "Incorporated non-profit organizations (or community groups with a non-profit sponsor)",
+        "audience_type": "nonprofit",
+        # 原文写「下一轮 2027 秋开放」= 分轮次；当前轮次已过。
+        "deadline": "",
+        "deadline_kind": "periodic",
+        "deadline_note": "下一轮申请预计 2027 年秋季开放，以官网通知为准",
+        "status": "restricted",
+        "status_note": "当前轮次已结束，下一轮 2027 秋开放",
+        # HRCIF 是「非营利项目上限」，不是小企业补助，避免金额被误读。
+        "amount_note": "Category One 上限 $30,000，仅限注册非营利组织",
+        "keywords": ["非营利", "社区发展", "青年"],
+    },
 ]
 
 MONTHS = {m: i for i, m in enumerate(
@@ -486,7 +546,91 @@ def parse_toronto(html, src):
     return out
 
 
-PARSERS = {"on-available-funding": parse_ontario, "toronto-incentives": parse_toronto}
+def parse_official_detail(html, src):
+    """区级精选项目：单个官方详情页（非列表页）。
+
+    与 parse_ontario/parse_toronto 不同，这里的 src 就是项目自己的官方页，
+    没有「列表→多条」的过程。人工在 SOURCES 里核对好 name/受众/截止兜底，
+    本函数只负责每天刷新正文、金额、成本分担、咨询邮箱。
+    这样既不误收服务/收费页（宁缺勿错），又能让 changes.json 捕捉到金额/状态变化。
+    """
+    body = html
+    if src.get("body_selector") == "elementor":
+        # Yorklink 用 Elementor 建站，正文散落在多个 <div class="elementor-widget-container">
+        # 里；把它们连起来取正文。不能用 entry-content——那只是 CSS 选择器，页面里没有这个容器。
+        blocks = re.findall(r'class="elementor-widget-container"[^>]*>([\s\S]*?)</div>', html)
+        body = " ".join(blocks) if blocks else html
+    else:
+        m = re.search(r"<main[\s\S]*?</main>", html, re.I)
+        body = m.group(0) if m else html
+    body = re.sub(r"<(script|style|nav|footer|header|form)[\s\S]*?</\1>", " ", body, flags=re.I)
+
+    # 去掉标题残留：站点标题后缀（"| Toronto Area's York Region"）、重复的项目名、
+    # 以及 "Read our 20xx Impact Report" 这类页头样板句。
+    txt = strip_tags(body)
+    name = src["name"]
+    txt = re.sub(r"\|[^\n]{0,60}(?:York Region|Halton|Canada)[^|]{0,40}", " ", txt, flags=re.I)
+    txt = re.sub(r"Read our (?:20\d\d)?\s*Impact Report[^.]{0,120}\.", " ", txt, flags=re.I)
+    txt = re.sub(r"Learn how (?:we|we've)[^.]{0,120}\.", " ", txt, flags=re.I)
+    blob = strip_tags(txt)
+    blob = re.sub(r"^\W+|\s{2,}", " ", blob).strip()
+
+    # 金额/成本分担：用与省/市项目同一套保守规则，避免把项目成本或总规模当上限
+    mn, mx, share, _ = parse_amount(blob)
+
+    # 截止：SOURCES 里人工核对过（原文抓到的可能是 Funding Term 结束日，会误导），
+    # 一律以配置为准；deadline_text 保留原文供详情表展示。
+    d_iso = src.get("deadline", "")
+    d_kind = src.get("deadline_kind", "")
+    if not d_kind:
+        d_iso, d_kind = parse_deadline(blob)
+    dl_text = ""
+    dm = re.search(r".{0,60}(?:deadline|application period|intake).{0,160}", blob, re.I)
+    if dm:
+        dl_text = dm.group(0).strip()
+
+    # 摘要取项目介绍的前若干字（跳过导航/标题样板），详情保留更长正文
+    summary = strip_tags(blob, 600)
+    detail = strip_tags(blob, 1800)
+    out = {
+        "id": "%s/%s" % (src["id"], re.sub(r"[^a-z0-9]+", "-", name.lower())[:60].strip("-")),
+        "name": name,
+        "level": src["level"],
+        "region": src["region"],
+        "org": src["org_default"],
+        "status": src.get("status", "unknown"),
+        "deadline": d_iso,
+        "deadline_kind": d_kind,
+        "deadline_text": dl_text,
+        "deadline_note": src.get("deadline_note", ""),
+        "amount_min": mn,
+        "amount_max": mx,
+        "cost_share": share,
+        "amount_note": src.get("amount_note", ""),
+        "summary": summary,
+        "detail": detail,
+        "how_to_apply": "",
+        "eligibility": src.get("audience", ""),
+        "url": src["url"],
+        "link_label": "官方详情",
+        "contact": first_email(body),
+        "source": src["id"],
+        "source_url": src["url"],
+        "audience": src.get("audience", ""),
+        # 人工核对过的受众桶/关键词，直接采用（区级页面资格原文不适合关键词粗判）
+        "audience_type_override": src.get("audience_type", ""),
+        "keywords": src.get("keywords", []),
+    }
+    return [out]
+
+
+PARSERS = {
+    "on-available-funding": parse_ontario,
+    "toronto-incentives": parse_toronto,
+    "york-tourism-fund": parse_official_detail,
+    "york-psap": parse_official_detail,
+    "halton-hrcif": parse_official_detail,
+}
 
 
 def load_prev():
@@ -691,8 +835,12 @@ def audience_from_text(p):
 
 
 def classify_audience(p):
-    """谁能申请：人工覆盖 → Recipient type → 资格原文 → 未知。"""
+    """谁能申请：信源内置覆盖 → 人工覆盖表 → Recipient type → 资格原文 → 未知。"""
     name = (p.get("name") or "").lower()
+    # 区级精选项目在 SOURCES 里已人工核对受众桶，优先级最高
+    ov = p.get("audience_type_override")
+    if ov in AUD_KEYS:
+        return ov
     for key, bucket in AUD_OVERRIDES.items():
         if key and key in name:
             return bucket

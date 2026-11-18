@@ -145,7 +145,12 @@ def card(p, idx=0):
 
     rows = []
     if p.get("amount_max"):
-        rows.append(("金额", "最高 %s" % money(p["amount_max"])))
+        amt_txt = "最高 %s" % money(p["amount_max"])
+        # 若信源注明了金额口径（如「仅限非营利」「项目总成本上限」），一并显示，
+        # 避免把非营利项目上限/成本区间误读成小企业可拿的补助。
+        if p.get("amount_note"):
+            amt_txt += "（%s）" % p["amount_note"]
+        rows.append(("金额", amt_txt))
     if p.get("cost_share"):
         rows.append(("自付比例", "至少 %d%%（政府承担 %d%%）" % (
             100 - int(p["cost_share"]), int(p["cost_share"]))))
@@ -153,11 +158,11 @@ def card(p, idx=0):
     if p.get("deadline"):
         rows.append(("截止", "%s（%s）" % (p["deadline"], p.get("deadline_text", "")[:70])))
     elif kind == "rolling":
-        rows.append(("截止", "滚动受理，随时可申请"))
+        rows.append(("截止", p.get("deadline_note") or "滚动受理，随时可申请"))
     elif kind == "ongoing":
         rows.append(("截止", p.get("deadline_note") or "常年受理，具体以官网为准"))
     elif kind == "periodic":
-        rows.append(("截止", "分轮次受理（每年定时开放），具体日期见官方页"))
+        rows.append(("截止", p.get("deadline_note") or "分轮次受理（每年定时开放），具体日期见官方页"))
     else:
         rows.append(("截止", "官方未公布截止日，以官方页为准"))
     if p.get("eligibility"):

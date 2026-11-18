@@ -16,7 +16,7 @@
 | 仓库 | https://github.com/gszy84858-bit/canada-grants （**公开**，Pages 免费版只支持公开仓库） |
 | 本地路径 | `~/Documents/GitHub/canada-grants` |
 | 运行方式 | GitHub Actions 每天 10:00 UTC（= 多伦多 6:00 夏令时 / 5:00 冬令时）+ push 到 `main` 自动触发 |
-| 数据源 | 安省 Available funding opportunities、多伦多 Business Incentives（2 个，均为官方页） |
+| 数据源 | 安省 Available funding opportunities、多伦多 Business Incentives，+ 约克/荷顿 3 个精选官方项目页（共 5 个 source，均为官方页） |
 | 依赖 | **零第三方库**，只用 Python 3 标准库 |
 | 成本 | 0 元（免费 Pages + 免费 Actions + Gemini 免费层） |
 | 用户 | 一个做跨境电商（ShopNorth，加拿大+美国市场）的华人卖家，主要用**手机**看 |
@@ -72,7 +72,7 @@ open docs/index.html        # 看效果
 
 ## 6. 待办（按优先级）
 
-1. **扩信源**：皮尔区 / 约克区 / 荷顿区的商业补助页；联邦 BBF（Black Business Fund）需浏览器渲染，得单独处理。
+1. ~~**扩信源**~~ **部分完成（本地已实现，待 push 上线）**：新增约克区 2 个（York Region Tourism Fund、Northern York PSAP）+ 荷顿区 1 个（HRCIF）精选官方项目页，本地抓取验证通过（51→59 条）。做法见 `fetch_grants.py` 的 `parse_official_detail()` + SOURCES 里带 `body_selector`/人工覆盖字段的条目。**未做**：皮尔区（官网是零散项目页，无总表，需再挖）、联邦 BBF（需浏览器渲染，本机连 canada.ca 超时，零依赖做不到）。区级 SBEC 页面上的 Starter Company Plus / Summer Company / Futurpreneur 与省级已收录重复，不重复收；Tourism Signage 是收费安装路牌，非补助，已排除。
 2. **关键词覆盖率**：部分项目 `keywords` 为空（规则兜底没命中 + 翻译没返回标签），热门关键词面板会少几项。
 3. **中文质量抽检**：CI 里翻译失败会静默降级成英文，页面不报错。偶尔要抽查几条看有没有漏译。
 4. **本地无法测中文**：本机没有 `GEMINI_API_KEY`，中文效果只能看线上。
