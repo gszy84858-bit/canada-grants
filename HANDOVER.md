@@ -21,15 +21,16 @@
 | 成本 | 0 元（免费 Pages + 免费 Actions + Gemini 免费层） |
 | 用户 | 一个做跨境电商（ShopNorth，加拿大+美国市场）的华人卖家，主要用**手机**看 |
 
-## 2. 现状快照（2026-11-17 核实过线上）
+## 2. 现状快照（2026-11-17 晚扩信源上线后核实线上）
 
 | 指标 | 值 |
 |---|---|
-| 在架项目 | **52** |
+| 收录总数 | **59**（安省 28 + 多伦多 28 + 约克 2 + 荷顿 1） |
+| 在架（首页展示） | **55** |
 | 已过期（自动过滤，不展示） | 4 |
-| 页面体积 | 216 KB 单页 |
-| 提交数 | 27 |
-| 最近一次线上构建 | 2026-11-17 14:04（多伦多时间） |
+| 页面体积 | 233 KB 单页（含中文） |
+| 提交数 | 28 |
+| 最近一次线上构建 | 2026-11-17 21:08（多伦多时间，push 触发） |
 
 线上 `/expired.html` 已返回 **404**——过期页在 10-28 按用户要求删掉了，那是预期行为，不是故障。
 
@@ -72,7 +73,7 @@ open docs/index.html        # 看效果
 
 ## 6. 待办（按优先级）
 
-1. ~~**扩信源**~~ **部分完成（本地已实现，待 push 上线）**：新增约克区 2 个（York Region Tourism Fund、Northern York PSAP）+ 荷顿区 1 个（HRCIF）精选官方项目页，本地抓取验证通过（51→59 条）。做法见 `fetch_grants.py` 的 `parse_official_detail()` + SOURCES 里带 `body_selector`/人工覆盖字段的条目。**未做**：皮尔区（官网是零散项目页，无总表，需再挖）、联邦 BBF（需浏览器渲染，本机连 canada.ca 超时，零依赖做不到）。区级 SBEC 页面上的 Starter Company Plus / Summer Company / Futurpreneur 与省级已收录重复，不重复收；Tourism Signage 是收费安装路牌，非补助，已排除。
+1. ~~**扩信源**~~ **部分完成（2026-11-17 已上线，提交 98d2b6b）**：新增约克区 2 个（York Region Tourism Fund、Northern York PSAP）+ 荷顿区 1 个（HRCIF）精选官方项目页，线上已核实 59 条。做法见 `fetch_grants.py` 的 `parse_official_detail()` + SOURCES 里带 `body_selector`/人工覆盖字段的条目。**未做**：皮尔区（官网是零散项目页，无总表，需再挖）、联邦 BBF（需浏览器渲染，本机连 canada.ca 超时，零依赖做不到）。区级 SBEC 页面上的 Starter Company Plus / Summer Company / Futurpreneur 与省级已收录重复，不重复收；Tourism Signage 是收费安装路牌，非补助，已排除。
 2. **关键词覆盖率**：部分项目 `keywords` 为空（规则兜底没命中 + 翻译没返回标签），热门关键词面板会少几项。
 3. **中文质量抽检**：CI 里翻译失败会静默降级成英文，页面不报错。偶尔要抽查几条看有没有漏译。
 4. **本地无法测中文**：本机没有 `GEMINI_API_KEY`，中文效果只能看线上。
