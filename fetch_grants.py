@@ -18,6 +18,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.parse
 import urllib.request
 from datetime import datetime, date
@@ -1021,8 +1022,12 @@ def extract_keywords(p):
     return out[:5]
 
 
-def translate(items, key, batch=5):
-    """给 name / summary 生成中文。失败无妨，页面回退英文。"""
+def translate(items, key, batch=5, _pass=1):
+    """给 name / summary 生成中文。失败无妨，页面回退英文。
+
+    Gemini 免费层偶发限流（一批里所有模型都返回 HTTPError），
+    整批会静默留在英文。第一轮结束后把没译出的项目延时、拆小批再试一次。
+    """
     prompt_tpl = (
         "把下面加拿大政府补助项目改写成中文，供中文读者快速判断是否值得申请。\n"
         "输出三部分：\n"
@@ -1080,7 +1085,14 @@ def translate(items, key, batch=5):
                             ok += 1
                 break
             except Exception as e:
-                print("    ! 中文失败(%s) %s" % (model, type(e).__name__))
+                print("    ! 中文失败(%s) %s %s" % (
+                    model, type(e).__name__, str(e)[:120]))
+    if _pass == 1:
+        missing = [it for it in items if not it.get("zh_name")]
+        if missing:
+            print("    · 中文延时重试 %d 条（免费层限流自愈）" % len(missing))
+            time.sleep(8)
+            ok += translate(missing, key, batch=2, _pass=2)
     return ok
 
 
