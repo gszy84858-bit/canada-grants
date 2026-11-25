@@ -44,7 +44,7 @@
 4. **每条必须有截止信息。** 五种写法之一：明确日期 / 滚动受理 / 常年受理 / 分轮次受理 / 截止日见官方页。**不允许留空白**。
 5. **`docs/` 和 `data/` 不进 git。** 它们由 CI 每天重建（`data/` 靠 Actions 缓存传递）。所以「删一个页面」「改一次数据」**不能靠删文件提交**，必须改生成器 + 让 CI 重跑。Pages 部署是整站替换，旧文件会自动消失。
 6. **时区锁死 `America/Toronto`。** CI runner 是 UTC，页面上的「数据更新于」必须显式按多伦多时间算。
-7. **推送凭据不在本机。** 这台 Mac 上没有 GitHub 凭据（钥匙串无 github.com 条目、没装 `gh`、`~/.ssh` 是空的）。**不要反复试 push**，改完提交，告诉用户「在 VS Code 里点 Push origin」。
+7. **推送：本机现在可以直接推。** 2026-11-24 实测：已装 `gh` CLI，`git credential fill` 能拿到 github.com 的凭据，`git push origin main` 成功。改完**自己直接推**，别再让用户手动点。只有报 `could not read Username` 时才退回老办法：让用户在 VS Code 点 Push，或按 `⌘⇧P` → `Git: Push`。
 8. **改 `HTML_TPL` 里的 JS 要小心 Python 转义。** 模板是 Python 三引号字符串，里面的 `\n` 会被 Python 吃掉，要用 `String.fromCharCode(10)`。改完必须本地构建一次看结果。
 
 ## 4. 三条命令（全部工作都从这儿开始）
@@ -95,5 +95,5 @@ open docs/index.html        # 看效果
 > 「加拿大补助库」是个零依赖 Python 项目，抓安省+多伦多+约克+荷顿的补助项目做中文索引页，
 > 线上 `gszy84858-bit.github.io/canada-grants`，本地在 `~/Documents/GitHub/canada-grants`。
 > 数据源 5 个，条数每天波动，以线上 meta.json 为准。定时实际晚 6-10 小时，属正常。
-> 改完 `build_site.py` 要本地重建验证；推送需要用户在 VS Code 点 Push origin。
+> 改完 `build_site.py` 要本地重建验证；本机可直接 `git push origin main`（凭据已具备）。
 > 详细交接在仓库根目录 `HANDOVER.md` + `notes/`。
