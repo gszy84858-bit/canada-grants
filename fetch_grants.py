@@ -107,6 +107,72 @@ SOURCES = [
         "amount_note": "Category One 上限 $30,000，仅限注册非营利组织",
         "keywords": ["非营利", "社区发展", "青年"],
     },
+    # 皮尔区（2026-11-25 扩信源）：官网同样是零散项目页，无总表。
+    # 只收两条官方原文写明金额/截止方式的项目；CIP 各基金当前页面均标 Closed，
+    # Circular Economy Initiatives Fund 已公布 2026 获奖名单（本轮结束），不收。
+    {
+        "id": "peel-moi",
+        "level": "municipal",
+        "region": "Peel Region",
+        "org_default": "Region of Peel",
+        "url": "https://peelregion.ca/business/development-services/major-office-incentives-program",
+        "file": "peel_moi.html",
+        "name": "Peel Major Office Incentives Program (MOI)",
+        "body_selector": "main",
+        "audience": "大型写字楼开发商 / 业主（项目约 1,858 平方米以上），非普通小企业",
+        "audience_type": "business",
+        # 官网明确写 open to receive applications until June 30, 2031
+        "deadline": "2031-06-30",
+        "deadline_kind": "fixed",
+        "status": "open",
+        # TIEG 按开发前后区域税额差返还，最长 10 年，没有统一单笔上限。
+        "amount_note": "税收增量等值补助（TIEG），最长 10 年；无统一单笔上限",
+        "keywords": ["建筑地产", "租金房产税"],
+    },
+    {
+        "id": "peel-dc-grant",
+        "level": "municipal",
+        "region": "Peel Region",
+        "org_default": "Region of Peel",
+        "url": "https://peelregion.ca/about/finance/development-charges-deferral-grant-program",
+        "file": "peel_dc.html",
+        "name": "Peel Development Charges Deferral and Grant Program",
+        "body_selector": "main",
+        "audience": "皮尔区符合条件的新建住宅项目开发商 / 业主",
+        "audience_type": "business",
+        # 官网：建筑许可、完整申请、开发费支付协议均须在 2027-12-31 前完成
+        "deadline": "2027-12-31",
+        "deadline_kind": "fixed",
+        "status": "open",
+        # 政府承担比例（50% / 100% 区域开发费），不是能拿到的现金金额。
+        "amount_note": "开发费返还：住宅项目为区域开发费的 50%，部分出租单元可达 100%",
+        "keywords": ["建筑地产", "租金房产税"],
+    },
+    # 联邦（2026-11-25 补上）：旧记录说「BBF 需浏览器渲染、零依赖做不到」，
+    # 实际是试了 www.canada.ca（超时）。同一联邦项目在 ISED 官网是静态页，
+    # 纯标准库可抓。这里收的是 Black Entrepreneurship Loan Fund（BEP 的贷款组件）。
+    {
+        "id": "fed-bep-loan",
+        "level": "federal",
+        "region": "Canada",
+        "org_default": "Innovation, Science and Economic Development Canada",
+        "url": "https://ised-isde.canada.ca/site/ised/en/programs-and-initiatives/black-entrepreneurship-program/black-entrepreneurship-loan-fund",
+        "file": "fed_bep_loan.html",
+        "name": "Black Entrepreneurship Loan Fund (BEP)",
+        "body_selector": "main",
+        "audience": "加拿大黑人创业者及黑人拥有的企业",
+        "audience_type": "business",
+        "deadline": "",
+        "deadline_kind": "rolling",
+        "deadline_note": "常年受理；由 FACE 通过在线贷款平台接收申请（以官网为准）",
+        "status": "open",
+        # 官网原文：loans between $10,000 to $250,000（明确单笔区间，不是基金总规模）
+        "amount_min": 10000,
+        "amount_max": 250000,
+        "amount_note": "贷款（非赠与）：单笔 $10,000–$250,000，由 FACE 与 BDC 发放",
+        "how_to_apply": "通过 Federation of African Canadian Economics (FACE) 在线贷款门户申请，BDC 合作发放。",
+        "keywords": ["初创企业", "雇工补贴"],
+    },
 ]
 
 MONTHS = {m: i for i, m in enumerate(
@@ -575,8 +641,14 @@ def parse_official_detail(html, src):
     blob = strip_tags(txt)
     blob = re.sub(r"^\W+|\s{2,}", " ", blob).strip()
 
-    # 金额/成本分担：用与省/市项目同一套保守规则，避免把项目成本或总规模当上限
+    # 金额/成本分担：用与省/市项目同一套保守规则，避免把项目成本或总规模当上限。
+    # 若官方原文用非标准句式写明单笔区间（如 "loans between $10,000 to $250,000"），
+    # 在 SOURCES 里人工核对后直接覆盖，避免正则漏掉或误抓基金总规模。
     mn, mx, share, _ = parse_amount(blob)
+    if src.get("amount_min") is not None:
+        mn = src["amount_min"]
+    if src.get("amount_max") is not None:
+        mx = src["amount_max"]
 
     # 截止：SOURCES 里人工核对过（原文抓到的可能是 Funding Term 结束日，会误导），
     # 一律以配置为准；deadline_text 保留原文供详情表展示。
@@ -609,7 +681,7 @@ def parse_official_detail(html, src):
         "amount_note": src.get("amount_note", ""),
         "summary": summary,
         "detail": detail,
-        "how_to_apply": "",
+        "how_to_apply": src.get("how_to_apply", ""),
         "eligibility": src.get("audience", ""),
         "url": src["url"],
         "link_label": "官方详情",
@@ -630,6 +702,9 @@ PARSERS = {
     "york-tourism-fund": parse_official_detail,
     "york-psap": parse_official_detail,
     "halton-hrcif": parse_official_detail,
+    "peel-moi": parse_official_detail,
+    "peel-dc-grant": parse_official_detail,
+    "fed-bep-loan": parse_official_detail,
 }
 
 
@@ -883,6 +958,9 @@ TAG_VOCAB = [
     "社区发展", "文化艺术", "医疗健康", "能源",
 ]
 
+# 键必须是 TAG_VOCAB 里的词：extract_keywords() 的结果最终会过 norm_tags()，
+# 用词表外的别名（旧版 "设备"/"研发"/"能效"/"租金"/"新创"/"雇佣"）会被静默丢掉，
+# 这正是部分项目 keywords 为空的根因（2026-11-25 修复）。
 KW_VOCAB = {
     "零售": ["retail", "storefront", "shop"],
     "制造": ["manufactur", "factory", "production"],
@@ -891,18 +969,22 @@ KW_VOCAB = {
     "农业": ["agri", "farm", "food processing"],
     "旅游": ["tourism", "visitor", "hospitality"],
     "培训": ["training", "skills", "workforce"],
-    "设备": ["equipment", "capital", "machinery"],
+    "设备采购": ["equipment", "machinery", "capital equipment", "capital grant"],
     "数字化": ["digital", "e-commerce", "online", "automation"],
     "出口": ["export", "international market", "trade"],
-    "研发": ["research", "r&d", "innovation", "prototype"],
-    "能效": ["energy efficien", "retrofit", "emission", "clean"],
-    "租金": ["rent", "lease", "property tax"],
-    "新创": ["startup", "start-up", "new business", "entrepreneur"],
+    "研发创新": ["research", "r&d", "innovation", "prototype"],
+    "节能环保": ["energy efficien", "retrofit", "emission", "clean"],
+    "租金房产税": ["rent", "lease", "property tax", "tax rebate", "development charge", "tax increment"],
+    "初创企业": ["startup", "start-up", "new business"],
     "青年": ["youth", "student", "young"],
     "女性": ["women", "woman"],
     "原住民": ["indigenous", "first nation"],
     "非营利": ["not-for-profit", "charit"],
-    "雇佣": ["hire", "hiring", "wage", "job"],
+    "雇工补贴": ["hire", "hiring", "wage", "employment", "job creation"],
+    "建筑地产": ["housing", "residential", "real estate", "site readiness", "certified site", "construction", "property development"],
+    "基础设施": ["infrastructure", "pothole", "road", "site designation", "fire protection", "public works", "culvert", "bridge"],
+    "交通物流": ["road safety", "transit", "logistics"],
+    "文化艺术": ["heritage", "arts", "culture", "museum"],
 }
 
 

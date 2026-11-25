@@ -402,7 +402,8 @@ __BANNER__
   <div class="fg" data-g="level"><span class="lb">层级</span>
     <button class="btn on" data-v="">全部</button>
     <button class="btn" data-v="provincial">省级</button>
-    <button class="btn" data-v="municipal">市级</button></div>
+    <button class="btn" data-v="municipal">市级</button>
+    <button class="btn" data-v="federal">联邦</button></div>
   <div class="fg" data-g="status"><span class="lb">状态</span>
     <button class="btn on" data-v="">全部</button>
     <button class="btn" data-v="open">开放</button>

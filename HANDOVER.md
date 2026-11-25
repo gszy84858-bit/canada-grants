@@ -16,21 +16,21 @@
 | 仓库 | https://github.com/gszy84858-bit/canada-grants （**公开**，Pages 免费版只支持公开仓库） |
 | 本地路径 | `~/Documents/GitHub/canada-grants` |
 | 运行方式 | GitHub Actions 每天 **10:00 UTC**（配置为多伦多 5-6 点）+ push 到 `main` 自动触发。**实际常延迟 6-10 小时**，多伦多时间下午才更新完，详见第 6 节 |
-| 数据源 | 安省 Available funding opportunities、多伦多 Business Incentives，+ 约克/荷顿 3 个精选官方项目页（共 5 个 source，均为官方页） |
+| 数据源 | 安省 Available funding opportunities、多伦多 Business Incentives，+ 约克/荷顿/皮尔 5 个精选官方项目页，+ 联邦 ISED 贷款基金页（共 8 个 source，均为官方页） |
 | 依赖 | **零第三方库**，只用 Python 3 标准库 |
 | 成本 | 0 元（免费 Pages + 免费 Actions + Gemini 免费层） |
 | 用户 | 一个做跨境电商（ShopNorth，加拿大+美国市场）的华人卖家，主要用**手机**看 |
 
-## 2. 现状快照（2026-11-24 核实线上）
+## 2. 现状快照（2026-11-25 核实）
 
 | 指标 | 值 |
 |---|---|
-| 数据源 | **5 个**：安省 28 + 多伦多 28 + 约克 2 + 荷顿 1（区级是人工核对的精选官方项目页，不是总表） |
-| 收录总数 | **每天波动**。扩信源首日 59 条；2026-11-22 线上实测 57 条（官方页面内容每天在变，属正常） |
-| 在架（首页展示） | **54**（11-22 实测） |
-| 已过期（自动过滤） | 3（11-22 实测） |
-| 提交数 | 36 |
-| 最近一次线上构建 | 2026-11-24 20:18（多伦多时间） |
+| 数据源 | **8 个**：安省 26 + 多伦多 28 + 约克 2 + 荷顿 1 + 皮尔 2 + 联邦 ISED 1（区级是人工核对的精选官方项目页，不是总表；条数每天在变） |
+| 收录总数 | **每天波动**。11-25 本地全量抓取为 60 条（新扩信源上线前线上为 54 条），以线上 `meta.json` 为准 |
+| 在架（首页展示） | 本地重建 57（过期 3 条自动过滤）；11-25 14:47 线上为 54（扩源前） |
+| 已过期（自动过滤） | 3（11-25 本地实测） |
+| 提交数 | 41（含本次扩信源与文档更新） |
+| 最近一次线上构建 | 2026-11-25 14:47:48（多伦多时间，扩源前；推送后以新的 `built_at` 为准） |
 
 **条数以线上 `meta.json` 为准**，别拿本地 `data/programs.json` 判断线上状态——本地快照停在 11-17。
 
@@ -76,10 +76,10 @@ open docs/index.html        # 看效果
 ## 6. 待办（按优先级）
 
 0. ~~**站点连续两天停更**~~ **已修复（2026-11-24，提交 340f32e）**：11-23/11-24 的 CI 抓取和构建都成功，但 `deploy-pages` 报 `No artifacts named "github-pages"`——产物其实已上传成功，是 GitHub API 列表短暂滞后。现在上传后先轮询确认产物可见（最多 2 分钟）再发布，推送触发的 CI 已验证通过。线上 `meta.json` 的 `built_at` 是判断更新是否正常的唯一标准。
-1. ~~**扩信源**~~ **部分完成（2026-11-17 已上线，提交 98d2b6b）**：新增约克区 2 个（York Region Tourism Fund、Northern York PSAP）+ 荷顿区 1 个（HRCIF）精选官方项目页，首日线上 59 条。做法见 `fetch_grants.py` 的 `parse_official_detail()` + SOURCES 里带 `body_selector`/人工覆盖字段的条目。**未做**：皮尔区（官网是零散项目页，无总表，需再挖）、联邦 BBF（需浏览器渲染，本机连 canada.ca 超时，零依赖做不到）。区级 SBEC 页面上的 Starter Company Plus / Summer Company / Futurpreneur 与省级已收录重复，不重复收；Tourism Signage 是收费安装路牌，非补助，已排除。
+1. ~~**扩信源**~~ **已完成（2026-11-25，本次提交）**：约克 2 + 荷顿 1（11-17 已上线）+ 皮尔 2（Major Office Incentives、Development Charges Deferral and Grant）+ 联邦 1（ISED 的 Black Entrepreneurship Loan Fund），共 8 个 source。区级 SBEC 页面上的 Starter Company Plus / Summer Company / Futurpreneur 与省级重复，不收；Tourism Signage 是收费安装路牌，非补助；皮尔 CIP 各基金当前全 Closed、Circular Economy Initiatives Fund 已公布 2026 获奖名单，均不收。**联邦旧结论已推翻**：不是「BBF 需浏览器渲染」，而是试错域名——`www.canada.ca` 超时，同一项目在 `ised-isde.canada.ca` 是静态页，标准库可直接抓。详见 `notes/03` A8。
 2. **⚠️ 定时不准时**：cron 配的是 10:00 UTC，但实际运行时间长期落在 16-20 UTC（多伦多中午到下午），晚 6-10 小时。GitHub 免费层的 schedule 排队/降级所致，**不是配置错误，也不要当成故障去修**。要真准时，得用外部定时服务（如 cron-job.org）打 `workflow_dispatch` 接口。
-3. **关键词覆盖率**：部分项目 `keywords` 为空（规则兜底没命中 + 翻译没返回标签），热门关键词面板会少几项。
-4. **中文质量抽检**：CI 里翻译失败会静默降级成英文，页面不报错。偶尔要抽查几条看有没有漏译。
+3. ~~**关键词覆盖率**~~ **已修复（2026-11-25，本次提交）**：根因是 `KW_VOCAB` 的键用了「设备/研发/能效/租金/新创/雇佣」这些词表外别名，规则兜底结果过 `norm_tags()` 时被全部丢掉。改为受控词表内的键并补「建筑地产/基础设施/交通物流/文化艺术」等命中词；本地全量抓取 60 条，空关键词 **0 条**。
+4. **中文质量抽检**：CI 里翻译失败会静默降级成英文，页面不报错。11-25 线上抽检 54/54 条的中文名+摘要+四段详情齐全；扩源上线后要再抽一次新的 3 条（尤其联邦贷款页正文较短）。
 5. **本地无法测中文**：本机没有 `GEMINI_API_KEY`，中文效果只能看线上。
 
 ## 7. 文档索引
@@ -93,7 +93,7 @@ open docs/index.html        # 看效果
 
 ## 8. 一句话总结给新会话
 
-> 「加拿大补助库」是个零依赖 Python 项目，抓安省+多伦多+约克+荷顿的补助项目做中文索引页，
+> 「加拿大补助库」是个零依赖 Python 项目，抓安省+多伦多+约克+荷顿+皮尔+联邦 ISED 的项目做中文索引页，
 > 线上 `gszy84858-bit.github.io/canada-grants`，本地在 `~/Documents/GitHub/canada-grants`。
 > 数据源 5 个，条数每天波动，以线上 meta.json 为准。定时实际晚 6-10 小时，属正常。
 > 改完 `build_site.py` 要本地重建验证；本机可直接 `git push origin main`（凭据已具备）。

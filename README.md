@@ -12,8 +12,11 @@
 |---|---|---|
 | 安省 Available funding opportunities | 省级 | 省内各厅的资金项目（状态/截止日/资格） |
 | 多伦多 Business Grants & Incentives | 市级 | 市级补助、返款、代金券 |
+| 约克区 2 + 荷顿区 1 + 皮尔区 2 | 区级 | 人工核对的官方项目详情页（区级官网无总表，不假装抓全） |
+| ISED Black Entrepreneurship Loan Fund | 联邦 | 黑人创业者贷款 $10,000–$250,000（BEP 组件） |
 
-> 正式版会补：皮尔区 / 约克区 / 荷顿区，以及联邦 BBF（需浏览器渲染，单独处理）
+> 区级只收有明确金额/截止方式的项目页；皮尔区 CIP 各基金当前均为 Closed、
+> Circular Economy Initiatives Fund 本轮已结束，故不收。
 
 ## 页面能力
 
