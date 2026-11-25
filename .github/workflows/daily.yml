@@ -81,6 +81,24 @@ jobs:
         with:
           path: docs
 
+      # 上传成功后 API 列表偶尔滞后（11-23/11-24 连续两天因此找不到产物而发布失败）。
+      # 先轮询确认产物可见，再交给 deploy-pages，避免误判为「无产物」。
+      - name: 等待 Pages 产物在 API 中可见
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for i in $(seq 1 12); do
+            if gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts" \
+                --jq '.artifacts[] | select(.name == "github-pages") | .id' | grep -q .; then
+              echo "产物已在 API 中可见（第 $i 次检查）"
+              exit 0
+            fi
+            echo "产物尚未可见，10 秒后重试（$i/12）"
+            sleep 10
+          done
+          echo "::error::产物 2 分钟内仍不可见，终止以避免 deploy-pages 误判"
+          exit 1
+
       - name: 发布到公网
         id: deploy
         uses: actions/deploy-pages@v4
