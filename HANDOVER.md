@@ -30,7 +30,7 @@
 | 在架（首页展示） | **54**（11-22 实测） |
 | 已过期（自动过滤） | 3（11-22 实测） |
 | 提交数 | 36 |
-| 最近一次线上构建 | 2026-11-22 12:34（多伦多时间） |
+| 最近一次线上构建 | 2026-11-24 20:18（多伦多时间） |
 
 **条数以线上 `meta.json` 为准**，别拿本地 `data/programs.json` 判断线上状态——本地快照停在 11-17。
 
@@ -44,7 +44,7 @@
 4. **每条必须有截止信息。** 五种写法之一：明确日期 / 滚动受理 / 常年受理 / 分轮次受理 / 截止日见官方页。**不允许留空白**。
 5. **`docs/` 和 `data/` 不进 git。** 它们由 CI 每天重建（`data/` 靠 Actions 缓存传递）。所以「删一个页面」「改一次数据」**不能靠删文件提交**，必须改生成器 + 让 CI 重跑。Pages 部署是整站替换，旧文件会自动消失。
 6. **时区锁死 `America/Toronto`。** CI runner 是 UTC，页面上的「数据更新于」必须显式按多伦多时间算。
-7. **推送：本机现在可以直接推。** 2026-11-24 实测：已装 `gh` CLI，`git credential fill` 能拿到 github.com 的凭据，`git push origin main` 成功。改完**自己直接推**，别再让用户手动点。只有报 `could not read Username` 时才退回老办法：让用户在 VS Code 点 Push，或按 `⌘⇧P` → `Git: Push`。
+7. **推送：本机现在可以直接推。** 2026-11-24 实测：`gh` CLI + git 共用同一令牌，**已含 `workflow` scope**，所以连 `.github/workflows/*.yml` 也能直接推（当天通过设备码授权补上的）。改完**自己直接推**，别再让用户手动点。只有报 `could not read Username` / 权限被拒时才退回老办法：让用户在 VS Code 点 Push，或按 `⌘⇧P` → `Git: Push`。
 8. **改 `HTML_TPL` 里的 JS 要小心 Python 转义。** 模板是 Python 三引号字符串，里面的 `\n` 会被 Python 吃掉，要用 `String.fromCharCode(10)`。改完必须本地构建一次看结果。
 
 ## 4. 三条命令（全部工作都从这儿开始）
@@ -75,6 +75,7 @@ open docs/index.html        # 看效果
 
 ## 6. 待办（按优先级）
 
+0. ~~**站点连续两天停更**~~ **已修复（2026-11-24，提交 340f32e）**：11-23/11-24 的 CI 抓取和构建都成功，但 `deploy-pages` 报 `No artifacts named "github-pages"`——产物其实已上传成功，是 GitHub API 列表短暂滞后。现在上传后先轮询确认产物可见（最多 2 分钟）再发布，推送触发的 CI 已验证通过。线上 `meta.json` 的 `built_at` 是判断更新是否正常的唯一标准。
 1. ~~**扩信源**~~ **部分完成（2026-11-17 已上线，提交 98d2b6b）**：新增约克区 2 个（York Region Tourism Fund、Northern York PSAP）+ 荷顿区 1 个（HRCIF）精选官方项目页，首日线上 59 条。做法见 `fetch_grants.py` 的 `parse_official_detail()` + SOURCES 里带 `body_selector`/人工覆盖字段的条目。**未做**：皮尔区（官网是零散项目页，无总表，需再挖）、联邦 BBF（需浏览器渲染，本机连 canada.ca 超时，零依赖做不到）。区级 SBEC 页面上的 Starter Company Plus / Summer Company / Futurpreneur 与省级已收录重复，不重复收；Tourism Signage 是收费安装路牌，非补助，已排除。
 2. **⚠️ 定时不准时**：cron 配的是 10:00 UTC，但实际运行时间长期落在 16-20 UTC（多伦多中午到下午），晚 6-10 小时。GitHub 免费层的 schedule 排队/降级所致，**不是配置错误，也不要当成故障去修**。要真准时，得用外部定时服务（如 cron-job.org）打 `workflow_dispatch` 接口。
 3. **关键词覆盖率**：部分项目 `keywords` 为空（规则兜底没命中 + 翻译没返回标签），热门关键词面板会少几项。
